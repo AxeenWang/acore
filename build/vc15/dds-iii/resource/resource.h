@@ -1,0 +1,61 @@
+﻿//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ 產生的 Include 檔案。
+// 由 DDS-III.rc 使用
+//
+#define IDD_MAINFRAME                   501
+#define IDI_ICON                        601
+#define IDC_EDIT_MESSAGE                1000
+#define IDC_MONSTER_BTN_SAVE            1001
+#define IDC_CHK_AUTOLOCK_HPMP           1101
+#define IDC_CHK_AUTOLOCK_GOLD           1102
+#define IDC_CHK_AUTOLOCK_ITEM           1103
+#define IDC_CHK_AUTOLOCK_GEMS           1104
+#define IDC_COMBO_MOON                  1200
+#define IDC_MONSTER_EDIT_REALEXP        1201
+#define IDC_MONSTER_EXIT_NEXTEXP        1202
+#define IDC_MONSTER_EDIT_HP             1203
+#define IDC_MONSTER_EDIT_MP             1204
+#define IDC_MONSTER_COMBO_CODE          1205
+#define IDC_MONSTER_COMBO_LEVEL         1206
+#define IDC_MONSTER_COMBO_MEMBERNUMBER  1207
+#define IDC_MEMBER_COMBO_POWER          1301
+#define IDC_MEMBER_COMBO_POWER2         1302
+#define IDC_MEMBER_COMBO_POWER3         1303
+#define IDC_MEMBER_COMBO_POWER4         1304
+#define IDC_MEMBER_COMBO_POWER5         1305
+#define IDC_MEMBER_COMBO_SKILLAMOUNT    1500
+#define IDC_MEMBER_COMBO_SKILL          1501
+#define IDC_MEMBER_COMBO_SKILL2         1502
+#define IDC_MEMBER_COMBO_SKILL3         1503
+#define IDC_MEMBER_COMBO_SKILL4         1504
+#define IDC_MEMBER_COMBO_SKILL5         1505
+#define IDC_MEMBER_COMBO_SKILL6         1506
+#define IDC_MEMBER_COMBO_SKILL7         1507
+#define IDC_MEMBER_COMBO_SKILL8         1508
+#define IDC_MEMBER_COMBO_SKILL9         1509
+#define IDC_MEMBER_COMBO_SKILL10        1510
+#define IDC_MEMBER_COMBO_SKILL11        1511
+#define IDC_MEMBER_COMBO_SKILL12        1512
+#define IDC_MEMBER_COMBO_SKILL13        1513
+#define IDC_MEMBER_COMBO_SKILL14        1514
+#define IDC_MEMBER_COMBO_SKILL15        1515
+#define IDC_MEMBER_COMBO_SKILL16        1516
+#define IDC_MEMBER_COMBO_SKILL17        1517
+#define IDC_MEMBER_COMBO_SKILL18        1518
+#define IDC_MEMBER_COMBO_SKILL19        1519
+#define IDC_MEMBER_COMBO_SKILL20        1520
+#define IDC_MEMBER_COMBO_SKILL21        1521
+#define IDC_MEMBER_COMBO_SKILL22        1522
+#define IDC_MEMBER_COMBO_SKILL23        1523
+#define IDC_MEMBER_COMBO_SKILL24        1524
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        103
+#define _APS_NEXT_COMMAND_VALUE         40001
+#define _APS_NEXT_CONTROL_VALUE         1012
+#define _APS_NEXT_SYMED_VALUE           101
+#endif
+#endif
