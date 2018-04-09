@@ -13,7 +13,6 @@
 # Custom for Visual Studio C/C++
 *.vcxproj	merge=union
 *.filters	merge=union
-*.user		merge=union
 
 # sources
 *.c			text
