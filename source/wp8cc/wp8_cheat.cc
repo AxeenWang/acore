@@ -3,7 +3,7 @@
  * @brief	WP8cc 程序掛勾類別, 成員函式
  * @author	Swang
  * @date	2018-04-05
- * @date	2018-04-05
+ * @date	2018-04-10
  * @note	none
  *****************************************************************************/
 #include "wp8cc\wp8_cheat.hh"
@@ -40,93 +40,90 @@ BOOL WP8Cheat::WatchingYou()
 }
 
 /**************************************************//**
- * @brief	讀取 WP8 資料
- * @return	@c BOOL
- *			- 資料讀取成功傳回: TRUE
- *			- 資料讀取失敗傳回: FALSE
+ * @brief	設定遊戲版本
  *****************************************************/
-BOOL WP8Cheat::LoadData()
+void WP8Cheat::SetVersion(int32u ver)
 {
-	//TODO
-	return 0;
-}
-
-/**************************************************//**
- * @brief	保存 WP8 資料
- * @return	@c BOOL
- *			- 資料保存成功傳回: TRUE
- *			- 資料保存失敗傳回: FALSE
- *****************************************************/
-BOOL WP8Cheat::SaveData()
-{
-	//TODO
-	return 0;
-}
-
-/**************************************************//**
- * @brief	配置記憶體
- *****************************************************/
-void WP8Cheat::CreateDataMemory()
-{
-	int iMatch = m_iMatchMemory;
-
-	for (;;) {
-		if (iMatch > 0) break;
-		iMatch = 0;
-		LPSaWP8ADDRESS aPtr = new (std::nothrow) SaWP8ADDRESS();
-		if (aPtr == NULL) break;
-		iMatch++;
-
-		m_iMatchMemory = iMatch;
-		return;
+	switch (ver) {
+	case WP8VER_501:
+		m_uVersion = WP8VER_501;
+		break;
+	case WP8VER_502:
+		m_uVersion = WP8VER_502;
+		break;
+	default:
+		m_uVersion = WP8VER_502;
 	}
-	m_iMatchMemory = -1;
+	this->MatchDataInfo();
 }
 
 /**************************************************//**
- * @brief	配置記憶體
+ * @brief	對應各資料位址
  *****************************************************/
-void WP8Cheat::DeleteDataMemory()
+void WP8Cheat::MatchDataInfo()
 {
-	SAFE_DELETE(m_aPtr);
-	m_iMatchMemory = -1;
-	m_iMatchVersion = -1;
-}
+	::memset((void*)&m_HorseAbility, 0, sizeof(SaWP8ABILITY));
+	m_HorseAbility.Count = HORSE_ABILITY_COUNT;
+	m_HorseAbility.Addr = HORSE_ABILITY_ADDR;
+	m_HorseAbility.Seek = HORSE_ABILITY_SEEK;
 
-/**************************************************//**
- * @brief	匹配對應版本數據位址
- * @param	[in] ver 版本號
- *****************************************************/
-void WP8Cheat::MatchAddress(int ver)
-{
-	for (;;) {
-		if (m_aPtr == NULL) break;
-		::memset((void*)m_aPtr, 0, sizeof(SaWP8ADDRESS));
-		m_aPtr->sGame.uTotail = WP8GAME_TOTAIL;
-		m_aPtr->sGame.uSpeedAddr = WP8GAME_SPEED_ADDR;
-		m_aPtr->sGame.uSpeedSeek = WP8GAME_SPEED_SEEK;
-		m_aPtr->sGame.uTacticAddr = WP8GAME_TACTIC_ADDR;
-		m_aPtr->sGame.uTacticSeek = WP8GAME_TACTIC_SEEK;
-		m_aPtr->sGame.uWeightAddr = WP8GAME_WEIGHT_ADDR;
-		m_aPtr->sGame.uWeightSeek = WP8GAME_WEIGHT_SEEK;
-		m_aPtr->sGame.uJockeyAddr = WP8GAME_JOCKEY_ADDR;
-		m_aPtr->sGame.uJockeySeek = WP8GAME_JOCKEY_SEEK;
+	::memset((void*)&m_HorseRace, 0, sizeof(SaWP8RACE));
+	m_HorseRace.Count = HORSE_RACE_COUNT;
+	m_HorseRace.Addr = HORSE_RACE_ADDR;
+	m_HorseRace.Seek = HORSE_RACE_SEEK;
 
-		m_iMatchVersion = ver;
-		return;
+	::memset((void*)&m_HorsePony, 0, sizeof(SaWP8PONY));
+	m_HorsePony.Count = HORSE_PONY_COUNT;
+	m_HorsePony.Addr = HORSE_PONY_ADDR;
+	m_HorsePony.Seek = HORSE_PONY_SEEK;
+
+	::memset((void*)&m_HorseMare, 0, sizeof(SaWP8MARE));
+	m_HorseMare.Count = HORSE_MARE_COUNT;
+	m_HorseMare.Addr = HORSE_MARE_ADDR;
+	m_HorseMare.Seek = HORSE_MARE_SEEK;
+
+	::memset((void*)&m_HorseStallion, 0, sizeof(SaWP8STALLION));
+	m_HorseStallion.Count = HORSE_STALLION_COUNT;
+	m_HorseStallion.Addr = HORSE_STALLION_ADDR;
+	m_HorseStallion.Seek = HORSE_STALLION_SEEK;
+
+	::memset((void*)&m_GameInfo, 0, sizeof(SaWP8GAME));
+	m_GameInfo.Count = WP8GAME_COUNT;
+	m_GameInfo.SpeedAddr = WP8GAME_SPEED_ADDR;
+	m_GameInfo.SpeedSeek = WP8GAME_SPEED_SEEK;
+	m_GameInfo.TacticAddr = WP8GAME_TACTIC_ADDR;
+	m_GameInfo.TacticSeek = WP8GAME_TACTIC_SEEK;
+	m_GameInfo.WeightAddr = WP8GAME_WEIGHT_ADDR;
+	m_GameInfo.WeightSeek = WP8GAME_WEIGHT_SEEK;
+	m_GameInfo.JockeyAddr = WP8GAME_JOCKEY_ADDR;
+	m_GameInfo.JockeySeek = WP8GAME_JOCKEY_SEEK;
+
+	if (m_uVersion == WP8VER_502) {
+		m_HorseAbility.Addr += WP8VER_502_SEEK;
+		m_HorseRace.Addr += WP8VER_502_SEEK;
+		m_HorsePony.Addr += WP8VER_502_SEEK;
+		m_HorseMare.Addr += WP8VER_502_SEEK;
+		m_HorseStallion.Addr  += WP8VER_502_SEEK;
+
+		m_GameInfo.SpeedAddr  += WP8VER_502_SEEK;
+		m_GameInfo.TacticAddr += WP8VER_502_SEEK;
+		m_GameInfo.WeightAddr += WP8VER_502_SEEK;
+		m_GameInfo.JockeyAddr += WP8VER_502_SEEK;
 	}
-	m_iMatchVersion = -1;
+
 }
 
 /**************************************************//**
  * @brief	建構式
  *****************************************************/
 WP8Cheat::WP8Cheat()
-	: WsCheat()
-	, m_iMatchMemory(-1)
-	, m_iMatchVersion(-1)
-	, m_aPtr(NULL) {
-	this->CreateDataMemory();
+	: WsCheat() {
+	::memset((void*)&m_HorseAbility, 0, sizeof(SaWP8ABILITY));
+	::memset((void*)&m_HorseRace, 0, sizeof(SaWP8RACE));
+	::memset((void*)&m_HorsePony, 0, sizeof(SaWP8PONY));
+	::memset((void*)&m_HorseMare, 0, sizeof(SaWP8MARE));
+	::memset((void*)&m_HorseStallion, 0, sizeof(SaWP8STALLION));
+	::memset((void*)&m_GameInfo, 0, sizeof(SaWP8GAME));
 }
 
 /**************************************************//**
@@ -134,6 +131,5 @@ WP8Cheat::WP8Cheat()
  *****************************************************/
 WP8Cheat::~WP8Cheat()
 {
-	// 刪除所有物件成員
-	this->DeleteDataMemory();
+
 }

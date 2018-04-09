@@ -9,6 +9,7 @@
 #ifndef __AXEEN_WP8_WP8COMM_HH__
 #define __AXEEN_WP8_WP8COMM_HH__
 #include "wp8_cheat.hh"
+#include "wp8_struct.hh"
 
 WP8Cheat*	StartCheat();
 void		EndCheat();

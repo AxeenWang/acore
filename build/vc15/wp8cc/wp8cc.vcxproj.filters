@@ -51,6 +51,9 @@
     <ClInclude Include="..\..\..\include\wp8cc\wp8_frame.hh">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\wp8cc\wp8_cheat_struct.hh">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\wp8cc\wp8_frame.cc">

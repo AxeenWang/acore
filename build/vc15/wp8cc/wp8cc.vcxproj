@@ -183,6 +183,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\wp8cc\wp8_ccinc.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_cheat.hh" />
+    <ClInclude Include="..\..\..\include\wp8cc\wp8_cheat_struct.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_comm.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_define.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_frame.hh" />

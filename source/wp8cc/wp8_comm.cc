@@ -14,11 +14,11 @@ static WP8Cheat* static_cheat_object = NULL;
  * @brief	WP8cc 名稱定義
  *********************************************************/
 static SaCONSTTEXT static_name_park[] = {
-	emNameDefault,		TEXT("WP8cc"),
-	emNameClassName,	TEXT("AXEEN_WP8CC_CLASS"),
-	emNameTitleName,	TEXT("WP8cc - Winning Post 8 2018 Viewer"),
-	emNameError,		TEXT("WP8cc Error!"),
-	emNamePassEnd,		TEXT("WP8cc Pass End")
+	emNameDefault,			TEXT("WP8cc"),
+	emNameClassName,		TEXT("AXEEN_WP8CC_CLASS"),
+	emNameTitleName,		TEXT("WP8cc - Winning Post 8 2018 Viewer"),
+	emNameError,			TEXT("WP8cc Error!"),
+	emNamePassEnd,			TEXT("WP8cc Pass End")
 };
 
 /******************************************************//**
@@ -767,10 +767,9 @@ WP8Cheat * StartCheat()
 	if (wp == NULL) {
 		wp = new (std::nothrow) WP8Cheat();
 		if (wp != NULL) {
-			if (wp->IsMatchMemory() > 0) {
-				static_cheat_object = wp;
-				return wp;
-			}
+			static_cheat_object = wp;
+			wp->SetVersion(WP8VER_502);
+			return wp;
 		}
 	}
 	return NULL;
