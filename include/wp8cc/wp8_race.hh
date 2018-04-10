@@ -3,7 +3,7 @@
  * @brief	WP8cc 競走馬操作類別
  * @author	Swang
  * @date	2018-04-05
- * @date	2018-04-05
+ * @date	2018-04-10
  * @note	none
  *****************************************************************************/
 #ifndef __AXEEN_WP8_WP8RACE_HH__
@@ -40,6 +40,9 @@ public:
 	virtual void OnEventSize(WPARAM wParam, LPARAM lParam);
 	virtual void OnEventClose(WPARAM wParam, LPARAM lParam);
 	virtual void OnEventInitDialog(WPARAM wParam, LPARAM lParam);
+
+public:
+	virtual void LoadData();
 
 public:
 	WP8RaceFrame();

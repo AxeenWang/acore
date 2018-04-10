@@ -10,11 +10,17 @@
 #define __AXEEN_WP8_WP8CHEATSTRUCT_HH__
 #include "cwins\cwins.hh"
 
+// Patch version
 #define WP8VER_501					0x20180101	//!< WP8 遊戲版本號 WP8-2018 v1.0.1
 #define WP8VER_502					0x20180102	//!< WP8 遊戲版本號 WP8-2018 v1.0.2
 #define WP8VER_502_SEEK				0x00000100	//!< WP8-2018 v1.0.2 位移
 
- // 比賽相關
+// 時間、日期
+#define WP8DATE_ADDR				0x00E29FDC	//!< WP8 當前時間位址
+#define WP8DATE_DATA_LENGTH			1			//!< WP8 當前時間資料長度
+#define WP8DATE_WEEK_LENGTH			52			//!< 一年週數
+
+// 比賽相關
 #define WP8GAME_COUNT				18			//!< 比賽相關: 賽道、參賽馬數量
 #define WP8GAME_SPEED_ADDR			0xEBA384	//!< 比賽相關: 速度位址
 #define WP8GAME_SPEED_SEEK			2			//!< 比賽相關: 速度下一筆資料位差
@@ -61,10 +67,39 @@
 #define HORSE_STALLION_DATA_LENGTH	12			//!< 種牡馬資料長度 (in int32u)
 
 /******************************************************//**
- * @struct	SaWP8GAME
+ * @struct	SaWP8DATE
+ * @brief	時間結構
+ * @details	月份週數分配方式
+ *			- 例: int bufWeek [] = { 4, 4, 5, 4, 5, 4, 4, 5, 4, 5, 4, 4 };
+ *			- 一年週數總和為 52 週
+ * @note	WP8 時間存放方式 
+ *			- 存放時間使用 1 byte 資料長度
+ *			- 當前週數 = 高 4 bits (HIBITS)
+ *			- 當前月數 = 低 4 bits (LOBITS) zero-base
+ *			- 如 4 月 1 週 資料為 0x13
+ *			- 如 6 月 2 週 資料為 0x25
+			- 取得當前週數算法
+ *				-# dat = 取得當前時間資料
+ *				-# m = (LOBITS)dat
+ *				-# w = (HIBITS)dat
+ *				-# t = m * 4 + w (當前週數)
+ *			- 比賽中 w 數據會有所變化，該數據還包含比賽場次資訊
+ *				-# t = (w > 7) ? t - 4 : t;
+ *				-# t = (w > 3) ? t - 4 : t;
+ *********************************************************/
+struct SaWP8DATE {
+	intxu	Addr;			//!< 當前時間位址
+	int32u	DataLength;		//!< 當前時間資料長度 (in byte)
+	int32u	WeekNumber;		//!< 週數
+	int32u	Month;			//!< 當前月
+	int32u	Week;			//!< 當前週
+};
+
+/******************************************************//**
+ * @struct	SaWP8RACING
  * @brief	比賽相關結構
  *********************************************************/
-struct SaWP8GAME {
+struct SaWP8RACING {
 	int32u	Count;						//!< 賽道數量
 	intxu	SpeedAddr;					//!< 速度位址
 	intxu	SpeedSeek;					//!< 速度下一筆資料位移 (in byte)
@@ -79,7 +114,7 @@ struct SaWP8GAME {
 	intxu	JockeySeek;					//!< 騎乘騎師下一筆資料位移 (in byte)
 	intxu	JockeyData[WP8GAME_COUNT];	//!< 騎乘騎師資料
 };
-typedef SaWP8GAME*	LPSaWP8GAME;		//!< SaWP8GAME 指標型態
+typedef SaWP8RACING*	LPSaWP8RACING;	//!< SaWP8RACING 指標型態
 
 /******************************************************//**
  * @struct	SaWP8ABILITY

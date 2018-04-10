@@ -2267,7 +2267,7 @@ DOT_FONTSIZE           = 10
 # the path where dot can find it using this tag.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-DOT_FONTPATH           = "C:/Program Files (x99)/graphviz-2.38/fonts"
+DOT_FONTPATH           = "D:/Program Files (x99)/graphviz-2.38/fonts"
 
 # If the CLASS_GRAPH tag is set to YES then doxygen will generate a graph for
 # each documented class showing the direct and indirect inheritance relations.
@@ -2411,7 +2411,7 @@ INTERACTIVE_SVG        = NO
 # found. If left blank, it is assumed the dot tool can be found in the path.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-DOT_PATH               = "C:/Program Files (x99)/graphviz-2.38/bin"
+DOT_PATH               = "D:/Program Files (x99)/graphviz-2.38/bin"
 
 # The DOTFILE_DIRS tag can be used to specify one or more directories that
 # contain dot files that are included in the documentation (see the \dotfile

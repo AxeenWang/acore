@@ -1,16 +1,16 @@
 ﻿/**************************************************************************//**
- * @file	wp8_game.cc
+ * @file	wp8_racing.cc
  * @brief	WP8cc 比賽相關操作類別，成員函式
  * @author	Swang
  * @date	2018-04-05
- * @date	2018-04-05
+ * @date	2018-04-10
  * @note	none
  *****************************************************************************/
-#include "wp8cc\wp8_game.hh"
+#include "wp8cc\wp8_racing.hh"
 
 //#####################################################
 //
-// WP8GameFrame 類別成員函式
+// WP8RacingFrame 類別成員函式
 //
 //#####################################################
 
@@ -19,9 +19,9 @@
  * @param	[in] wParam	參數 1
  * @param	[in] lParam 參數 2
  *****************************************************/
-void WP8GameFrame::OnEventSize(WPARAM wParam, LPARAM lParam)
+void WP8RacingFrame::OnEventSize(WPARAM wParam, LPARAM lParam)
 {
-	WP8GameList* cList = m_cList;
+	WP8RacingList* cList = m_cList;
 	int wd = (int)LOWORD(lParam);
 	int ht = (int)HIWORD(lParam);
 
@@ -35,7 +35,7 @@ void WP8GameFrame::OnEventSize(WPARAM wParam, LPARAM lParam)
  * @param	[in] wParam	參數 1
  * @param	[in] lParam 參數 2
  *****************************************************/
-void WP8GameFrame::OnEventClose(WPARAM wParam, LPARAM lParam)
+void WP8RacingFrame::OnEventClose(WPARAM wParam, LPARAM lParam)
 {
 	this->Release();
 	WP8Page::OnEventClose(wParam, lParam);
@@ -46,7 +46,7 @@ void WP8GameFrame::OnEventClose(WPARAM wParam, LPARAM lParam)
  * @param	[in] wParam	參數 1
  * @param	[in] lParam 參數 2
  *****************************************************/
-void WP8GameFrame::OnEventInitDialog(WPARAM wParam, LPARAM lParam)
+void WP8RacingFrame::OnEventInitDialog(WPARAM wParam, LPARAM lParam)
 {
 	this->InitList();
 }
@@ -54,7 +54,7 @@ void WP8GameFrame::OnEventInitDialog(WPARAM wParam, LPARAM lParam)
 /**************************************************//**
  * @brief	取得遊戲資料 : 比賽相關
  *****************************************************/
-void WP8GameFrame::LoadGame()
+void WP8RacingFrame::LoadData()
 {
 	// TODO
 }
@@ -62,7 +62,7 @@ void WP8GameFrame::LoadGame()
 /**************************************************//**
  * @brief	建構式
  *****************************************************/
-WP8GameFrame::WP8GameFrame()
+WP8RacingFrame::WP8RacingFrame()
 	: WP8Page()
 	, m_cList(NULL) {
 }
@@ -70,14 +70,14 @@ WP8GameFrame::WP8GameFrame()
 /**************************************************//**
  * @brief	解構式
  *****************************************************/
-WP8GameFrame::~WP8GameFrame() { this->Release(); }
+WP8RacingFrame::~WP8RacingFrame() { this->Release(); }
 
 /**************************************************//**
  * @brief	建立 List 物件
  *****************************************************/
-void WP8GameFrame::InitList()
+void WP8RacingFrame::InitList()
 {
-	WP8GameList* cList = new (std::nothrow) WP8GameList();
+	WP8RacingList* cList = new (std::nothrow) WP8RacingList();
 
 	if (cList != NULL) {
 		RECT rc;
@@ -95,7 +95,7 @@ void WP8GameFrame::InitList()
 /**************************************************//**
  * @brief	釋放已建立物件，釋放已配置記憶體
  *****************************************************/
-void WP8GameFrame::Release()
+void WP8RacingFrame::Release()
 {
 	SAFE_DELETE(m_cList);
 }
@@ -103,21 +103,21 @@ void WP8GameFrame::Release()
 
 //#####################################################
 //
-// WP8GameList 類別成員函式
+// WP8RacingList 類別成員函式
 //
 //#####################################################
 
 /**************************************************//**
  * @brief	建構式
  *****************************************************/
-WP8GameList::WP8GameList()
+WP8RacingList::WP8RacingList()
 	: WsListv() {
 }
 
 /**************************************************//**
  * @brief	解構式
  *****************************************************/
-WP8GameList::~WP8GameList() { }
+WP8RacingList::~WP8RacingList() { }
 
 /**************************************************//**
  * @brief	建立 ListView 控制項
@@ -127,7 +127,7 @@ WP8GameList::~WP8GameList() { }
  *			- 函式運作成功傳回: TRUE
  *			- 函式運作失敗傳回: FALSE
  *****************************************************/
-BOOL WP8GameList::Create(HWND hParent, int idItem)
+BOOL WP8RacingList::Create(HWND hParent, int idItem)
 {
 	const BOOL err = FALSE;
 	const BOOL eok = TRUE;
@@ -163,7 +163,7 @@ BOOL WP8GameList::Create(HWND hParent, int idItem)
 /**************************************************//**
  * @brief	建立列表欄位
  *****************************************************/
-void WP8GameList::InitColumn()
+void WP8RacingList::InitColumn()
 {
 	const SaLVCOLUMN lvc[] = {
 		48,		LVCOLUMN_ALIGN_LEFT,	TEXT("賽道"),

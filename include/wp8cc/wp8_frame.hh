@@ -3,7 +3,7 @@
  * @brief	WP8cc 主視窗類別 : 成員函示
  * @author	Swang
  * @date	2018-04-03
- * @date	2018-04-03
+ * @date	2018-04-10
  * @note	none
  *****************************************************************************/
 #ifndef __AXEEN_WP8_WP8FRAME_HH__
@@ -11,7 +11,7 @@
 #include "wp8_tabs.hh"
 #include "wp8_func.hh"
 #include "wp8_race.hh"
-#include "wp8_game.hh"
+#include "wp8_racing.hh"
 
 /******************************************************//**
  * @class	WP8Frame
@@ -40,6 +40,7 @@ public:
 
 protected:
 	void LoadGameData();
+	void ModifyTitle(int t, int m, int w);
 
 	void InitFrame();
 	void InitTabs();

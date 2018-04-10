@@ -188,7 +188,7 @@
     <ClInclude Include="..\..\..\include\wp8cc\wp8_define.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_frame.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_func.hh" />
-    <ClInclude Include="..\..\..\include\wp8cc\wp8_game.hh" />
+    <ClInclude Include="..\..\..\include\wp8cc\wp8_racing.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_page.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_race.hh" />
     <ClInclude Include="..\..\..\include\wp8cc\wp8_struct.hh" />
@@ -200,7 +200,7 @@
     <ClCompile Include="..\..\..\source\wp8cc\wp8_comm.cc" />
     <ClCompile Include="..\..\..\source\wp8cc\wp8_frame.cc" />
     <ClCompile Include="..\..\..\source\wp8cc\wp8_func.cc" />
-    <ClCompile Include="..\..\..\source\wp8cc\wp8_game.cc" />
+    <ClCompile Include="..\..\..\source\wp8cc\wp8_racing.cc" />
     <ClCompile Include="..\..\..\source\wp8cc\wp8_main.cc" />
     <ClCompile Include="..\..\..\source\wp8cc\wp8_page.cc" />
     <ClCompile Include="..\..\..\source\wp8cc\wp8_race.cc" />

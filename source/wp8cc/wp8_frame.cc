@@ -3,7 +3,7 @@
  * @brief	WP8CC 主視窗類別
  * @author	Swang
  * @date	2018-04-03
- * @date	2018-04-03
+ * @date	2018-04-10
  * @note	none
  *****************************************************************************/
 #include "wp8cc\wp8_frame.hh"
@@ -286,6 +286,13 @@ void WP8Frame::LoadGameData()
 		}
 	}
 
+	// 讀取遊戲時間
+	int t = (int)wp->GetCurrentWeekNumber(FALSE);
+	int m = (int)wp->GetCurrentMonth();
+	int w = (int)wp->GetCurrentWeek();
+	this->ModifyTitle(t, m, w);
+
+
 	#if 0
 	TCHAR sz[MAX_PATH];
 	::wsprintf(sz, TEXT("Handle= 0x%08X, id = %li"), wp->GetProcessHandle(), wp->GetProcessID());
@@ -296,9 +303,24 @@ void WP8Frame::LoadGameData()
 	if (cursel != -1) {
 		cPage = m_vPage[cursel];
 		if (cPage != NULL) {
-
+			cPage->LoadData();
 		}
 	}
+}
+
+/**************************************************//**
+ * @brief	修改視窗標題內容
+ * @param	[in] t 週數
+ * @param	[in] m 月份
+ * @param	[in] w 週份
+ *****************************************************/
+void WP8Frame::ModifyTitle(int t, int m, int w)
+{
+	const TCHAR* fmt = TEXT("%s - %d 月 %d 週 (第 %d 週)");
+	TCHAR szText[MAX_PATH];
+
+	::wsprintf(szText, fmt, ::GetNamePark(emNameTitleName), m, w, t);
+	this->SetText(szText);
 }
 
 /**************************************************//**
@@ -365,7 +387,7 @@ void WP8Frame::InitPage()
 				cPage = (WP8Page*)new (std::nothrow) WP8RaceFrame();
 				break;
 			case 7:
-				cPage = (WP8Page*)new (std::nothrow) WP8GameFrame();
+				cPage = (WP8Page*)new (std::nothrow) WP8RacingFrame();
 				break;
 			default:
 				cPage = new (std::nothrow) WP8Page();

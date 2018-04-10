@@ -39,9 +39,6 @@
     <ClInclude Include="..\..\..\include\wp8cc\wp8_race.hh">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\wp8cc\wp8_game.hh">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\wp8cc\wp8_comm.hh">
       <Filter>標頭檔</Filter>
     </ClInclude>
@@ -52,6 +49,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\wp8cc\wp8_cheat_struct.hh">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wp8cc\wp8_racing.hh">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,13 +74,13 @@
     <ClCompile Include="..\..\..\source\wp8cc\wp8_race.cc">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\wp8cc\wp8_game.cc">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\wp8cc\wp8_comm.cc">
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\wp8cc\wp8_cheat.cc">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\wp8cc\wp8_racing.cc">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

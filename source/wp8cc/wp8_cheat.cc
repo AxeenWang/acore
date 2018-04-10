@@ -54,14 +54,100 @@ void WP8Cheat::SetVersion(int32u ver)
 	default:
 		m_uVersion = WP8VER_502;
 	}
-	this->MatchDataInfo();
+	this->InitDataAddress();
+}
+
+/**************************************************//**
+ * @brief	取得遊戲時間
+ * @see		SaWP8DATE
+ *****************************************************/
+void WP8Cheat::LoadGameDate()
+{
+	const int32u err = -1;
+	const int32u month[] = { 4, 4, 5, 4, 5, 4, 4, 5, 4, 5, 4, 4 };
+	const size_t month_length = sizeof(month) / sizeof(int32u);	
+	int32u m, t, temp;
+
+	// 時間資料讀取錯誤
+	if ((t = this->LoadGameCurrentWeekNumber()) == err) {
+		m_Date.WeekNumber = err;
+		m_Date.Month = err;
+		m_Date.Week = err;
+		return;
+	}
+
+	// 取得遊戲中月份、週份
+	temp = 0;
+	for (m = 0; m < month_length; m++) {
+		temp += month[m];
+		if (temp >= t) { temp -= month[m]; break; }
+	}
+
+	m_Date.WeekNumber = t;
+	m_Date.Week = t - temp + 1;	// zero-base so must plus 1
+	m_Date.Month = m + 1;		// zero-base so must plus 1
+}
+
+/**************************************************//**
+ * @brief	讀取遊戲當前週數
+ * @return	@c int32u
+ *			- 運作成功傳回: 當前週數
+ *			- 運作失敗傳回: -1
+ * @see		SaWP8DATE
+ *****************************************************/
+int32u WP8Cheat::LoadGameCurrentWeekNumber()
+{
+	const int32u err = -1;
+	intxu	addr = m_Date.Addr;
+	size_t	len = (size_t)m_Date.DataLength;
+	int32u	date;
+
+	// 數據不正確
+	if (addr == 0 || len == 0)
+		return err;
+
+	// 讀取遊戲時間
+	date = 0;
+	if (this->ReadMemory((LPVOID)addr, &date, len) == len) {
+		int32u w, m, t;
+		w = (date >> 4) & 0x000F;	// HIBITS
+		m = date & 0x000F;			// LOBITS
+		t = m * 4 + w;
+
+		// 比賽中?
+		t = (w > 7) ? t - 4 : t;
+		t = (w > 3) ? t - 4 : t;
+		return t;
+	}
+	return err;
+}
+
+/**************************************************//**
+ * @brief	初始化資料內容
+ *****************************************************/
+void WP8Cheat::InitData()
+{
+	const int32u err = -1;
+	::memset((void*)&m_HorseAbility, 0, sizeof(SaWP8ABILITY));
+	::memset((void*)&m_HorseRace, 0, sizeof(SaWP8RACE));
+	::memset((void*)&m_HorsePony, 0, sizeof(SaWP8PONY));
+	::memset((void*)&m_HorseMare, 0, sizeof(SaWP8MARE));
+	::memset((void*)&m_HorseStallion, 0, sizeof(SaWP8STALLION));
+
+	::memset((void*)&m_Date, 0, sizeof(SaWP8DATE));
+	m_Date.WeekNumber = err;
+	m_Date.Month = err;
+	m_Date.Week = err;
+
+	::memset((void*)&m_Racing, 0, sizeof(SaWP8RACING));
 }
 
 /**************************************************//**
  * @brief	對應各資料位址
  *****************************************************/
-void WP8Cheat::MatchDataInfo()
+void WP8Cheat::InitDataAddress()
 {
+	// WP8-2018 address setting
 	::memset((void*)&m_HorseAbility, 0, sizeof(SaWP8ABILITY));
 	m_HorseAbility.Count = HORSE_ABILITY_COUNT;
 	m_HorseAbility.Addr = HORSE_ABILITY_ADDR;
@@ -87,17 +173,22 @@ void WP8Cheat::MatchDataInfo()
 	m_HorseStallion.Addr = HORSE_STALLION_ADDR;
 	m_HorseStallion.Seek = HORSE_STALLION_SEEK;
 
-	::memset((void*)&m_GameInfo, 0, sizeof(SaWP8GAME));
-	m_GameInfo.Count = WP8GAME_COUNT;
-	m_GameInfo.SpeedAddr = WP8GAME_SPEED_ADDR;
-	m_GameInfo.SpeedSeek = WP8GAME_SPEED_SEEK;
-	m_GameInfo.TacticAddr = WP8GAME_TACTIC_ADDR;
-	m_GameInfo.TacticSeek = WP8GAME_TACTIC_SEEK;
-	m_GameInfo.WeightAddr = WP8GAME_WEIGHT_ADDR;
-	m_GameInfo.WeightSeek = WP8GAME_WEIGHT_SEEK;
-	m_GameInfo.JockeyAddr = WP8GAME_JOCKEY_ADDR;
-	m_GameInfo.JockeySeek = WP8GAME_JOCKEY_SEEK;
+	::memset((void*)&m_Date, 0, sizeof(SaWP8DATE));
+	m_Date.Addr = WP8DATE_ADDR;
+	m_Date.DataLength = WP8DATE_DATA_LENGTH;
 
+	::memset((void*)&m_Racing, 0, sizeof(SaWP8RACING));
+	m_Racing.Count = WP8GAME_COUNT;
+	m_Racing.SpeedAddr = WP8GAME_SPEED_ADDR;
+	m_Racing.SpeedSeek = WP8GAME_SPEED_SEEK;
+	m_Racing.TacticAddr = WP8GAME_TACTIC_ADDR;
+	m_Racing.TacticSeek = WP8GAME_TACTIC_SEEK;
+	m_Racing.WeightAddr = WP8GAME_WEIGHT_ADDR;
+	m_Racing.WeightSeek = WP8GAME_WEIGHT_SEEK;
+	m_Racing.JockeyAddr = WP8GAME_JOCKEY_ADDR;
+	m_Racing.JockeySeek = WP8GAME_JOCKEY_SEEK;
+
+	// WP9-2018 v1.0.2.x offset
 	if (m_uVersion == WP8VER_502) {
 		m_HorseAbility.Addr += WP8VER_502_SEEK;
 		m_HorseRace.Addr += WP8VER_502_SEEK;
@@ -105,12 +196,12 @@ void WP8Cheat::MatchDataInfo()
 		m_HorseMare.Addr += WP8VER_502_SEEK;
 		m_HorseStallion.Addr  += WP8VER_502_SEEK;
 
-		m_GameInfo.SpeedAddr  += WP8VER_502_SEEK;
-		m_GameInfo.TacticAddr += WP8VER_502_SEEK;
-		m_GameInfo.WeightAddr += WP8VER_502_SEEK;
-		m_GameInfo.JockeyAddr += WP8VER_502_SEEK;
+		m_Date.Addr += WP8VER_502_SEEK;
+		m_Racing.SpeedAddr  += WP8VER_502_SEEK;
+		m_Racing.TacticAddr += WP8VER_502_SEEK;
+		m_Racing.WeightAddr += WP8VER_502_SEEK;
+		m_Racing.JockeyAddr += WP8VER_502_SEEK;
 	}
-
 }
 
 /**************************************************//**
@@ -118,12 +209,7 @@ void WP8Cheat::MatchDataInfo()
  *****************************************************/
 WP8Cheat::WP8Cheat()
 	: WsCheat() {
-	::memset((void*)&m_HorseAbility, 0, sizeof(SaWP8ABILITY));
-	::memset((void*)&m_HorseRace, 0, sizeof(SaWP8RACE));
-	::memset((void*)&m_HorsePony, 0, sizeof(SaWP8PONY));
-	::memset((void*)&m_HorseMare, 0, sizeof(SaWP8MARE));
-	::memset((void*)&m_HorseStallion, 0, sizeof(SaWP8STALLION));
-	::memset((void*)&m_GameInfo, 0, sizeof(SaWP8GAME));
+	this->InitData();
 }
 
 /**************************************************//**

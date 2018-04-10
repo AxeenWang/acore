@@ -3,7 +3,7 @@
  * @brief	WP8cc 競走馬操作類別，成員函式
  * @author	Swang
  * @date	2018-04-05
- * @date	2018-04-05
+ * @date	2018-04-10
  * @note	none
  *****************************************************************************/
 #include "wp8cc\wp8_race.hh"
@@ -49,6 +49,13 @@ void WP8RaceFrame::OnEventClose(WPARAM wParam, LPARAM lParam)
 void WP8RaceFrame::OnEventInitDialog(WPARAM wParam, LPARAM lParam)
 {
 	this->InitList();
+}
+
+/**************************************************//**
+ * @brief	取得競走馬資料
+ *****************************************************/
+void WP8RaceFrame::LoadData()
+{
 }
 
 /**************************************************//**
