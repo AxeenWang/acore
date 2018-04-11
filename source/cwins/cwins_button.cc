@@ -17,14 +17,14 @@
  * @param	[in] ht			按鈕高度
  * @param	[in] hParent	父視窗 Handle
  * @param	[in] idItem		控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 操作成功傳回: TRUE
  *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
  * @note	使用 CreateWindowEx() 建立一個 Button
  *****************************************************/
-BOOL WsButton::CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem)
+Bool WsButton::CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const BOOL	err = FALSE;
+	const Bool	err = FALSE;
 	HINSTANCE	hInst = ::GetModuleHandle(NULL);
 	SaCTRLS		ctrl;
 

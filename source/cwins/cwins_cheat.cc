@@ -13,14 +13,14 @@
  * @param	[in] pszModule	程序模組名稱
  *			- 程序模組名稱即為可執行程式的檔案名稱，如 Foo.exe, Foo.dll
  *			- 程序模組名稱不必刻意注意大小寫，會自動進行辨認。
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 若出現指定目標或目標已存在則傳回 TRUE
  *			- 若目標不存在或發生錯誤，則傳回 FALSE
  *****************************************************/
-BOOL WsCheat::SearchCheatProcess(LPCTSTR pszModule)
+Bool WsCheat::SearchCheatProcess(LPCTSTR pszModule)
 {
-	const	BOOL err = FALSE;
-	const	BOOL eok = TRUE;
+	const	Bool err = FALSE;
+	const	Bool eok = TRUE;
 	HANDLE	hProcess = m_hProcess;
 	DWORD	idSave = m_idProcess;
 	DWORD	pid = this->SearchProcess(pszModule);

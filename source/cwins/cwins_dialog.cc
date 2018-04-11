@@ -74,14 +74,14 @@ INT_PTR WsDialog::MessageDispose(UINT uMessage, WPARAM wParam, LPARAM lParam)
  * @param	[in] bModule	是否建立 Module Dialog
  *			- 預設為 FALSE 建立 Child Dialog
  *			- 設定為 TRUE 建立 Module Dialog
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 函式運作成功傳回: TRUE
  *			- 函式運作失敗傳回: FALSE
  * @details 使用資源檔(Resource)定義的 Dialog 資源建立
  *****************************************************/
-BOOL WsDialog::CreateFromResource(HWND hParent, int idItem, void * pvUnknow, BOOL bModule)
+Bool WsDialog::CreateFromResource(HWND hParent, int idItem, void * pvUnknow, Bool bModule)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 	HINSTANCE hInst = ::GetModuleHandle(NULL);	// 取得程序模組 Handle
 	HWND hWnd = m_hWnd;
 	LPTSTR pszTemplate;
@@ -126,12 +126,12 @@ BOOL WsDialog::CreateFromResource(HWND hParent, int idItem, void * pvUnknow, BOO
  * @param	[in] bModule	是否建立 Module Dialog
  *			- 預設為 FALSE 建立 Child Dialog
  *			- 設定為 TRUE 建立 Module Dialog
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 函式運作成功傳回: TRUE
  *			- 函式運作失敗傳回: FALSE
  * @details 使用 CreateWindowEx() 建立 Dialog
  *****************************************************/
-BOOL WsDialog::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem, void* pvUnknow, BOOL bModule)
+Bool WsDialog::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem, void* pvUnknow, Bool bModule)
 {
 	const int err = FALSE;
 	const TCHAR* pszName = TEXT("DialogEx");

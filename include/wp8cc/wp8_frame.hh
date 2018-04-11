@@ -36,7 +36,7 @@ protected:
 public:
 	WP8Frame();
 	virtual ~WP8Frame();
-	BOOL Create(HINSTANCE hInstance);
+	Bool Create(HINSTANCE hInstance);
 
 protected:
 	void LoadGameData();

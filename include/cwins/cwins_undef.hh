@@ -26,7 +26,7 @@ inline LRESULT WINAPI SendMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lPa
 // ----------------- PostMessage ------------------
 #ifdef PostMessage
 #undef PostMessage
-inline BOOL WINAPI PostMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+inline Bool WINAPI PostMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
 	#ifdef __ACORE_UNICODE__
 	return ::PostMessageW(hWnd, Msg, wParam, lParam);

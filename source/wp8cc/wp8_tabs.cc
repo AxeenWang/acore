@@ -25,10 +25,10 @@ WP8Tabs::~WP8Tabs() { }
  * @param	[in] hParent	父視窗操作 handle
  * @param	[in] idItem		控制項 ID	
  *****************************************************/
-BOOL WP8Tabs::Create(HWND hParent, int idItem)
+Bool WP8Tabs::Create(HWND hParent, int idItem)
 {
-	const BOOL err = FALSE;
-	const BOOL eok = TRUE;
+	const Bool err = FALSE;
+	const Bool eok = TRUE;
 	const DWORD dwStyle = WS_CLIPSIBLINGS | TCS_FIXEDWIDTH;	// | WS_BORDER;
 
 	SaCTRLS ctrls;

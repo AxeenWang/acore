@@ -26,10 +26,10 @@ enum EmSAMPLE {
  * @note	僅僅是一個範本，用來試驗與練習 Doxygen 註解方式
  *********************************************************/
 struct SaACOREEXAMPLE {
-	int32u	uRes1;		//!< 結構資料 1
-	int32u	uRes2;		//!< 結構資料 2
-	int64u	uData1;		//!< 結構資料 3
-	int64u	uData2;		//!< 結構資料 4
+	Int32u	uRes1;		//!< 結構資料 1
+	Int32u	uRes2;		//!< 結構資料 2
+	Int64u	uData1;		//!< 結構資料 3
+	Int64u	uData2;		//!< 結構資料 4
 };
 typedef SaACOREEXAMPLE*	PSaACOREEXAMPLE;	//!< 結構 ACOREEXAMPLE_ 短程指標
 typedef SaACOREEXAMPLE*	LPSaACOREEXAMPLE;	//!< 結構 ACOREEXAMPLE_ 長程指標

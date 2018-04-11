@@ -16,14 +16,14 @@
  * @param	[in] ht			ComboBox 高度
  * @param	[in] hParent	父視窗 Handle
  * @param	[in] idItem		控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 函式運作成功傳回: TRUE
  *			- 函式運作失敗傳回: FALSE
  * @note	使用 Windows API CreateWindowEx() 建立 Combox 控制項
  *****************************************************/
-BOOL WsCombo::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem)
+Bool WsCombo::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 	HMODULE	hInst = ::GetModuleHandle(NULL);
 	SaCTRLS	ctrl;
 

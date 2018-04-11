@@ -22,9 +22,9 @@ public:
 	WsTabs();
 	virtual ~WsTabs();
 
-	BOOL DeleteAllItem();
-	BOOL DeleteItem(int index);
-	void DeSelectAll(BOOL bDeSel);
+	Bool DeleteAllItem();
+	Bool DeleteItem(int index);
+	void DeSelectAll(Bool bDeSel);
 
 	// 標籤位置相關
 	int  GetCurselFocus();
@@ -33,21 +33,21 @@ public:
 	int  SetCursel(int index);
 
 	// 標籤操作
-	BOOL InsertItem(int index, LPTCITEM pttci);
-	BOOL InsertItem(int index, LPCTSTR psz);
-	BOOL GetItem(int index, TCITEM* pttci);
-	BOOL SetItem(int index, LPTCITEM pttci);
+	Bool InsertItem(int index, LPTCITEM pttci);
+	Bool InsertItem(int index, LPCTSTR psz);
+	Bool GetItem(int index, TCITEM* pttci);
+	Bool SetItem(int index, LPTCITEM pttci);
 	int  GetItemCount();
 
 	// 位置操作
-	void AdjustRect(BOOL bMode, RECT* prc);
-	BOOL GetItemRect(int index, RECT* prc);
+	void AdjustRect(Bool bMode, RECT* prc);
+	Bool GetItemRect(int index, RECT* prc);
 	LRESULT SetItemSize(int wd, int ht);
 	INT SetMinWidth(int wd);
 
 	// 建立 Tab
-	BOOL CreateFromResource(HWND hTab, int idItem);
-	BOOL CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem);
+	Bool CreateFromResource(HWND hTab, int idItem);
+	Bool CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem);
 };
 
 /**************************************************//**
@@ -64,31 +64,31 @@ inline WsTabs::~WsTabs() { }
 
 /**************************************************//**
  * @brief	刪除所有標籤
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
 *****************************************************/
-inline BOOL WsTabs::DeleteAllItem()
+inline Bool WsTabs::DeleteAllItem()
 {
 	// 傳送 TCM_DELETEALLITEMS 訊息
 	// wParam 必須為零
 	// lParam 必須為零
-	return (BOOL)this->SendMessage(TCM_DELETEALLITEMS, 0, 0);
+	return (Bool)this->SendMessage(TCM_DELETEALLITEMS, 0, 0);
 }
 
 /**************************************************//**
  * @brief	刪除一個標籤
  * @param	[in] index 項目索引值 (zero-base)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
 *****************************************************/
-inline BOOL WsTabs::DeleteItem(int index)
+inline Bool WsTabs::DeleteItem(int index)
 {
 	// 傳送 TCM_DELETEITEM 訊息
 	// wParam 標籤的索引值 (zero-base)
 	// lParam 必須為零
-	return (BOOL)this->SendMessage(TCM_DELETEITEM, (WPARAM)index, 0);
+	return (Bool)this->SendMessage(TCM_DELETEITEM, (WPARAM)index, 0);
 }
 
 /**************************************************//**
@@ -100,7 +100,7 @@ inline BOOL WsTabs::DeleteItem(int index)
  *			- FALSE, 所有的標籤將被清除狀態
  *			- TRUE,  當前被選定的標籤將被清除狀態
 *****************************************************/
-inline void WsTabs::DeSelectAll(BOOL bDeSel)
+inline void WsTabs::DeSelectAll(Bool bDeSel)
 {
 	// 傳送 TCM_DESELECTALL 訊息, TCIS_BUTTONPRESSED
 	// wParam 標示要清除的範圍
@@ -167,11 +167,11 @@ inline int WsTabs::SetCursel(int index)
  * @brief	插入一個標籤
  * @param	[in] index	要插入標籤的索引 (zero-base)
  * @param	[in] pttci	TCITEM 結構指標
- * @return  @c BOOL
+ * @return  @c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsTabs::InsertItem(int index, LPTCITEM pttci)
+inline Bool WsTabs::InsertItem(int index, LPTCITEM pttci)
 {
 	// 傳送 TCM_INSERTITEM 訊息
 	// wParam 要插入的標籤索引
@@ -183,32 +183,32 @@ inline BOOL WsTabs::InsertItem(int index, LPTCITEM pttci)
  * @brief	取得指定標籤訊息
  * @param	[in]  index	標籤索引 (zero-base)
  * @param	[out] pttci TCITEM 結構指標
- * @return  @c BOOL
+ * @return  @c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsTabs::GetItem(int index, TCITEM* pttci)
+inline Bool WsTabs::GetItem(int index, TCITEM* pttci)
 {
 	// 傳送 TCM_GETITEM 訊息
 	// wParam 欲取得資訊的標籤索引
 	// lParam TCITEM 結構指標
-	return (BOOL)this->SendMessage(TCM_GETITEM, (WPARAM)index, (LPARAM)pttci);
+	return (Bool)this->SendMessage(TCM_GETITEM, (WPARAM)index, (LPARAM)pttci);
 }
 
 /**************************************************//**
  * @brief	設定指定標籤訊息
  * @param	[in]  index	標籤索引 (zero-base)
  * @param	[out] pttci TCITEM 結構指標
- * @return  @c BOOL
+ * @return  @c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsTabs::SetItem(int index, LPTCITEM pttci)
+inline Bool WsTabs::SetItem(int index, LPTCITEM pttci)
 {
 	// 傳送 TCM_SETITEM 訊息
 	// wParam 欲設定資訊的標籤索引
 	// lParam TCITEM 結構指標
-	return (BOOL)this->SendMessage(TCM_SETITEM, (WPARAM)index, (LPARAM)pttci);
+	return (Bool)this->SendMessage(TCM_SETITEM, (WPARAM)index, (LPARAM)pttci);
 }
 
 /**************************************************//**
@@ -233,7 +233,7 @@ inline int WsTabs::GetItemCount()
  *			- TRUE : Specifies a display rectangle and receives the corresponding window rectangle
  *			- FALSE: specifies a window rectangle and receives the corresponding display area.
  *****************************************************/
-inline void WsTabs::AdjustRect(BOOL bMode, RECT* prc)
+inline void WsTabs::AdjustRect(Bool bMode, RECT* prc)
 {
 	// 傳送 TCM_ADJUSTRECT 訊息
 	// wParam 使用模式
@@ -251,12 +251,12 @@ inline void WsTabs::AdjustRect(BOOL bMode, RECT* prc)
  *			- 執行成功傳回: TRUE
  *			- 執行失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsTabs::GetItemRect(int index, RECT* prc)
+inline Bool WsTabs::GetItemRect(int index, RECT* prc)
 {
 	// 傳送 TCM_GETITEMRECT 訊息
 	// wParam 標籤索引
 	// lParam RECT 結構指標
-	return (BOOL)this->SendMessage(TCM_GETITEMRECT, (WPARAM)index, (LPARAM)prc);
+	return (Bool)this->SendMessage(TCM_GETITEMRECT, (WPARAM)index, (LPARAM)prc);
 }
 
 /**************************************************//**
@@ -297,10 +297,10 @@ inline INT WsTabs::SetMinWidth(int wd)
  * @brief	結合資源檔或其他已存在的 Tab 控制項
  * @param	[in] hTab	子項目視窗 handle
  * @param	[in] idItem	控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 操作成功傳回: TRUE
  *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
  ******************************************************/
-inline BOOL WsTabs::CreateFromResource(HWND hTab, int idItem) { return this->CombineResource(hTab, idItem); }
+inline Bool WsTabs::CreateFromResource(HWND hTab, int idItem) { return this->CombineResource(hTab, idItem); }
 
 #endif // !__AXEEN_CWINS_CWINSTAB_HH__

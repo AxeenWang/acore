@@ -14,11 +14,11 @@
  * @param	[in] size		字型尺寸
  * @param	[in] bBlod		是否要粗體
  * @param	[in] charset	指定字符集
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 操作成功傳回: TRUE
  *			- 操作失敗傳回: FALSE
  *****************************************************/
-BOOL WsObject::CreateFont(LPCTSTR fontFace, int size, BOOL bBlod, int charset)
+Bool WsObject::CreateFont(LPCTSTR fontFace, int size, Bool bBlod, int charset)
 {
 	HDC hDC = NULL;
 	int iHeight, iBold;
@@ -71,12 +71,12 @@ int WsObject::GetBorderSize()
  * @brief	設定視窗-工作區矩形邊界尺寸
  * @param	[in] wd		視窗寬度
  * @param	[in] ht		視窗高度
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 操作成功傳回: TRUE
  *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
  * @see		MSDN SetWindowPos
  *****************************************************/
-BOOL WsObject::SetClientSize(int wd, int ht)
+Bool WsObject::SetClientSize(int wd, int ht)
 {
 	const UINT flag = SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE;
 	HWND hWnd = m_hWnd;
@@ -168,7 +168,7 @@ void WsObject::InDestroyWindow()
 void WsObject::InitCommCtrl()
 {
 	// 在此設定一個靜態識別旗標，令所有繼承者，不會重複指定通用控制項
-	static BOOL bCommctrl = FALSE;
+	static Bool bCommctrl = FALSE;
 	INITCOMMONCONTROLSEX icce;
 
 	if (!bCommctrl) {

@@ -23,10 +23,10 @@ public:
 	WsCheat();
 	virtual ~WsCheat();
 
-	BOOL SearchCheatProcess(LPCTSTR pszModule);
+	Bool SearchCheatProcess(LPCTSTR pszModule);
 	SIZE_T ReadMemory(LPCVOID aBasePtr, LPVOID aBuffPtr, SIZE_T uSize);
 	SIZE_T WriteMemory(LPVOID aBasePtr, LPCVOID aBuffPtr, SIZE_T uSize);
-	BOOL IsHooking();
+	Bool IsHooking();
 
 protected:
 	void ReleaseHook();
@@ -88,9 +88,9 @@ inline SIZE_T WsCheat::WriteMemory(LPVOID aBasePtr, LPCVOID aBuffPtr, SIZE_T uSi
 
 /**************************************************//**
  * @brief	是否與目標掛勾完成
- * @return	@c BOOL	若已有掛勾連結目標程序時傳回 TRUE，否則傳回 FALSE
+ * @return	@c Bool	若已有掛勾連結目標程序時傳回 TRUE，否則傳回 FALSE
  *****************************************************/
-inline BOOL WsCheat::IsHooking() { return m_hProcess != NULL; }
+inline Bool WsCheat::IsHooking() { return m_hProcess != NULL; }
 
 /**************************************************//**
  * @brief	釋放與目標程序掛勾

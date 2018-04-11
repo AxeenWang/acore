@@ -17,13 +17,13 @@
  * @param	[in] ht       EditBox 高度
  * @param	[in] hParent  父視窗 Handle
  * @param	[in] idItem   控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 函式運作成功傳回: TRUE
  *			- 函式運作失敗傳回: FALSE
 ******************************************************/
-BOOL WsEdit::CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem)
+Bool WsEdit::CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 	HMODULE hInst = ::GetModuleHandle(NULL);
 	SaCTRLS ctrl;
 

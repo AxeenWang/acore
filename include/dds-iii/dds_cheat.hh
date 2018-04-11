@@ -45,12 +45,12 @@
  * @details 對齊方式參照 EmLVCALIGN
  *********************************************************/
 typedef struct _DDSIII_MEMBERSTATUS {
-	int16u	minHP;		//!< 當前生命值
-	int16u	maxHP;		//!< 最大生命值
-	int16u	minMP;		//!< 當前魔法值
-	int16u	maxMP;		//!< 最大魔法值
-	int16u	status;		//!< 角色狀態
-	int32u	exp;		//!< 經驗值
+	Int16u	minHP;		//!< 當前生命值
+	Int16u	maxHP;		//!< 最大生命值
+	Int16u	minMP;		//!< 當前魔法值
+	Int16u	maxMP;		//!< 最大魔法值
+	Int16u	status;		//!< 角色狀態
+	Int32u	exp;		//!< 經驗值
 } DDSIIIMEMBERSTATUS;
 
 /**************************************************//**
@@ -70,8 +70,8 @@ public:
 	void CheckGem();
 	void CheckGold();
 
-	BOOL LoadMemberData(int val);
-	BOOL SaveMemberData();
+	Bool LoadMemberData(int val);
+	Bool SaveMemberData();
 
 	/**************************************************//**
 	 * @brief 取得惡魔編號
@@ -356,7 +356,7 @@ public:
 	 *****************************************************/
 	int GetMoon()
 	{
-		intxu addr = DDSIII_MOON_BASE;
+		IntQu addr = DDSIII_MOON_BASE;
 		int moon = 0;
 		if (this->ReadMemory((LPCTSTR)addr, &moon, 1) != 1)
 			moon = -1;
@@ -369,20 +369,20 @@ public:
 	 *****************************************************/
 	void SetMoon(int val)
 	{
-		intxu addr = DDSIII_MOON_BASE;
+		IntQu addr = DDSIII_MOON_BASE;
 		int moon = val;
 		this->WriteMemory((LPVOID)addr, &moon, 1);
 	}
 
 protected:
-	void GodBlessYou(intxu addr);
-	BOOL GetDataEdit(void* dst, int inx, size_t len);
+	void GodBlessYou(IntQu addr);
+	Bool GetDataEdit(void* dst, int inx, size_t len);
 	void SetDataEdit(void* src, int inx, size_t len);
 	void ClearLoadData();
 	void Destroy();
 
 protected:
-	intxu	m_xBasePoint;							//!< 載入的仲魔資料基底位址
+	IntQu	m_xBasePoint;							//!< 載入的仲魔資料基底位址
 	int		m_iBaseID;								//!< 載入的招募仲魔欄位編號
 	BYTE	m_cBaseData[DDSIII_MEMBER_DATASIZE];	//!< 載入的原始資料
 	BYTE	m_cBaseEdit[DDSIII_MEMBER_DATASIZE];	//!< 修改中資料

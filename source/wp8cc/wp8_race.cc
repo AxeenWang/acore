@@ -120,14 +120,14 @@ WP8RaceList::~WP8RaceList() { }
  * @brief	建立 ListView 控制項
  * @param	[in] hParent	父視窗操作 handle
  * @param	[in] idItem		列表控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 函式運作成功傳回: TRUE
  *			- 函式運作失敗傳回: FALSE
  *****************************************************/
-BOOL WP8RaceList::Create(HWND hParent, int idItem)
+Bool WP8RaceList::Create(HWND hParent, int idItem)
 {
-	const BOOL err = FALSE;
-	const BOOL eok = TRUE;
+	const Bool err = FALSE;
+	const Bool eok = TRUE;
 
 	// LVS_REPORT				: 設定成 Report 樣式
 	// LVS_SHOWSELALWAYS		: 非當前使用視窗時，被選定 Item 仍以高亮反白顯示

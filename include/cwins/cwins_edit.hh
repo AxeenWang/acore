@@ -23,8 +23,8 @@ class WsEdit : public WsCtrls
 public:
 	WsEdit();
 	virtual ~WsEdit();
-	BOOL CreateFromResource(HWND hEdit, int idItem);
-	BOOL CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem);
+	Bool CreateFromResource(HWND hEdit, int idItem);
+	Bool CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem);
 };
 
 /******************************************************//**
@@ -41,10 +41,10 @@ inline WsEdit::~WsEdit() { }
  * @brief	結合資源檔或其他已存在的 EditBox 控制項
  * @param	[in] hEdit	子項目視窗 handle
  * @param	[in] idItem	控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 操作成功傳回: TRUE
  *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
  ******************************************************/
-inline BOOL WsEdit::CreateFromResource(HWND hEdit, int idItem) { return this->CombineResource(hEdit, idItem); }
+inline Bool WsEdit::CreateFromResource(HWND hEdit, int idItem) { return this->CombineResource(hEdit, idItem); }
 
 #endif // !__AXEEN_CWINS_CWINSEDIT_HH__

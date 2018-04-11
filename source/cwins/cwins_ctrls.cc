@@ -11,22 +11,22 @@
 /******************************************************//**
  * @brief	建立控制項，使用 HotCode 方式建立
  * @param	[in] ccPtr SaCTRLS 結構指標
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 建立成功傳回: TRUE
  *			- 建立失敗傳回: FALSE
  * @see		SaCTRLS 結構, EmCTRLS 列舉
  * @note	依據 SaCTRLS 結構定義內容建立對應控制項，控制項可見 EmCTRLS 所定義的內容
  *********************************************************/
-BOOL WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
+Bool WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 	HMODULE	hInst = ::GetModuleHandle(NULL);
 	HWND	hCtrl = NULL;
 	HMENU	hMenu = NULL;
 	DWORD	dwStyle = 0;
 	DWORD	dwExStyle = 0;
 	LPCTSTR	pszClass;
-	intxu	idItem;
+	IntQu	idItem;
 
 	if (hInst == NULL							// 無效的模組 handle
 		|| ccPtr == NULL						// 無效的 SaCTRLS 指標
@@ -48,7 +48,7 @@ BOOL WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
 		dwStyle = ccPtr->dwStyle | WS_CLIPSIBLINGS | WS_VISIBLE | WS_CHILD;
 
 	dwExStyle = ccPtr->dwExStyle;
-	idItem = (intxu)ccPtr->idItem;
+	idItem = (IntQu)ccPtr->idItem;
 	hMenu = (HMENU)idItem;
 
 	// 建立控制項
@@ -87,13 +87,13 @@ BOOL WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
  * @param	[in] hParent		父視窗 HANDLE
  * @param	[in] idItem			控制項 ID
  * @param	[in] fnWndProcess	控制項 callback function address
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 建立成功傳回: TRUE
  *			- 建立失敗傳回: FALSE
  *********************************************************/
-BOOL WsCtrls::CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess)
+Bool WsCtrls::CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 	HMODULE	hInst;
 	HWND	hCtrl;
 
@@ -127,11 +127,11 @@ BOOL WsCtrls::CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess)
  * @brief	結合資源檔或其他已存在的控制項
  * @param	[in] hCtrl	子項目視窗 handle
  * @param	[in] idItem	控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 操作成功傳回: TRUE
  *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
  ******************************************************/
-BOOL WsCtrls::CombineResource(HWND hCtrl, int idItem)
+Bool WsCtrls::CombineResource(HWND hCtrl, int idItem)
 {
 	HMODULE	hInst = ::GetModuleHandle(NULL);
 	// 驗證控制項 Handle

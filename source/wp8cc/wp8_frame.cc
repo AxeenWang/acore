@@ -225,9 +225,9 @@ WP8Frame::~WP8Frame() { }
  * @brief	建立 WP8cc 主視窗框架 (Dialog)
  * @param	[in] hInstance 程序模組 handle
  *****************************************************/
-BOOL WP8Frame::Create(HINSTANCE hInstance)
+Bool WP8Frame::Create(HINSTANCE hInstance)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 	const DWORD dwStyle = WS_OVERLAPPEDWINDOW;
 	const int wd = WP8_DEFAULT_WIDTH;
 	const int ht = WP8_DEFAULT_HEIGHT;
@@ -292,13 +292,9 @@ void WP8Frame::LoadGameData()
 	int w = (int)wp->GetCurrentWeek();
 	this->ModifyTitle(t, m, w);
 
+	wp->LoadHorseAbility();
 
-	#if 0
-	TCHAR sz[MAX_PATH];
-	::wsprintf(sz, TEXT("Handle= 0x%08X, id = %li"), wp->GetProcessHandle(), wp->GetProcessID());
-	::MessageBox(m_hWnd, sz, TEXT("aaa"), MB_OK);
-	#endif
-
+	// 通知旗下各子控制項、視窗進行讀取與版面佈局
 	int cursel = cTabs->GetCursel();
 	if (cursel != -1) {
 		cPage = m_vPage[cursel];

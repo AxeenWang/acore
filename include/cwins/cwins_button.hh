@@ -28,11 +28,11 @@ public:
 
 	// 單遠或複選狀態
 	LRESULT GetState();
-	LRESULT SetState(BOOL bState);
+	LRESULT SetState(Bool bState);
 
 	// 建立按鈕
-	BOOL CreateFromResource(HWND hButton, int idItem);
-	BOOL CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem);
+	Bool CreateFromResource(HWND hButton, int idItem);
+	Bool CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem);
 };
 
 /**************************************************//**
@@ -102,7 +102,7 @@ inline LRESULT WsButton::GetState()
  *			- FALSE	清除按鈕所有被設定狀態
  * @return	@c LRESULT	傳回值始終為零
  *****************************************************/
-inline LRESULT WsButton::SetState(BOOL bState)
+inline LRESULT WsButton::SetState(Bool bState)
 {
 	// 傳送 BM_SETSTATE 訊息
 	// wParam 指定按鈕是否被選中
@@ -114,10 +114,10 @@ inline LRESULT WsButton::SetState(BOOL bState)
  * @brief	結合資源檔或其他已存在的 Button
  * @param	[in] hButton	子項目視窗
  * @param	[in] idItem		控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 操作成功傳回: TRUE
  *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
  ******************************************************/
-inline BOOL WsButton::CreateFromResource(HWND hButton, int idItem) { return this->CombineResource(hButton, idItem); }
+inline Bool WsButton::CreateFromResource(HWND hButton, int idItem) { return this->CombineResource(hButton, idItem); }
 
 #endif	/* __AXEEN_CWINS_CWINSBUTTON_HH__ */

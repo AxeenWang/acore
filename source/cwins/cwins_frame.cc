@@ -90,14 +90,14 @@ int WsFrame::Run()
 /**************************************************//**
  * @brief	建立一個範本視窗
  * @param	[in] hInstance	程序運行模組 Hanlde of Module
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsFrame::CreateFromWindowEx(HINSTANCE hInstance)
+Bool WsFrame::CreateFromWindowEx(HINSTANCE hInstance)
 {
-	const BOOL err = FALSE;
-	const BOOL eok = TRUE;
+	const Bool err = FALSE;
+	const Bool eok = TRUE;
 	SaFRAME frm;
 
 	if (hInstance == NULL) 	return err;
@@ -136,15 +136,15 @@ BOOL WsFrame::CreateFromWindowEx(HINSTANCE hInstance)
 /**************************************************//**
  * @brief	向系統註冊一個視窗類別
  * @param	[in] fmsPtr	SaFRAME 結構指標
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功回傳: TRUE
  *			- 運作失敗回傳: FALSE
  * @see SaFRAME struct
  * @see MSDN WNDCLASSEX struct
  *****************************************************/
-BOOL WsFrame::InRegisterClass(LPSaFRAME fmsPtr)
+Bool WsFrame::InRegisterClass(LPSaFRAME fmsPtr)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 
 	UINT        uStyle = (CS_HREDRAW | CS_VREDRAW);    // | CS_DBLCLKS;
 	HINSTANCE   hInst = NULL;
@@ -202,24 +202,24 @@ BOOL WsFrame::InRegisterClass(LPSaFRAME fmsPtr)
 /**************************************************//**
  * @brief	建立視窗
  * @param	[in] fmsPtr	SaFRAME 結構指標
- * @return	BOOL 型別
+ * @return	Bool 型別
  *	成功回傳 TRUE
  *	失敗回傳 FALSE
  *****************************************************/
-BOOL WsFrame::InCreateWindow(LPSaFRAME fmsPtr)
+Bool WsFrame::InCreateWindow(LPSaFRAME fmsPtr)
 {
-	const	BOOL err = false;
+	const	Bool err = false;
 	HWND	hWnd = NULL;
 	HMENU	hMenu = NULL;
 	DWORD	dwStyle = 0;    // WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX;
 	DWORD	dwExStyle = 0;
-	intxu	idItem = 0;
+	IntQu	idItem = 0;
 	int		x, y, wd, ht;
 
 	if (fmsPtr == NULL) return err;
 
 	// save window sample info
-	idItem = (intxu)fmsPtr->idItem;
+	idItem = (IntQu)fmsPtr->idItem;
 	dwStyle |= fmsPtr->dwStyle;
 	dwExStyle |= fmsPtr->dwExStyle;
 	hMenu = (HMENU)idItem;

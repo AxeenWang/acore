@@ -14,11 +14,11 @@
  * @param	[in] wd		指定 Column 寬度
  * @param	[in] align	指定對齊方式
  * @param	[in] psz	指定 Column 顯示文字位址
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsListv::InsertColumn(int index, int wd, int align, LPTSTR psz)
+Bool WsListv::InsertColumn(int index, int wd, int align, LPTSTR psz)
 {
     const static int aiAssign[] = { LVCFMT_LEFT, LVCFMT_RIGHT, LVCFMT_CENTER, LVCFMT_LEFT };
     LVCOLUMN lvc;
@@ -56,11 +56,11 @@ void WsListv::DeleteAllColumn()
  * @param	[in]  index	欄位項目索引 (zero-base)
  * @param	[out] psz	保存取得文字緩衝區
  * @param	[in]  cch	要取得字串長度 (in TCHAR)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsListv::GetColumn(int index, LPTSTR psz, int cch)
+Bool WsListv::GetColumn(int index, LPTSTR psz, int cch)
 {
     LVCOLUMN lvc;
 
@@ -69,18 +69,18 @@ BOOL WsListv::GetColumn(int index, LPTSTR psz, int cch)
     lvc.mask = LVCF_TEXT;
 	lvc.pszText = psz;
     lvc.cchTextMax = cch;
-    return (BOOL)this->SendMessage(LVM_GETCOLUMN, (WPARAM)index, (LPARAM)&lvc);
+    return (Bool)this->SendMessage(LVM_GETCOLUMN, (WPARAM)index, (LPARAM)&lvc);
 }
 
 /**************************************************//**
  * @brief	設定指定欄位(Column)文字內容
  * @param	[in] index	欄位項目索引 (zero-base)
  * @param	[in] psz	欲設定文字緩衝區
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsListv::SetColumn(int index, LPTSTR psz)
+Bool WsListv::SetColumn(int index, LPTSTR psz)
 {
     LVCOLUMN lvc;
 
@@ -88,7 +88,7 @@ BOOL WsListv::SetColumn(int index, LPTSTR psz)
     ::memset((void*)&lvc, 0, sizeof(LVCOLUMN));
     lvc.mask = LVCF_TEXT;
 	lvc.pszText = psz;
-    return (BOOL)this->SendMessage(LVM_SETCOLUMN, (WPARAM)index, (LPARAM)&lvc);
+    return (Bool)this->SendMessage(LVM_SETCOLUMN, (WPARAM)index, (LPARAM)&lvc);
 }
 
 /**************************************************//**
@@ -96,11 +96,11 @@ BOOL WsListv::SetColumn(int index, LPTSTR psz)
  * @param	[in] index	項目索引值   (zero-base)
  * @param	[in] isubs	項目子欄位索引(zero-base)
  * @param	[in] psz	字串緩衝區
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsListv::InsertItem(int index, int isubs, LPTSTR psz)
+Bool WsListv::InsertItem(int index, int isubs, LPTSTR psz)
 {
     LVITEM lvi;
 
@@ -126,11 +126,11 @@ BOOL WsListv::InsertItem(int index, int isubs, LPTSTR psz)
  * @param	[in] bSelect
  *			- TRUE  設定被選擇
  *			- FALSE 取消被選擇
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsListv::SetSelectItem(int index, BOOL bSelect)
+Bool WsListv::SetSelectItem(int index, Bool bSelect)
 {
     LVITEM lvi;
     ::memset((void*)&lvi, 0, sizeof(LVITEM));
@@ -144,11 +144,11 @@ BOOL WsListv::SetSelectItem(int index, BOOL bSelect)
  * @param	[in] index	項目索引值   (zero-base)
  * @param	[in] isubs	項目子欄位索引(zero-base)
  * @param	[in] psz	字串緩衝區
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsListv::SetItem(int index, int isubs, LPTSTR psz)
+Bool WsListv::SetItem(int index, int isubs, LPTSTR psz)
 {
     LVITEM lvi;
 
@@ -160,7 +160,7 @@ BOOL WsListv::SetItem(int index, int isubs, LPTSTR psz)
     lvi.iSubItem = isubs;   // choose sub item
     lvi.pszText = psz;      // push the string
     lvi.cchTextMax = ::lstrlen(lvi.pszText);
-    return (BOOL)this->SendMessage(LVM_SETITEMTEXT, (WPARAM)index, (LPARAM)&lvi);
+    return (Bool)this->SendMessage(LVM_SETITEMTEXT, (WPARAM)index, (LPARAM)&lvi);
 }
 
 /**************************************************//**
@@ -169,11 +169,11 @@ BOOL WsListv::SetItem(int index, int isubs, LPTSTR psz)
  * @param	[in]  isubs	項目子欄位索引(zero-base)
  * @param	[out] psz	字串緩衝區
  * @param	[in]  cch	要取得字串的長度 (in TCHAR)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsListv::GetItem(int index, int isubs, LPTSTR psz, int cch)
+Bool WsListv::GetItem(int index, int isubs, LPTSTR psz, int cch)
 {
     LVITEM lvi;
 
@@ -221,14 +221,14 @@ void WsListv::DefaultStyle()
  * @param	[in] ht			ListView 高度
  * @param	[in] hParent	父視窗 Handle
  * @param	[in] idItem		控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回 TRUE
  *			- 運作失敗傳回 FALSE
  * @note	使用 CreateWindowEx 建立 ListView 控制項
  *****************************************************/
-BOOL WsListv::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem)
+Bool WsListv::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
     SaCTRLS ctrl; // Structure for controller
 
 	if (hParent == NULL)	// hParent (父視窗) 不得為 NULL

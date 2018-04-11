@@ -37,11 +37,11 @@ public:
 	virtual ~WsFrame();
 
 	int  Run();
-	BOOL CreateFromWindowEx(HINSTANCE hInstance);
+	Bool CreateFromWindowEx(HINSTANCE hInstance);
 
 protected:
-	BOOL InRegisterClass(LPSaFRAME fmsPtr);
-	BOOL InCreateWindow(LPSaFRAME fmsPtr);
+	Bool InRegisterClass(LPSaFRAME fmsPtr);
+	Bool InCreateWindow(LPSaFRAME fmsPtr);
 };
 
 /**************************************************//**

@@ -18,6 +18,5 @@ WP8Cheat*	GetCheat();
 void		SysError(EmWP8ERROR err, HWND hWnd = NULL);
 LPCTSTR		GetNamePark(EmNAMEPARK index);
 LPCTSTR		SearchNamePark(EmNAMEPARK index);
-LPCTSTR		GetJockeyName(int index);
 
 #endif // !__AXEEN_WP8_WP8COMM_HH__

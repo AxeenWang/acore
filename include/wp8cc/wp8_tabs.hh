@@ -21,7 +21,7 @@ class WP8Tabs : public WsTabs
 public:
 	WP8Tabs();
 	virtual ~WP8Tabs();
-	BOOL Create(HWND hParent, int idItem);
+	Bool Create(HWND hParent, int idItem);
 
 protected:
 	void InitTab();

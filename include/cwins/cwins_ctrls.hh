@@ -22,9 +22,9 @@ public:
 	WsCtrls();
 	WsCtrls(EmCTRLS type);
 	virtual ~WsCtrls();
-	BOOL CreateUseHotCodes(LPSaCTRLS ccPtr);
-	BOOL CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess);
-	BOOL CombineResource(HWND hCtrl, int idItem);
+	Bool CreateUseHotCodes(LPSaCTRLS ccPtr);
+	Bool CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess);
+	Bool CombineResource(HWND hCtrl, int idItem);
 	LPCTSTR GetControlClassName(EmCTRLS index);
 };
 

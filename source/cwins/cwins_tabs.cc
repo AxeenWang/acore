@@ -12,13 +12,13 @@
  * @brief	插入一個標籤 (文字標籤)
  * @param	[in] index	標籤索引 (zero-base)
  * @param	[in] psz	文字緩衝區
- * @return  @c BOOL
+ * @return  @c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-BOOL WsTabs::InsertItem(int index, LPCTSTR psz)
+Bool WsTabs::InsertItem(int index, LPCTSTR psz)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 
     TCITEM tci;
 	TCHAR szText[MAX_PATH];
@@ -39,13 +39,13 @@ BOOL WsTabs::InsertItem(int index, LPCTSTR psz)
  * @param	[in] ht			高度
  * @param	[in] hParent	父視窗操作 handle
  * @param	[in] idItem		ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 執行成功傳回: TRUE
  *			- 執行失敗傳回: FALSE
  *****************************************************/
-BOOL WsTabs::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem)
+Bool WsTabs::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const BOOL err = FALSE;
+	const Bool err = FALSE;
 	SaCTRLS ctrl;	// Structure for controller
 	RECT rc;
 

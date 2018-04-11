@@ -62,7 +62,6 @@ enum EmWP8FUNCPARAM {
 	emWP8FuncLoad
 };
 
-
 /******************************************************//**
  * @struct	SaCONSTTEXT
  * @brief	WP8cc 名稱定義結構

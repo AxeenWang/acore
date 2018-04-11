@@ -22,47 +22,47 @@ public:
 	WsListv();
 	virtual ~WsListv();
 
-    BOOL InsertColumn(int index, int wd, int align, LPTSTR psz);
-	BOOL DeleteColumn(int index);
+    Bool InsertColumn(int index, int wd, int align, LPTSTR psz);
+	Bool DeleteColumn(int index);
     void DeleteAllColumn();
 
-    BOOL GetColumn(int index, LPTSTR psz, int cch);
-    BOOL SetColumn(int index, LPTSTR psz);
+    Bool GetColumn(int index, LPTSTR psz, int cch);
+    Bool SetColumn(int index, LPTSTR psz);
 
 	int  GetColumnWidth(int index);
-	BOOL SetColumnWidth(int index, int pixel);
+	Bool SetColumnWidth(int index, int pixel);
 
 	int  GetColumnCount();
 	int  GetCountPerPage();
 	int  GetTopIndex();
 
-	BOOL GetItemPosition(int index, LPPOINT aPtr);
+	Bool GetItemPosition(int index, LPPOINT aPtr);
 
-    BOOL InsertItem(int index, int isubs, LPTSTR psz);
-	BOOL DeleteItem(int index);
-	BOOL DeleteAllItem();
+    Bool InsertItem(int index, int isubs, LPTSTR psz);
+	Bool DeleteItem(int index);
+	Bool DeleteAllItem();
 
-	BOOL SetItemStatus(int index, LPLVITEM plvi);
+	Bool SetItemStatus(int index, LPLVITEM plvi);
 	int  GetItemCount();
 	int  GetSelectItemCount();
 	int  GetSelectItem();
-	BOOL SetSelectItem(int index, BOOL bSelect);
+	Bool SetSelectItem(int index, Bool bSelect);
 	int  GetSelectItemFirst();
 	int  GetSelectItemNext();
 
-    BOOL SetItem(int index, int isubs, LPTSTR psz);
-    BOOL GetItem(int index, int isubs, LPTSTR psz, int cch);
+    Bool SetItem(int index, int isubs, LPTSTR psz);
+    Bool GetItem(int index, int isubs, LPTSTR psz, int cch);
 
-	BOOL SetBkColor(COLORREF dwColor);
-	BOOL SetTextColor(COLORREF dwColor);
-	BOOL SetTextBkColor(COLORREF dwColor);
+	Bool SetBkColor(COLORREF dwColor);
+	Bool SetTextColor(COLORREF dwColor);
+	Bool SetTextBkColor(COLORREF dwColor);
 
 	DWORD GetExStyle();
 	void  SetExStyle(DWORD dwExStyle);
     void  DefaultStyle();
 
-	BOOL CreateFromResource(HWND hList, int idItem);
-    BOOL CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem);
+	Bool CreateFromResource(HWND hList, int idItem);
+    Bool CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem);
 
 protected:
 	COLORREF ColorShade(COLORREF c, float fPercent);
@@ -89,16 +89,16 @@ inline WsListv::~WsListv() { }
 /**************************************************//**
  * @brief	刪除一個欄位(Column)
  * @param	[in] index	欄位項目索引 (zero-base)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsListv::DeleteColumn(int index)
+inline Bool WsListv::DeleteColumn(int index)
 {
 	// LVM_DELETECOLUMN
 	// wParam 欄位索引
 	// lParam 必須為零
-	return (BOOL)this->SendMessage(LVM_DELETECOLUMN, (WPARAM)index, 0);
+	return (Bool)this->SendMessage(LVM_DELETECOLUMN, (WPARAM)index, 0);
 }
 
 /**************************************************//**
@@ -120,12 +120,12 @@ inline int WsListv::GetColumnWidth(int index)
  * @param	[in] pixel	欄位寬度 (in pixel) 像素
  * @return	@c int		傳回寬度數據，若失敗則傳回 0
  *****************************************************/
-inline BOOL WsListv::SetColumnWidth(int index, int pixel)
+inline Bool WsListv::SetColumnWidth(int index, int pixel)
 {
 	// LVM_GETCOLUMNWIDTH
 	// wParam 欄位索引 zero-base
 	// lParam 欄位寬度 (像素)
-	return (BOOL)this->SendMessage(LVM_SETCOLUMNWIDTH, (WPARAM)index, (LPARAM)pixel);
+	return (Bool)this->SendMessage(LVM_SETCOLUMNWIDTH, (WPARAM)index, (LPARAM)pixel);
 }
 
 /**************************************************//**
@@ -165,16 +165,16 @@ inline int WsListv::GetCountPerPage()
  * @brief	取得指定項目位置
  * @param	[in]  index	項目索引
  * @param	[out] aPtr	POINT 結構指標
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsListv::GetItemPosition(int index, LPPOINT aPtr)
+inline Bool WsListv::GetItemPosition(int index, LPPOINT aPtr)
 {
 	// LVM_GETITEMPOSITION
 	// wParam 項目索引
 	// lParam POINT 結構指標
-	return (BOOL)this->SendMessage(LVM_GETITEMPOSITION, (WPARAM)index, (LPARAM)aPtr);
+	return (Bool)this->SendMessage(LVM_GETITEMPOSITION, (WPARAM)index, (LPARAM)aPtr);
 }
 
 /**************************************************//**
@@ -192,30 +192,30 @@ inline int WsListv::GetTopIndex()
 /**************************************************//**
  * @brief	刪除一個項目(Item)
  * @param	[in] index	項目索引值 (zero-base)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsListv::DeleteItem(int index)
+inline Bool WsListv::DeleteItem(int index)
 {
 	// LVM_DELETEITEM
 	// wParam 項目索引
 	// lParam 必須為零
-	return (BOOL)this->SendMessage(LVM_DELETEITEM, (WPARAM)index, 0);
+	return (Bool)this->SendMessage(LVM_DELETEITEM, (WPARAM)index, 0);
 }
 
 /**************************************************//**
  * @brief	刪除所有項目(Item)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsListv::DeleteAllItem()
+inline Bool WsListv::DeleteAllItem()
 {
 	// LVM_DELETEALLITEMS
 	// wParam 必須為零
 	// lParam 必須為零
-	return (BOOL)this->SendMessage(LVM_DELETEALLITEMS, 0, 0);
+	return (Bool)this->SendMessage(LVM_DELETEALLITEMS, 0, 0);
 }
 
 /**************************************************//**
@@ -234,16 +234,16 @@ inline int WsListv::GetItemCount()
  * @brief	設定項目(Item)狀態
  * @param	[in] index	項目索引值   (zero-base)
  * @param	[in] plvi	LVITEM 結構指標
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsListv::SetItemStatus(int index, LPLVITEM plvi)
+inline Bool WsListv::SetItemStatus(int index, LPLVITEM plvi)
 {
 	// LVM_SETITEMSTATE
 	// wParam 項目索引
 	// lParam LVITEM 結構指標
-	return (BOOL)this->SendMessage(LVM_SETITEMSTATE, (WPARAM)index, (LPARAM)plvi);
+	return (Bool)this->SendMessage(LVM_SETITEMSTATE, (WPARAM)index, (LPARAM)plvi);
 }
     
 /**************************************************//**
@@ -306,46 +306,46 @@ inline int WsListv::GetSelectItemNext()
 /**************************************************//**
  * @brief	設定背景顏色
  * @param	[in] dwColor 顏色(RGB)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsListv::SetBkColor(COLORREF dwColor)
+inline Bool WsListv::SetBkColor(COLORREF dwColor)
 {
 	// LVM_SETBKCOLOR
 	// wParam 必須為零
 	// lParam COLORREF 型別, 背景顏色 RGB (若使用 CLR_NONE 定義值，則為無被景色)
-	return (BOOL)this->SendMessage(LVM_SETBKCOLOR, 0, (LPARAM)dwColor);
+	return (Bool)this->SendMessage(LVM_SETBKCOLOR, 0, (LPARAM)dwColor);
 }
 
 /**************************************************//**
  * @brief	設定文字顏色
  * @param	[in] dwColor 顏色(RGB)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsListv::SetTextColor(COLORREF dwColor)
+inline Bool WsListv::SetTextColor(COLORREF dwColor)
 {
 	// LVM_SETTEXTCOLOR
 	// wParam 必須為零
 	// lParam COLORREF 型別, 顏色定義。
-	return (BOOL)this->SendMessage(LVM_SETTEXTCOLOR, 0, (LPARAM)dwColor);
+	return (Bool)this->SendMessage(LVM_SETTEXTCOLOR, 0, (LPARAM)dwColor);
 }
 
 /**************************************************//**
  * @brief	設定文字背景顏色
  * @param	[in] dwColor 顏色(RGB)
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 運作成功傳回: TRUE
  *			- 運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsListv::SetTextBkColor(COLORREF dwColor)
+inline Bool WsListv::SetTextBkColor(COLORREF dwColor)
 {
 	// LVM_SETTEXTBKCOLOR
 	// wParam 必須為零
 	// lParam COLORREF 型別, 背景顏色 RGB (若使用 CLR_NONE 定義值，則為無被景色)
-	return (BOOL)this->SendMessage(LVM_SETTEXTBKCOLOR, 0, (LPARAM)dwColor);
+	return (Bool)this->SendMessage(LVM_SETTEXTBKCOLOR, 0, (LPARAM)dwColor);
 }
 
 /**************************************************//**
@@ -397,10 +397,10 @@ inline COLORREF WsListv::ColorShade(COLORREF c, float fPercent)
  * @brief	結合資源檔或其他已存在的 ListView 控制項
  * @param	[in] hList	子項目視窗
  * @param	[in] idItem	控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 操作成功傳回: TRUE
  *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
  ******************************************************/
-inline BOOL WsListv::CreateFromResource(HWND hList, int idItem) { return this->CombineResource(hList, idItem); }
+inline Bool WsListv::CreateFromResource(HWND hList, int idItem) { return this->CombineResource(hList, idItem); }
 
 #endif	/* __AXEEN_CWINS_CWINSLISTVIEW_HH__ */

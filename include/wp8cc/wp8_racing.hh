@@ -21,7 +21,7 @@ class WP8RacingList : public WsListv
 public:
 	WP8RacingList();
 	virtual ~WP8RacingList();
-	BOOL Create(HWND hParent, int idItem);
+	Bool Create(HWND hParent, int idItem);
 
 protected:
 	void InitColumn();

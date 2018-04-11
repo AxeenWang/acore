@@ -33,6 +33,14 @@
 #endif
 #endif
 
+#ifndef True
+#define True	1			//!< 布林式判別 for Bool
+#endif
+
+#ifndef False
+#define False	0			//!< 布林式判別 for Bool
+#endif
+
 /********************************************//**
  * 字串宣告巨集 - Windows 風格字串定義
  ***********************************************/
@@ -51,6 +59,16 @@
 #define TEXT(quote) __TEXT(quote)		//!< 字串定義巨集
 #endif
 #endif
+
+/********************************************//**
+ * 定義型巨集
+ ***********************************************/
+#define STRING_MAX		260		//!< 最大字串容量
+#define STRING_HUGE		196		//!< 超大字串容量
+#define STRING_LARGE	132		//!< 大型字串容量
+#define STRING_MIDDLE	64		//!< 中型字串容量
+#define STRING_SMALL	32		//!< 小型字串容量
+#define STRING_TINY		24		//!< 最小字串容量
 
 /********************************************//**
  * 常用動作巨集

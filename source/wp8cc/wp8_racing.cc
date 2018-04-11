@@ -56,7 +56,28 @@ void WP8RacingFrame::OnEventInitDialog(WPARAM wParam, LPARAM lParam)
  *****************************************************/
 void WP8RacingFrame::LoadData()
 {
-	// TODO
+	WP8Cheat* wp = ::GetCheat();
+	WP8RacingList* lst = m_cList;
+
+	if (wp == NULL || lst == NULL) return;	
+	int track = wp->GetRacingTrack();
+	TCHAR text[STRING_MAX];
+
+	wp->LoadRacing();
+	lst->DeleteAllItem();
+
+	for (int i = 0; i < track; i++) {
+		::wsprintf(text, TEXT("%d"), i+1);
+		lst->InsertItem(i, 0, text);
+		::lstrcpy(text, wp->GetRacingSpeedText(i));
+		lst->SetItem(i, 2, text);
+		::lstrcpy(text, wp->GetRacingTacticText(i));
+		lst->SetItem(i, 3, text);
+		::lstrcpy(text, wp->GetRacingWeightText(i));
+		lst->SetItem(i, 4, text);
+		::lstrcpy(text, wp->GetRacingJockeyText(i));
+		lst->SetItem(i, 5, text);
+	}
 }
 
 /**************************************************//**
@@ -123,14 +144,14 @@ WP8RacingList::~WP8RacingList() { }
  * @brief	建立 ListView 控制項
  * @param	[in] hParent	父視窗操作 handle
  * @param	[in] idItem		列表控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 函式運作成功傳回: TRUE
  *			- 函式運作失敗傳回: FALSE
  *****************************************************/
-BOOL WP8RacingList::Create(HWND hParent, int idItem)
+Bool WP8RacingList::Create(HWND hParent, int idItem)
 {
-	const BOOL err = FALSE;
-	const BOOL eok = TRUE;
+	const Bool err = FALSE;
+	const Bool eok = TRUE;
 
 	// LVS_REPORT				: 設定成 Report 樣式
 	// LVS_SHOWSELALWAYS		: 非當前使用視窗時，被選定 Item 仍以高亮反白顯示

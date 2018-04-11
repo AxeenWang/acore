@@ -96,7 +96,7 @@ WP8Page::~WP8Page() { }
  * @param	[in] bRelease 是否釋放筆刷
  * @return	@c HBRUSH 筆刷操作 handle
  *****************************************************/
-HBRUSH WP8Page::Brush(BOOL bRelease)
+HBRUSH WP8Page::Brush(Bool bRelease)
 {
 	static HBRUSH hBrush = NULL;
 

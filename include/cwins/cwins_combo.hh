@@ -35,8 +35,8 @@ public:
 	int GetItemTextLength(int index);
 	int GetItemText(int index, LPTSTR pszText);
 
-	BOOL CreateFromResource(HWND hCombo, int idItem);
-	BOOL CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem);
+	Bool CreateFromResource(HWND hCombo, int idItem);
+	Bool CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem);
 };
 
 /**************************************************//**
@@ -186,10 +186,10 @@ inline int WsCombo::GetItemText(int index, LPTSTR pszText)
  * @brief	結合資源檔或其他已建立的 ComboBox 控制項
  * @param	[in] hCombo	子項目視窗
  * @param	[in] idItem	控制項 ID
- * @return	@c BOOL
+ * @return	@c Bool
  *			- 函式運作成功傳回: TRUE
  *			- 函式運作失敗傳回: FALSE
  *****************************************************/
-inline BOOL WsCombo::CreateFromResource(HWND hCombo, int idItem) { return this->CombineResource(hCombo, idItem); }
+inline Bool WsCombo::CreateFromResource(HWND hCombo, int idItem) { return this->CombineResource(hCombo, idItem); }
 
 #endif	/* __AXEEN_CWINS_CWINSCOMMBO_H__ */
