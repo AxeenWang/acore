@@ -12,7 +12,7 @@ int TestStruct(LPSaACOREEXAMPLE aPtr)
 {
 	const int err = -1;
 	const int eok = 1;
-	if (aPtr == NULL) return err;
+	if (aPtr == Null) return err;
 
 	struct SaACOREEXAMPLE ast;
 	::memset(&ast, 0, sizeof(ast));

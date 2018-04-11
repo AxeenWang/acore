@@ -155,7 +155,7 @@ inline int WsCombo::DeleteItem(int index)
  * @brief	取得 Item 字串長度
  * @param	[in] index	要取得字串長度的索引碼 (zero-base)
  * @return	@c int
- *			- 執行成功，傳回所指 Item 字串長度，單位 TCHAR (不含 NULL 結尾)
+ *			- 執行成功，傳回所指 Item 字串長度，單位 TCHAR (不含 Null 結尾)
  *			- 執行失敗，傳回 CB_ERR
  *****************************************************/
 inline int WsCombo::GetItemTextLength(int index)
@@ -171,7 +171,7 @@ inline int WsCombo::GetItemTextLength(int index)
  * @param	[in]  index		要取得字串的索引碼 (zero-base)
  * @param	[out] pszText	要存放字串緩衝區
  * @return	@c int
- *			- 執行成功傳回: 指定 Item 的字串長度，單位 TCHAR (不含 NULL 結尾)
+ *			- 執行成功傳回: 指定 Item 的字串長度，單位 TCHAR (不含 Null 結尾)
  *			- 執行失敗傳回: CB_ERR
  *****************************************************/
 inline int WsCombo::GetItemText(int index, LPTSTR pszText)
@@ -187,8 +187,8 @@ inline int WsCombo::GetItemText(int index, LPTSTR pszText)
  * @param	[in] hCombo	子項目視窗
  * @param	[in] idItem	控制項 ID
  * @return	@c Bool
- *			- 函式運作成功傳回: TRUE
- *			- 函式運作失敗傳回: FALSE
+ *			- 函式運作成功傳回: True
+ *			- 函式運作失敗傳回: False
  *****************************************************/
 inline Bool WsCombo::CreateFromResource(HWND hCombo, int idItem) { return this->CombineResource(hCombo, idItem); }
 

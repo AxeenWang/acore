@@ -35,12 +35,12 @@ INT_PTR WP8Func::MessageDispose(UINT uMessage, WPARAM wParam, LPARAM lParam)
 		break;
 	//case WM_CTLCOLORDLG:
 		// 依據指定筆刷重新繪製 Dialog
-	//	if (this->Brush() != NULL) return (INT_PTR)(this->Brush());
+	//	if (this->Brush() != Null) return (INT_PTR)(this->Brush());
 	//	break;
 	default:
-		return FALSE;
+		return False;
 	}
-	return TRUE;
+	return True;
 }
 
 /**************************************************//**

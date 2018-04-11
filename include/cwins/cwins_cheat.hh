@@ -59,7 +59,7 @@ inline SIZE_T WsCheat::ReadMemory(LPCVOID aBasePtr, LPVOID aBuffPtr, SIZE_T uSiz
 	HANDLE hProcess = m_hProcess;
 	SIZE_T cbReads = 0;
 
-	if (hProcess != NULL && aBasePtr != NULL && aBuffPtr != NULL) {
+	if (hProcess != Null && aBasePtr != Null && aBuffPtr != Null) {
 		::ReadProcessMemory(hProcess, aBasePtr, aBuffPtr, uSize, &cbReads);
 	}
 	return cbReads;
@@ -80,7 +80,7 @@ inline SIZE_T WsCheat::WriteMemory(LPVOID aBasePtr, LPCVOID aBuffPtr, SIZE_T uSi
 	HANDLE hProcess = m_hProcess;
 	SIZE_T cbWrite = 0;
 
-	if (hProcess != NULL && aBasePtr != NULL && aBuffPtr != NULL) {
+	if (hProcess != Null && aBasePtr != Null && aBuffPtr != Null) {
 		::WriteProcessMemory(hProcess, aBasePtr, aBuffPtr, uSize, &cbWrite);
 	}
 	return cbWrite;
@@ -88,9 +88,9 @@ inline SIZE_T WsCheat::WriteMemory(LPVOID aBasePtr, LPCVOID aBuffPtr, SIZE_T uSi
 
 /**************************************************//**
  * @brief	是否與目標掛勾完成
- * @return	@c Bool	若已有掛勾連結目標程序時傳回 TRUE，否則傳回 FALSE
+ * @return	@c Bool	若已有掛勾連結目標程序時傳回 True，否則傳回 False
  *****************************************************/
-inline Bool WsCheat::IsHooking() { return m_hProcess != NULL; }
+inline Bool WsCheat::IsHooking() { return m_hProcess != Null; }
 
 /**************************************************//**
  * @brief	釋放與目標程序掛勾

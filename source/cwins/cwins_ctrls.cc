@@ -12,26 +12,26 @@
  * @brief	建立控制項，使用 HotCode 方式建立
  * @param	[in] ccPtr SaCTRLS 結構指標
  * @return	@c Bool
- *			- 建立成功傳回: TRUE
- *			- 建立失敗傳回: FALSE
+ *			- 建立成功傳回: True
+ *			- 建立失敗傳回: False
  * @see		SaCTRLS 結構, EmCTRLS 列舉
  * @note	依據 SaCTRLS 結構定義內容建立對應控制項，控制項可見 EmCTRLS 所定義的內容
  *********************************************************/
 Bool WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
 {
-	const Bool err = FALSE;
-	HMODULE	hInst = ::GetModuleHandle(NULL);
-	HWND	hCtrl = NULL;
-	HMENU	hMenu = NULL;
+	const Bool err = False;
+	HMODULE	hInst = ::GetModuleHandle(Null);
+	HWND	hCtrl = Null;
+	HMENU	hMenu = Null;
 	DWORD	dwStyle = 0;
 	DWORD	dwExStyle = 0;
 	LPCTSTR	pszClass;
 	IntQu	idItem;
 
-	if (hInst == NULL							// 無效的模組 handle
-		|| ccPtr == NULL						// 無效的 SaCTRLS 指標
+	if (hInst == Null							// 無效的模組 handle
+		|| ccPtr == Null						// 無效的 SaCTRLS 指標
 		|| this->IsExist()						// 此類別物件已經存在視窗定義
-		|| ccPtr->hParent == NULL				// 無效的父視窗操作 handle
+		|| ccPtr->hParent == Null				// 無效的父視窗操作 handle
 		|| ccPtr->idItem < 0					// 無效的子控制項 id
 		|| ccPtr->emType <= emCtrlPassStart		// 子控制項型態指定錯誤
 		|| ccPtr->emType >= emCtrlPassEnd)		// 子控制項型態指定錯誤
@@ -39,7 +39,7 @@ Bool WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
 
 	// 取得 Controller 對應 class 名稱
 	pszClass = this->GetControlClassName(ccPtr->emType);
-	if (pszClass == NULL) return err;
+	if (pszClass == Null) return err;
 
 	// 設定視窗 style
 	if (ccPtr->emType == emCtrlDialogBox)
@@ -64,7 +64,7 @@ Bool WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
 		ccPtr->hParent,
 		hMenu, hInst,
 		(LPVOID)ccPtr->pvUnknow);
-	if (hCtrl == NULL) return err;
+	if (hCtrl == Null) return err;
 
 	// 保存各項數據
 	m_hModule = hInst;
@@ -74,12 +74,12 @@ Bool WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
 	m_emCtrlsType = ccPtr->emType;
 
 	// 使用自定義 Callback function ?
-	if (ccPtr->fnWndProcess != NULL) {
+	if (ccPtr->fnWndProcess != Null) {
 		// 指定訊息處理函數
 		m_fnWndProc = (WNDPROC)::GetWindowLongPtr(hCtrl, GWLP_WNDPROC);
 		::SetWindowLongPtr(hCtrl, GWLP_WNDPROC, (LONG_PTR)ccPtr->fnWndProcess);
 	}
-	return hCtrl != NULL;
+	return hCtrl != Null;
 }
 
 /******************************************************//**
@@ -88,21 +88,21 @@ Bool WsCtrls::CreateUseHotCodes(LPSaCTRLS ccPtr)
  * @param	[in] idItem			控制項 ID
  * @param	[in] fnWndProcess	控制項 callback function address
  * @return	@c Bool
- *			- 建立成功傳回: TRUE
- *			- 建立失敗傳回: FALSE
+ *			- 建立成功傳回: True
+ *			- 建立失敗傳回: False
  *********************************************************/
 Bool WsCtrls::CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess)
 {
-	const Bool err = FALSE;
+	const Bool err = False;
 	HMODULE	hInst;
 	HWND	hCtrl;
 
-	if (this->IsExist() || hParent == NULL || idItem < 0)
+	if (this->IsExist() || hParent == Null || idItem < 0)
 		return err;
 
-	hInst = ::GetModuleHandle(NULL);
+	hInst = ::GetModuleHandle(Null);
 	hCtrl = ::GetDlgItem(hParent, idItem);
-	if (hInst == NULL || hCtrl == NULL)
+	if (hInst == Null || hCtrl == Null)
 		return err;
 
 	m_hModule = hInst;
@@ -110,7 +110,7 @@ Bool WsCtrls::CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess)
 	m_hWnd = hCtrl;
 	m_idItem = idItem;
 
-	if (fnWndProcess != NULL) {
+	if (fnWndProcess != Null) {
 		// 保存當前預設訊息處理函式位址
 		m_fnWndProc = (WNDPROC)::GetWindowLongPtr(hCtrl, GWLP_WNDPROC);
 
@@ -120,7 +120,7 @@ Bool WsCtrls::CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess)
 			return err;
 		}
 	}
-	return hCtrl != NULL;
+	return hCtrl != Null;
 }
 
 /**************************************************//**
@@ -128,19 +128,19 @@ Bool WsCtrls::CreateUseResource(HWND hParent, int idItem, WNDPROC fnWndProcess)
  * @param	[in] hCtrl	子項目視窗 handle
  * @param	[in] idItem	控制項 ID
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  ******************************************************/
 Bool WsCtrls::CombineResource(HWND hCtrl, int idItem)
 {
-	HMODULE	hInst = ::GetModuleHandle(NULL);
+	HMODULE	hInst = ::GetModuleHandle(Null);
 	// 驗證控制項 Handle
-	if (hCtrl != NULL && hInst != NULL) {
+	if (hCtrl != Null && hInst != Null) {
 		this->m_hWnd = hCtrl;
 		this->m_hParent = ::GetParent(hCtrl);
 		this->m_hModule = hInst;
 	}
-	return hCtrl != NULL;
+	return hCtrl != Null;
 }
 
 /******************************************************//**
@@ -148,7 +148,7 @@ Bool WsCtrls::CombineResource(HWND hCtrl, int idItem)
  * @param	[in] index	取得控制項 calss name 索引，參照 EmCTRLS
  * @return	@c LPCTSTR
  *			- 執行成功 傳回字串位址
- *			- 執行失敗 傳回 NULL
+ *			- 執行失敗 傳回 Null
  *********************************************************/
 LPCTSTR WsCtrls::GetControlClassName(EmCTRLS index)
 {
@@ -189,6 +189,6 @@ LPCTSTR WsCtrls::GetControlClassName(EmCTRLS index)
 	int idx = (int)index;
 
 	if (idx >= len)
-		return NULL;
+		return Null;
 	return (LPCTSTR)szClass[idx];
 }

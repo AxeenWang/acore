@@ -13,17 +13,17 @@
  * @param	[in] index	標籤索引 (zero-base)
  * @param	[in] psz	文字緩衝區
  * @return  @c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsTabs::InsertItem(int index, LPCTSTR psz)
 {
-	const Bool err = FALSE;
+	const Bool err = False;
 
     TCITEM tci;
 	TCHAR szText[MAX_PATH];
 	
-	if (psz == NULL) return err;
+	if (psz == Null) return err;
 	::lstrcpy(szText, psz);
     tci.mask = TCIF_TEXT | TCIF_IMAGE; 
     tci.iImage = -1; 
@@ -40,17 +40,17 @@ Bool WsTabs::InsertItem(int index, LPCTSTR psz)
  * @param	[in] hParent	父視窗操作 handle
  * @param	[in] idItem		ID
  * @return	@c Bool
- *			- 執行成功傳回: TRUE
- *			- 執行失敗傳回: FALSE
+ *			- 執行成功傳回: True
+ *			- 執行失敗傳回: False
  *****************************************************/
 Bool WsTabs::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const Bool err = FALSE;
+	const Bool err = False;
 	SaCTRLS ctrl;	// Structure for controller
 	RECT rc;
 
 	// 防呆驗證
-	if (hParent == NULL || idItem == 0) return err;
+	if (hParent == Null || idItem == 0) return err;
 
 	// 初始 DMCWNDCTRLS 內容
 	::memset((void*)&ctrl, 0, sizeof(SaCTRLS));
@@ -67,7 +67,7 @@ Bool WsTabs::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int 
 	// 建立 DMCWNDCTRLS 內容
 	ctrl.hParent = hParent;
 	ctrl.emType = emCtrlSysTabControl32;
-	ctrl.pszName = NULL;
+	ctrl.pszName = Null;
 	ctrl.dwStyle = 0;
 	ctrl.dwExStyle = 0;
 	ctrl.iPosx = x;
@@ -75,6 +75,6 @@ Bool WsTabs::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int 
 	ctrl.iWidth = wd;
 	ctrl.iHeight = ht;
 	ctrl.idItem = idItem; // conctrller item id
-	ctrl.fnWndProcess = NULL;
+	ctrl.fnWndProcess = Null;
 	return this->CreateUseHotCodes(&ctrl);
 }

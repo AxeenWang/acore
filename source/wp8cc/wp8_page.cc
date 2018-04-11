@@ -32,12 +32,12 @@ INT_PTR WP8Page::MessageDispose(UINT uMessage, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_CTLCOLORDLG:
 		// 依據指定筆刷重新繪製 Dialog
-		if (this->Brush() != NULL) return (INT_PTR)(this->Brush());
+		if (this->Brush() != Null) return (INT_PTR)(this->Brush());
 		break;
 	default:
-		return FALSE;
+		return False;
 	}
-	return TRUE;
+	return True;
 }
 
 /**************************************************//**
@@ -56,7 +56,7 @@ void WP8Page::OnEventSize(WPARAM wParam, LPARAM lParam)
  *****************************************************/
 void WP8Page::OnEventClose(WPARAM wParam, LPARAM lParam)
 {
-	this->Brush(TRUE);	// param : bRelease = TRUE
+	this->Brush(True);	// param : bRelease = True
 	this->InDestroyWindow();
 	::EndDialog(m_hWnd, 0);
 }
@@ -98,17 +98,17 @@ WP8Page::~WP8Page() { }
  *****************************************************/
 HBRUSH WP8Page::Brush(Bool bRelease)
 {
-	static HBRUSH hBrush = NULL;
+	static HBRUSH hBrush = Null;
 
 	if (bRelease) {
-		if (hBrush != NULL) {
+		if (hBrush != Null) {
 			// 刪除筆刷
 			::DeleteObject(hBrush);
-			hBrush = NULL;
+			hBrush = Null;
 		}
 	}
 	else {
-		if (hBrush == NULL) {
+		if (hBrush == Null) {
 			// 建立筆刷顏色
 			hBrush = ::CreateSolidBrush(RGB(255, 255, 255));
 		}

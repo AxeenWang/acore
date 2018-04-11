@@ -75,7 +75,7 @@ void WP8Frame::OnEventSize(WPARAM wParam, LPARAM lParam)
 	RECT rc1, rc2, rc3;
 
 	// 設定 Tab 顯示位置
-	if (cTabs == NULL) return;
+	if (cTabs == Null) return;
 	x = y = 0;
 	wd = (int)LOWORD(lParam);
 	ht = (int)HIWORD(lParam);
@@ -83,7 +83,7 @@ void WP8Frame::OnEventSize(WPARAM wParam, LPARAM lParam)
 	cTabs->SetSize(wd, ht);
 
 	// 設定功能頁顯示位置
-	if (cFunc == NULL) return;
+	if (cFunc == Null) return;
 	cTabs->GetClientRect(&rc1);
 	cTabs->GetItemRect(0, &rc2);
 	cFunc->GetFrameRect(&rc3);
@@ -102,7 +102,7 @@ void WP8Frame::OnEventSize(WPARAM wParam, LPARAM lParam)
 	size_t len = m_vPage.size();
 	for (size_t i = 0; i < len; i++) {
 		cPage = m_vPage[i];
-		if (cPage == NULL) return;
+		if (cPage == Null) return;
 		//cPage->SetPosition(x, y);
 		cPage->SetSize(wd, ht);
 	}
@@ -118,7 +118,7 @@ void WP8Frame::OnEventClose(WPARAM wParam, LPARAM lParam)
 	WP8Page* cPage;
 	size_t len = m_vPage.size();
 	for (size_t i = 0; i < len; i++) {
-		if ((cPage = m_vPage[i]) != NULL) {
+		if ((cPage = m_vPage[i]) != Null) {
 			::SendMessage(cPage->GetHandle(), WM_CLOSE, 0, 0);
 		}
 	}
@@ -139,7 +139,7 @@ void WP8Frame::OnEventNotify(WPARAM wParam, LPARAM lParam)
 	// 被選擇的標籤有變化，進行 Dialog 頁面切換
 	if (p->code == TCN_SELCHANGE) {
 		WP8Tabs* cTabs = m_cTabsObj;
-		if (cTabs != NULL) {
+		if (cTabs != Null) {
 			int index = cTabs->GetCursel();
 			this->TabSelectChange(index);
 		}
@@ -188,7 +188,7 @@ void WP8Frame::TabSelectChange(int index)
 	// 隱藏所有頁面?
 	if (index < 0) {
 		for (size_t i = 0; i < len; i++) {
-			if ((cPage = m_vPage[i]) != NULL) {
+			if ((cPage = m_vPage[i]) != Null) {
 				cPage->Hide();
 			}
 		}
@@ -197,9 +197,9 @@ void WP8Frame::TabSelectChange(int index)
 
 	// 改變頁面顯示
 	if (index < len) {
-		if ((cPage = m_vPage[pev]) != NULL)
+		if ((cPage = m_vPage[pev]) != Null)
 			cPage->Hide();
-		if ((cPage = m_vPage[index]) != NULL) {
+		if ((cPage = m_vPage[index]) != Null) {
 			cPage->Show();
 			m_iPage = index;
 		}
@@ -211,8 +211,8 @@ void WP8Frame::TabSelectChange(int index)
  *****************************************************/
 WP8Frame::WP8Frame()
 	: WsFrame()
-	, m_cTabsObj(NULL)
-	, m_cFuncObj(NULL)
+	, m_cTabsObj(Null)
+	, m_cFuncObj(Null)
 	, m_iPage(0) {
 }
 
@@ -227,18 +227,18 @@ WP8Frame::~WP8Frame() { }
  *****************************************************/
 Bool WP8Frame::Create(HINSTANCE hInstance)
 {
-	const Bool err = FALSE;
+	const Bool err = False;
 	const DWORD dwStyle = WS_OVERLAPPEDWINDOW;
 	const int wd = WP8_DEFAULT_WIDTH;
 	const int ht = WP8_DEFAULT_HEIGHT;
 	SaFRAME ws;
 
-	if (hInstance == NULL) return err;
+	if (hInstance == Null) return err;
 
 	::memset((void*)&ws, 0, sizeof(ws));
 	ws.hInstance = hInstance;
-	ws.hWndParent = NULL;
-	ws.fnWndProc = NULL;
+	ws.hWndParent = Null;
+	ws.fnWndProc = Null;
 	ws.pszClassName = ::GetNamePark(emNameClassName);
 	ws.pszTitleName = ::GetNamePark(emNameTitleName);
 	ws.iPosx = 0;
@@ -247,9 +247,9 @@ Bool WP8Frame::Create(HINSTANCE hInstance)
 	ws.iHeight = ht;
 	ws.uClassStyle = 0;
 	ws.hBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	ws.hIcon = NULL;
-	ws.hIconSm = NULL;
-	ws.hCursor = NULL;
+	ws.hIcon = Null;
+	ws.hIconSm = Null;
+	ws.hCursor = Null;
 	ws.dwStyle = dwStyle;
 	ws.dwExStyle = 0;
 	ws.idItem = 0;
@@ -270,9 +270,9 @@ void WP8Frame::LoadGameData()
 	WP8Page* cPage;
 
 	// 物件尚未建立
-	if (wp == NULL) {
+	if (wp == Null) {
 		wp = ::StartCheat();
-		if (wp == NULL) {
+		if (wp == Null) {
 			::SysError(emErrWP8Cheat, hWnd);
 			return;
 		}
@@ -287,20 +287,19 @@ void WP8Frame::LoadGameData()
 	}
 
 	// 讀取遊戲時間
-	int t = (int)wp->GetCurrentWeekNumber(FALSE);
+	int t = (int)wp->GetCurrentWeekNumber(False);
 	int m = (int)wp->GetCurrentMonth();
 	int w = (int)wp->GetCurrentWeek();
 	this->ModifyTitle(t, m, w);
 
-	wp->LoadHorseAbility();
+	// 取得全部馬資料
+	wp->LoadHorseData();
 
-	// 通知旗下各子控制項、視窗進行讀取與版面佈局
-	int cursel = cTabs->GetCursel();
-	if (cursel != -1) {
-		cPage = m_vPage[cursel];
-		if (cPage != NULL) {
-			cPage->LoadData();
-		}
+	// 通知旗下成員進行數據更新
+	size_t len = m_vPage.size();
+	for (size_t i = 0; i < len; i++) {
+		cPage = m_vPage[i];
+		if (cPage != Null) cPage->LoadData();
 	}
 }
 
@@ -327,8 +326,8 @@ void WP8Frame::InitFrame()
 	const TCHAR* szfont = TEXT("Microsoft JhengHei");	//TEXT("Meiryo UI");	//TEXT("微軟正黑體");
 	const int ifont = 11;
 
-	this->SetIcon(::LoadIcon(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1)));
-	this->CreateFont(szfont, ifont, FALSE);
+	this->SetIcon(::LoadIcon(::GetModuleHandle(Null), MAKEINTRESOURCE(IDI_ICON1)));
+	this->CreateFont(szfont, ifont, False);
 
 	this->SetCenterPosition();
 	this->Update();
@@ -345,10 +344,10 @@ void WP8Frame::InitTabs()
 	WP8Tabs* cTab = new (std::nothrow) WP8Tabs();
 
 	for (;;) {
-		if (cTab == NULL) break;
+		if (cTab == Null) break;
 		if (!cTab->Create(hWnd, IDC_WP8TABS)) break;
 		m_cTabsObj = cTab;
-		if (hFont != NULL) { cTab->SetFont(m_hFont); }
+		if (hFont != Null) { cTab->SetFont(m_hFont); }
 		return;
 	}
 	this->PostMessage(WM_WP8ERROR, (WPARAM)emErrInitTabs, 0);
@@ -366,14 +365,14 @@ void WP8Frame::InitPage()
 	int len;
 
 	for (;;) {
-		if (m_cTabsObj == NULL) break;
+		if (m_cTabsObj == Null) break;
 
 		// 建立功能頁面
 		cFunc = new (std::nothrow) WP8Func();
-		if (cFunc == NULL) break;
+		if (cFunc == Null) break;
 
 		m_cFuncObj = cFunc;
-		if (!cFunc->CreateFromResource(hWnd, IDD_WP8FUNC, NULL)) break;
+		if (!cFunc->CreateFromResource(hWnd, IDD_WP8FUNC, Null)) break;
 		cFunc->Show();
 
 		len = cTab->GetItemCount();
@@ -389,9 +388,9 @@ void WP8Frame::InitPage()
 				cPage = new (std::nothrow) WP8Page();
 			}
 
-			if (cPage == NULL) break;
+			if (cPage == Null) break;
 			m_vPage.push_back(cPage);
-			cPage->CreateFromResource(hWnd, i + IDD_TAB_PAGE_01, NULL);
+			cPage->CreateFromResource(hWnd, i + IDD_TAB_PAGE_01, Null);
 			cPage->Hide();
 		}
 		if (m_vPage.size() < len) break;

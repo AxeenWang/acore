@@ -18,20 +18,20 @@
  * @param	[in] hParent	父視窗 Handle
  * @param	[in] idItem		控制項 ID
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  * @note	使用 CreateWindowEx() 建立一個 Button
  *****************************************************/
 Bool WsButton::CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const Bool	err = FALSE;
-	HINSTANCE	hInst = ::GetModuleHandle(NULL);
+	const Bool	err = False;
+	HINSTANCE	hInst = ::GetModuleHandle(Null);
 	SaCTRLS		ctrl;
 
-	if (hInst == NULL || hParent == NULL || idItem <= 0)
+	if (hInst == Null || hParent == Null || idItem <= 0)
 		return err;
 	// 沒有設定控制項名稱
-	if (pszName == NULL) pszName = TEXT("");
+	if (pszName == Null) pszName = TEXT("");
 
 	memset((void*)&ctrl, 0, sizeof(SaCTRLS));
 	ctrl.hParent = hParent;
@@ -44,6 +44,6 @@ Bool WsButton::CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht,
 	ctrl.iWidth = wd;
 	ctrl.iHeight = ht;
 	ctrl.idItem = idItem;
-	ctrl.fnWndProcess = NULL;
+	ctrl.fnWndProcess = Null;
 	return this->CreateUseHotCodes(&ctrl);
 }

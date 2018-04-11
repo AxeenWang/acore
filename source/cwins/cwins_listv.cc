@@ -15,8 +15,8 @@
  * @param	[in] align	指定對齊方式
  * @param	[in] psz	指定 Column 顯示文字位址
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsListv::InsertColumn(int index, int wd, int align, LPTSTR psz)
 {
@@ -57,14 +57,14 @@ void WsListv::DeleteAllColumn()
  * @param	[out] psz	保存取得文字緩衝區
  * @param	[in]  cch	要取得字串長度 (in TCHAR)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsListv::GetColumn(int index, LPTSTR psz, int cch)
 {
     LVCOLUMN lvc;
 
-    if (NULL == psz) return FALSE;
+    if (Null == psz) return False;
     ::memset((void*)&lvc, 0, sizeof(LVCOLUMN));
     lvc.mask = LVCF_TEXT;
 	lvc.pszText = psz;
@@ -77,14 +77,14 @@ Bool WsListv::GetColumn(int index, LPTSTR psz, int cch)
  * @param	[in] index	欄位項目索引 (zero-base)
  * @param	[in] psz	欲設定文字緩衝區
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsListv::SetColumn(int index, LPTSTR psz)
 {
     LVCOLUMN lvc;
 
-	if (NULL == psz) return FALSE;
+	if (Null == psz) return False;
     ::memset((void*)&lvc, 0, sizeof(LVCOLUMN));
     lvc.mask = LVCF_TEXT;
 	lvc.pszText = psz;
@@ -97,14 +97,14 @@ Bool WsListv::SetColumn(int index, LPTSTR psz)
  * @param	[in] isubs	項目子欄位索引(zero-base)
  * @param	[in] psz	字串緩衝區
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsListv::InsertItem(int index, int isubs, LPTSTR psz)
 {
     LVITEM lvi;
 
-	if (NULL == psz) return FALSE;
+	if (Null == psz) return False;
     // Setting properties Of members
     ::memset((void*)&lvi, 0, sizeof(LVITEM));
     lvi.mask = LVIF_TEXT;   // LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
@@ -124,11 +124,11 @@ Bool WsListv::InsertItem(int index, int isubs, LPTSTR psz)
  * @brief	設定指定項目(Item)被選中
  * @param	[in] index		項目索引值 (zero-base)
  * @param	[in] bSelect
- *			- TRUE  設定被選擇
- *			- FALSE 取消被選擇
+ *			- True  設定被選擇
+ *			- False 取消被選擇
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsListv::SetSelectItem(int index, Bool bSelect)
 {
@@ -145,14 +145,14 @@ Bool WsListv::SetSelectItem(int index, Bool bSelect)
  * @param	[in] isubs	項目子欄位索引(zero-base)
  * @param	[in] psz	字串緩衝區
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsListv::SetItem(int index, int isubs, LPTSTR psz)
 {
     LVITEM lvi;
 
-    if (NULL == psz) return FALSE;
+    if (Null == psz) return False;
     // Setting properties Of members
     ::memset((void*)&lvi, 0, sizeof(LVITEM));
     lvi.mask = LVIF_TEXT;   // LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
@@ -170,14 +170,14 @@ Bool WsListv::SetItem(int index, int isubs, LPTSTR psz)
  * @param	[out] psz	字串緩衝區
  * @param	[in]  cch	要取得字串的長度 (in TCHAR)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsListv::GetItem(int index, int isubs, LPTSTR psz, int cch)
 {
     LVITEM lvi;
 
-    if (NULL == psz) return FALSE;
+    if (Null == psz) return False;
     // Setting properties Of members
     memset((void*)&lvi, 0, sizeof(LVITEM));
     lvi.mask = LVIF_TEXT;   // LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
@@ -222,16 +222,16 @@ void WsListv::DefaultStyle()
  * @param	[in] hParent	父視窗 Handle
  * @param	[in] idItem		控制項 ID
  * @return	@c Bool
- *			- 運作成功傳回 TRUE
- *			- 運作失敗傳回 FALSE
+ *			- 運作成功傳回 True
+ *			- 運作失敗傳回 False
  * @note	使用 CreateWindowEx 建立 ListView 控制項
  *****************************************************/
 Bool WsListv::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const Bool err = FALSE;
+	const Bool err = False;
     SaCTRLS ctrl; // Structure for controller
 
-	if (hParent == NULL)	// hParent (父視窗) 不得為 NULL
+	if (hParent == Null)	// hParent (父視窗) 不得為 Null
 		return err;
 	if (idItem <= 0)		// 子項目 ItemID 不得為 零 或 負數
 		return err;
@@ -240,7 +240,7 @@ Bool WsListv::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int
     ::memset((void*)&ctrl, 0, sizeof(SaCTRLS));
     ctrl.hParent = hParent;
     ctrl.emType = emCtrlSysListView32;
-    ctrl.pszName = NULL;
+    ctrl.pszName = Null;
     ctrl.dwStyle = LVS_REPORT | LVS_SHOWSELALWAYS; // LVS_EDITLABELS;
     ctrl.dwExStyle = 0;
     ctrl.iPosx = x;
@@ -248,7 +248,7 @@ Bool WsListv::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int
     ctrl.iWidth = wd;
     ctrl.iHeight = ht;
     ctrl.idItem = idItem; // conctrller item id
-    ctrl.fnWndProcess = NULL;
+    ctrl.fnWndProcess = Null;
 	return this->CreateUseHotCodes(&ctrl);
 }
 
@@ -319,7 +319,7 @@ void WsListv::PaintAlternatingRows()
 	HWND	hWnd = m_hWnd;
 	WNDPROC	fnProc = m_fnWndProc;
 
-	if (fnProc == NULL) return;
+	if (fnProc == Null) return;
 
 	RECT	rectUpd;	//	rectangle to update
 	RECT	rectDestin;	//	temporary storage
@@ -329,7 +329,7 @@ void WsListv::PaintAlternatingRows()
 	COLORREF c;			//	temporary storage
 
 	// get the rectangle to be updated
-	::GetUpdateRect(hWnd, &rectUpd, FALSE);
+	::GetUpdateRect(hWnd, &rectUpd, False);
 	// allow default processing first
 	::CallWindowProc(fnProc, hWnd, WM_PAINT, 0, 0);
 	// set the row horizontal dimensions
@@ -351,7 +351,7 @@ void WsListv::PaintAlternatingRows()
 			c = (i % 2) ? this->ColorShade(GetSysColor(COLOR_WINDOW), 95.0) : ::GetSysColor(COLOR_WINDOW);
 			this->SetBkColor(c);
 			// invalidate the row rectangle then...
-			::InvalidateRect(hWnd, &rect, FALSE);
+			::InvalidateRect(hWnd, &rect, False);
 			// ...force default processing
 			CallWindowProc(fnProc, m_hWnd, WM_PAINT, 0, 0);
 		}

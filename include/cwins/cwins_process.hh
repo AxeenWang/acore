@@ -31,10 +31,10 @@ private:
 	 * @brief	比對字串
 	 * @param	[in] pszDst	第一個字串位址
 	 * @param	[in] pszSrc	第二個字串位址
-	 * @param	[in] bCase	比對時是否區分字元大小寫 (TRUE = 區分大小寫)
+	 * @param	[in] bCase	比對時是否區分字元大小寫 (True = 區分大小寫)
 	 * @return	@c Bool
-	 *			- 比對結果相符傳回: TRUE
-	 *			- 比對結果不符傳回: FALSE
+	 *			- 比對結果相符傳回: True
+	 *			- 比對結果不符傳回: False
 	 *********************************************************/
 	Bool StrCompare(LPCTSTR pszDst, LPCTSTR pszSrc, Bool bCase);
 
@@ -59,7 +59,7 @@ protected:
  * @brief	建構式
  *********************************************************/
 inline WsProcess::WsProcess()
-	: m_hProcess(NULL),
+	: m_hProcess(Null),
 	m_idProcess(0) {
 }
 

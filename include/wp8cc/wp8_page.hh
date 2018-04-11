@@ -32,7 +32,7 @@ public:
 	virtual ~WP8Page();
 
 protected:
-	HBRUSH Brush(Bool bRelease = FALSE);
+	HBRUSH Brush(Bool bRelease = False);
 };
 
 #endif // !__AXEEN_WP8_WP8PAGE_HH__

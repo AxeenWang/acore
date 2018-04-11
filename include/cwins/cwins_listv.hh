@@ -90,8 +90,8 @@ inline WsListv::~WsListv() { }
  * @brief	刪除一個欄位(Column)
  * @param	[in] index	欄位項目索引 (zero-base)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsListv::DeleteColumn(int index)
 {
@@ -138,7 +138,7 @@ inline int WsListv::GetColumnCount()
 {
 	// 取得 HDM Handle
 	HWND hWnd = (HWND)::SendMessage(m_hWnd, LVM_GETHEADER, 0, 0);
-	if (hWnd != NULL) {
+	if (hWnd != Null) {
 		// HDM_GETITEMCOUNT
 		// wParam 必須為零
 		// lParam 必須為零
@@ -166,8 +166,8 @@ inline int WsListv::GetCountPerPage()
  * @param	[in]  index	項目索引
  * @param	[out] aPtr	POINT 結構指標
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsListv::GetItemPosition(int index, LPPOINT aPtr)
 {
@@ -193,8 +193,8 @@ inline int WsListv::GetTopIndex()
  * @brief	刪除一個項目(Item)
  * @param	[in] index	項目索引值 (zero-base)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsListv::DeleteItem(int index)
 {
@@ -207,8 +207,8 @@ inline Bool WsListv::DeleteItem(int index)
 /**************************************************//**
  * @brief	刪除所有項目(Item)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsListv::DeleteAllItem()
 {
@@ -235,8 +235,8 @@ inline int WsListv::GetItemCount()
  * @param	[in] index	項目索引值   (zero-base)
  * @param	[in] plvi	LVITEM 結構指標
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsListv::SetItemStatus(int index, LPLVITEM plvi)
 {
@@ -307,8 +307,8 @@ inline int WsListv::GetSelectItemNext()
  * @brief	設定背景顏色
  * @param	[in] dwColor 顏色(RGB)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsListv::SetBkColor(COLORREF dwColor)
 {
@@ -322,8 +322,8 @@ inline Bool WsListv::SetBkColor(COLORREF dwColor)
  * @brief	設定文字顏色
  * @param	[in] dwColor 顏色(RGB)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsListv::SetTextColor(COLORREF dwColor)
 {
@@ -337,8 +337,8 @@ inline Bool WsListv::SetTextColor(COLORREF dwColor)
  * @brief	設定文字背景顏色
  * @param	[in] dwColor 顏色(RGB)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsListv::SetTextBkColor(COLORREF dwColor)
 {
@@ -398,8 +398,8 @@ inline COLORREF WsListv::ColorShade(COLORREF c, float fPercent)
  * @param	[in] hList	子項目視窗
  * @param	[in] idItem	控制項 ID
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  ******************************************************/
 inline Bool WsListv::CreateFromResource(HWND hList, int idItem) { return this->CombineResource(hList, idItem); }
 

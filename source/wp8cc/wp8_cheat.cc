@@ -11,26 +11,26 @@
 /**************************************************//**
  * @brief	搜尋指定目標程序
  * @return	@c Bool
- *			- 若出現指定目標或目標已存在則傳回 TRUE
- *			- 若目標不存在或發生錯誤，則傳回 FALSE
+ *			- 若出現指定目標或目標已存在則傳回 True
+ *			- 若目標不存在或發生錯誤，則傳回 False
  *****************************************************/
 Bool WP8Cheat::WatchingYou()
 {
 	const	TCHAR* pexe = TEXT("WP8_2018.exe");
-	const	Bool err = FALSE;
-	const	Bool eok = TRUE;
+	const	Bool err = False;
+	const	Bool eok = True;
 	HANDLE	hProcess = m_hProcess;
 	DWORD	idSave = m_idProcess;
 	DWORD	pid = this->SearchProcess(pexe);
 
 	// 已存在與目標程序掛勾
-	if (hProcess != NULL) { if (pid == idSave) return eok; }
+	if (hProcess != Null) { if (pid == idSave) return eok; }
 
 	// 尚未與目標掛勾
 	this->ReleaseHook();
 	// 搜尋指定目標程序，若目標程序已存在系統，則進行開啟目標程序進行掛勾
 	if (pid != 0) {
-		if ((hProcess = this->OpenProcess(pid)) != NULL) {
+		if ((hProcess = this->OpenProcess(pid)) != Null) {
 			m_hProcess = hProcess;
 			m_idProcess = pid;
 			return eok;
@@ -62,7 +62,7 @@ void WP8Cheat::SetVersion(Int32u ver)
  * @param	[in] index	索引
  * @return	@c LPCTSTR
  *			- 函式運作成功傳回: 騎師名字字串位址
- *			- 函式運作失敗傳回: NULL
+ *			- 函式運作失敗傳回: Null
  *****************************************************/
 LPCTSTR WP8Cheat::GetJockeyName(int index)
 {
@@ -780,7 +780,7 @@ LPCTSTR WP8Cheat::GetJockeyName(int index)
 	if (index >= 0 && index < len) {
 		return text[index];
 	}
-	return NULL;
+	return Null;
 }
 
 /**************************************************//**
@@ -857,7 +857,7 @@ void WP8Cheat::LoadRacing()
  * @brief	取得賽道
  * @return	@c LPCTSTR	競賽速度字串
  *			- 若運作成功傳回: 當前賽道字串
- *			- 若運作失敗傳回: NULL
+ *			- 若運作失敗傳回: Null
  * @note	必須先調用 LoadRacing 成員
  * @see		SaWP8RACING 結構說明
  *****************************************************/
@@ -871,7 +871,7 @@ LPCTSTR WP8Cheat::GetRacingTrackText()
 		::wsprintf(text, fmt, result);
 		return text;
 	}
-	return NULL;
+	return Null;
 }
 
 /**************************************************//**
@@ -879,7 +879,7 @@ LPCTSTR WP8Cheat::GetRacingTrackText()
  * @param	[in] index	賽道索引
  * @return	@c LPCTSTR	競賽速度字串
  *			- 若運作成功傳回: 當前速度字串
- *			- 若運作失敗傳回: NULL
+ *			- 若運作失敗傳回: Null
  * @note	必須先調用 LoadRacing 成員
  * @see		SaWP8RACING 結構說明
  *****************************************************/
@@ -893,7 +893,7 @@ LPCTSTR WP8Cheat::GetRacingSpeedText(int index)
 		::wsprintf(text, fmt, result);
 		return text;
 	}
-	return NULL;
+	return Null;
 }
 
 /**************************************************//**
@@ -901,7 +901,7 @@ LPCTSTR WP8Cheat::GetRacingSpeedText(int index)
  * @param	[in] index	賽道索引
  * @return	@c Int32u	戰術
  *			- 若運作成功傳回: 當前戰術字串
- *			- 若運作失敗傳回: NULL
+ *			- 若運作失敗傳回: Null
  * @note	必須先調用 LoadRacing 成員
  * @see		SaWP8RACING 結構說明
  *****************************************************/
@@ -920,7 +920,7 @@ LPCTSTR WP8Cheat::GetRacingTacticText(int index)
 	int result = (int)this->GetRacingTactic(index);
 
 	if (result >= 0 && result < len) return text[result];
-	return NULL;
+	return Null;
 }
 
 /**************************************************//**
@@ -928,7 +928,7 @@ LPCTSTR WP8Cheat::GetRacingTacticText(int index)
  * @param	[in] index	賽道索引
  * @return	@c Int32u	斤量字串
  *			- 若運作成功傳回: 當前騎手斤量
- *			- 若運作失敗傳回: NULL
+ *			- 若運作失敗傳回: Null
  * @note	必須先調用 LoadRacing 成員
  * @see		SaWP8RACING 結構說明
  *****************************************************/
@@ -942,7 +942,7 @@ LPCTSTR WP8Cheat::GetRacingWeightText(int index)
 		::wsprintf(text, fmt, resual);
 		return text;
 	}
-	return NULL;
+	return Null;
 }
 
 /**************************************************//**
@@ -950,7 +950,7 @@ LPCTSTR WP8Cheat::GetRacingWeightText(int index)
  * @param	[in] index	賽道索引
  * @return	@c Int32u	騎乘騎手名字
  *			- 若運作成功傳回: 當前騎乘騎手名字
- *			- 若運作失敗傳回: NULL
+ *			- 若運作失敗傳回: Null
  * @note	必須先調用 LoadRacing 成員
  * @see		SaWP8RACING 結構說明
  *****************************************************/
@@ -968,26 +968,26 @@ LPCTSTR WP8Cheat::GetRacingJockeyText(int index)
  * @param	[in] data	馬類型，存放讀取資料起始位址
  * @param	[in] len	馬類型，每筆存放資料長度 (in byte)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WP8Cheat::LoadHorseData(IntQu addr, IntQu seek, int count, void* data, int len)
 {
 	Int8u* desc = (Int8u*)data;
 
-	if (addr == 0 || data == NULL)
-		return FALSE;
+	if (addr == 0 || data == Null)
+		return False;
 
 	// 讀取資料
 	for (int i = 0; i < count; i++) {
 		if (this->ReadMemory((LPCVOID)addr, (LPVOID)desc, len) != len) {
 			::memset(data, 0, len);
-			return FALSE;
+			return False;
 		}
 		addr += seek;
 		desc += len;
 	}
-	return TRUE;
+	return True;
 }
 
 /**************************************************//**

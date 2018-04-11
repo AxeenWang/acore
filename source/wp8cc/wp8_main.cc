@@ -20,25 +20,25 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 {
 	const TCHAR* szMutex = TEXT("{8880EF18-59A9-B055-D668-86CB5A6D16F6}");
 	int err = 0;
-	HANDLE hMutex = NULL;
-	WP8Cheat* chtObj = NULL;
-	WP8Frame* frmObj = NULL;
+	HANDLE hMutex = Null;
+	WP8Cheat* chtObj = Null;
+	WP8Frame* frmObj = Null;
 
 
 	for (;;) {
 		// 檢查互拆識別，用於防止程式重載
-		hMutex = ::CreateMutex(NULL, TRUE, szMutex);
+		hMutex = ::CreateMutex(Null, True, szMutex);
 		if (::GetLastError() == ERROR_ALREADY_EXISTS) {
 			::SysError(emErrMutex); break;
 		}
 
 		// 建立程序操作物件 WP8Cheat
-		if ((chtObj = ::StartCheat()) == NULL) {
+		if ((chtObj = ::StartCheat()) == Null) {
 			::SysError(emErrWP8Cheat); break;
 		}
 
 		// 建立主要框架物件 WP8Frame
-		if ((frmObj = new (std::nothrow) WP8Frame()) == NULL) {
+		if ((frmObj = new (std::nothrow) WP8Frame()) == Null) {
 			::SysError(emErrWP8Frame); break;
 		}
 

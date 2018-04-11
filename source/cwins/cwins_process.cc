@@ -41,7 +41,7 @@ DWORD WsProcess::SearchProcess(LPCTSTR pszModule)
 	// 開始依序取得系統中所有執行的程式
 	do {
 		// 比對指定搜尋程式名稱
-		if (this->StrCompare(pszModule, pe32.szExeFile, FALSE)) {
+		if (this->StrCompare(pszModule, pe32.szExeFile, False)) {
 			// 找到目標程序, 回傳運行程序ID
 			return pe32.th32ProcessID;
 		}
@@ -55,19 +55,19 @@ DWORD WsProcess::SearchProcess(LPCTSTR pszModule)
  * @param	[in] dwProcessID	運行中程序 ID
  * @return	@c HANDLE
  *			- 運作成功傳回: 模組程序運作 HANDLE
- *			- 運作失敗傳回: NULL
+ *			- 運作失敗傳回: Null
  * @note	使用系統運行ID 開啟指定之程序，即可針對開程序進行各項操作，如...
  *			- 對該程序記憶體讀寫 (遊戲作弊常用)
  *			- 對該程序模組進行操作，如取得運作式窗，並針對該視窗傳送命令
  *****************************************************/
 HANDLE WsProcess::OpenProcess(DWORD dwProcessID)
 {
-	HANDLE hProcess = NULL;
+	HANDLE hProcess = Null;
 
 	// 使用程序運作ID 進行取得程序運作 HANDLE
 	if (dwProcessID != 0) {
-		hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwProcessID);
-		if (hProcess != NULL) {
+		hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, False, dwProcessID);
+		if (hProcess != Null) {
 			m_hProcess = hProcess;
 			m_idProcess = dwProcessID;
 		}
@@ -79,10 +79,10 @@ HANDLE WsProcess::OpenProcess(DWORD dwProcessID)
  * @brief	比對字串
  * @param	[in] pszDst	第一個字串位址
  * @param	[in] pszSrc	第二個字串位址
- * @param	[in] bCase	比對時是否區分字元大小寫 (TRUE = 區分大小寫)
+ * @param	[in] bCase	比對時是否區分字元大小寫 (True = 區分大小寫)
  * @return	@c Bool
- *			- 比對結果相符傳回: TRUE
- *			- 比對結果不符傳回: FALSE
+ *			- 比對結果相符傳回: True
+ *			- 比對結果不符傳回: False
  *****************************************************/
 Bool WsProcess::StrCompare(LPCTSTR pszDst, LPCTSTR pszSrc, Bool bCase)
 {
@@ -90,8 +90,8 @@ Bool WsProcess::StrCompare(LPCTSTR pszDst, LPCTSTR pszSrc, Bool bCase)
 	TCHAR szSrc[MAX_PATH];
 
 	// 防呆，防例外處理
-	if (pszDst == NULL || pszSrc == NULL)
-		return FALSE;
+	if (pszDst == Null || pszSrc == Null)
+		return False;
 
 	// 比對時區分大小寫
 	if (bCase) return lstrcmp(pszDst, pszSrc) == 0;
@@ -112,7 +112,7 @@ void WsProcess::StrUpper(LPTSTR psz)
 {
 	int i, len;
 
-	if (psz == NULL) return;
+	if (psz == Null) return;
 	len = lstrlen(psz);
 	for (i = 0; i < len; i++) {
 		psz[i] = (TCHAR)_totupper(psz[i]);
@@ -127,7 +127,7 @@ void WsProcess::StrLower(LPTSTR psz)
 {
 	int i, len;
 	
-	if (psz == NULL) return;
+	if (psz == Null) return;
 	len = lstrlen(psz);
 	for (i = 0; i < len; i++) {
 		psz[i] = (TCHAR)_totlower(psz[i]);

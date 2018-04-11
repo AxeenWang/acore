@@ -112,14 +112,14 @@ protected:
  * @brief	建構式
  *****************************************************/
 inline WsObject::WsObject()
-	: m_hModule(NULL)
-	, m_hParent(NULL)
-	, m_hFont(NULL)
-	, m_hWnd(NULL)
+	: m_hModule(Null)
+	, m_hParent(Null)
+	, m_hFont(Null)
+	, m_hWnd(Null)
 	, m_idItem(0)
 	, m_idTimer(0)
 	, m_emCtrlsType(emCtrlEmpty)
-	, m_fnWndProc(NULL) {
+	, m_fnWndProc(Null) {
 	this->InitCommCtrl();
 }
 
@@ -128,14 +128,14 @@ inline WsObject::WsObject()
  * @param	[in] type 控制項種類代碼
  *****************************************************/
 inline WsObject::WsObject(EmCTRLS type)
-	: m_hModule(NULL)
-	, m_hParent(NULL)
-	, m_hFont(NULL)
-	, m_hWnd(NULL)
+	: m_hModule(Null)
+	, m_hParent(Null)
+	, m_hFont(Null)
+	, m_hWnd(Null)
 	, m_idItem(0)
 	, m_idTimer(0)
 	, m_emCtrlsType(type)
-	, m_fnWndProc(NULL) {
+	, m_fnWndProc(Null) {
 	this->InitCommCtrl();
 }
 
@@ -171,8 +171,8 @@ inline LRESULT WsObject::SendChildMessage(int idItem, UINT uMessage, WPARAM wPar
  * @param	[in] wParam		參數 1
  * @param	[in] lParam		參數 2
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  * @see		MSDN PostMessage()
  *****************************************************/
 inline Bool WsObject::PostMessage(UINT uMessage, WPARAM wParam, LPARAM lParam) { return ::PostMessage(m_hWnd, uMessage, wParam, lParam); }
@@ -184,8 +184,8 @@ inline Bool WsObject::PostMessage(UINT uMessage, WPARAM wParam, LPARAM lParam) {
  * @param	[in] wParam		參數 1
  * @param	[in] lParam		參數 2
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  * @see		MSDN PostMessage()
  *****************************************************/
 inline Bool WsObject::PostChildMessage(int idItem, UINT uMessage, WPARAM wParam, LPARAM lParam) { return ::PostMessage(this->GetChild(idItem), uMessage, wParam, lParam); }
@@ -194,7 +194,7 @@ inline Bool WsObject::PostChildMessage(int idItem, UINT uMessage, WPARAM wParam,
  * @brief	建立 Timer 事件
  * @param	[in] nIDEvent		計時器 ID
  * @param	[in] uElapse		延遲時間 (ms) 多少時間觸發一次
- * @param	[in] fnTimerFunc	指定 Timer callback function，若此值為 NULL 計時器會對對視窗發出 WM_TIMER 訊息
+ * @param	[in] fnTimerFunc	指定 Timer callback function，若此值為 Null 計時器會對對視窗發出 WM_TIMER 訊息
  * @return	@c UINT_PTR
  *			- 操作成功傳回: 計時器 ID
  *			- 操作失敗傳回: 0，調用 GetLastError 取得錯誤訊息。
@@ -213,12 +213,12 @@ inline UINT_PTR WsObject::SetTimer(UINT_PTR nIDEvent, UINT uElapse, TIMERPROC fn
 /**************************************************//**
  * @brief	刪除 Timer 事件
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::KillTimer()
 {
-	const Bool err = FALSE;
+	const Bool err = False;
 	UINT_PTR uTimer = m_idTimer;
 	
 	if (uTimer) { m_idTimer = 0; return ::KillTimer(m_hWnd, uTimer); }
@@ -227,13 +227,13 @@ inline Bool WsObject::KillTimer()
 
 /**************************************************//**
  * @brief	刪除已建立字型
- * @note	刪除字型後，將會將 *hFontPtr 指向位置設為 NULL
+ * @note	刪除字型後，將會將 *hFontPtr 指向位置設為 Null
  *****************************************************/
 inline void WsObject::DeleteFont()
 {
-	if (m_hFont != NULL) {
+	if (m_hFont != Null) {
 		::DeleteObject(m_hFont);
-		m_hFont = NULL;
+		m_hFont = Null;
 	}
 }
 /**************************************************//**
@@ -243,11 +243,11 @@ inline void WsObject::DeleteFont()
  *****************************************************/
 inline void WsObject::SetFont(HFONT hFont)
 {
-	if (hFont != NULL) {
+	if (hFont != Null) {
 		// 傳送 WM_SETFONT 訊息
 		// wParam 為字型 Handle
-		// lParam 低字元(low-word) 設定字型後是否立即重繪視窗內容 (TRUE / FALSE)
-		::SendMessage(m_hWnd, WM_SETFONT, (WPARAM)hFont, (LPARAM)TRUE);
+		// lParam 低字元(low-word) 設定字型後是否立即重繪視窗內容 (True / False)
+		::SendMessage(m_hWnd, WM_SETFONT, (WPARAM)hFont, (LPARAM)True);
 	}
 }
 
@@ -255,8 +255,8 @@ inline void WsObject::SetFont(HFONT hFont)
  * @brief	設定(改變)視窗標題文字內容
  * @param	[in] psz 字串存放位址
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::SetText(LPCTSTR psz) { return ::SetWindowText(m_hWnd, psz); }
 
@@ -287,8 +287,8 @@ inline UINT WsObject::GetChildText(int idItem, LPTSTR psz, int cch) { return ::G
  * @param	[in] idItem	子控制項 id
  * @param	[in] psz	文字存放緩衝區指標
  * @return	@c Bool
- *			- 成功傳回: TRUE
- *			- 失敗傳回: FALSE
+ *			- 成功傳回: True
+ *			- 失敗傳回: False
  * @see		MSDN SetDlgItemText()
  *****************************************************/
 inline Bool WsObject::SetChildText(int idItem, LPCTSTR psz) { return ::SetDlgItemText(m_hWnd, idItem, psz); }
@@ -296,50 +296,50 @@ inline Bool WsObject::SetChildText(int idItem, LPCTSTR psz) { return ::SetDlgIte
 /**************************************************//**
  * @brief	更新視窗
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::Update() { return ::UpdateWindow(m_hWnd); }
 
 /**************************************************//**
  * @brief	啟用視窗或控制項操作
  * @return	@c Bool
- *			- 若視窗先前被禁用傳回: TRUE
- *			- 若視窗先前非禁用傳回: FALSE
+ *			- 若視窗先前被禁用傳回: True
+ *			- 若視窗先前非禁用傳回: False
  *****************************************************/
-inline Bool WsObject::Enable() { return ::EnableWindow(m_hWnd, TRUE); }
+inline Bool WsObject::Enable() { return ::EnableWindow(m_hWnd, True); }
 
 /**************************************************//**
  * @brief	停用視窗或控制項操作 (灰視窗不接收任何輸入動作)
  * @return	@c Bool
- *			- 若視窗先前被禁用傳回: TRUE
- *			- 若視窗先前非禁用傳回: FALSE
+ *			- 若視窗先前被禁用傳回: True
+ *			- 若視窗先前非禁用傳回: False
  *****************************************************/
-inline Bool WsObject::Disable() { return ::EnableWindow(m_hWnd, FALSE); }
+inline Bool WsObject::Disable() { return ::EnableWindow(m_hWnd, False); }
 
 /**************************************************//**
  * @brief	啟用子視窗或控制項操作
  * @param	[in] idItem 子視窗或控制項 ID
  * @return	@c Bool
- *			- 若視窗先前被禁用傳回: TRUE
- *			- 若視窗先前非禁用傳回: FALSE
+ *			- 若視窗先前被禁用傳回: True
+ *			- 若視窗先前非禁用傳回: False
  *****************************************************/
-inline Bool WsObject::EnableChild(int idItem) { return ::EnableWindow(this->GetChild(idItem), TRUE); }
+inline Bool WsObject::EnableChild(int idItem) { return ::EnableWindow(this->GetChild(idItem), True); }
 
 /**************************************************//**
  * @brief	停用子視窗或控制項操作
  * @param	[in] idItem 子視窗或控制項 ID
  * @return	@c Bool
- *			- 若視窗先前被禁用傳回: TRUE
- *			- 若視窗先前非禁用傳回: FALSE
+ *			- 若視窗先前被禁用傳回: True
+ *			- 若視窗先前非禁用傳回: False
  *****************************************************/
-inline Bool WsObject::DisableChild(int idItem) { return ::EnableWindow(this->GetChild(idItem), FALSE); }
+inline Bool WsObject::DisableChild(int idItem) { return ::EnableWindow(this->GetChild(idItem), False); }
 
 /**************************************************//**
  * @brief	顯示視窗或控制項
  * @return	@c Bool
- *			- 若視窗先前為顯示中傳回: TRUE
- *			- 若視窗先前為隱藏中傳回: FALSE
+ *			- 若視窗先前為顯示中傳回: True
+ *			- 若視窗先前為隱藏中傳回: False
  * @note	顯示視窗參數
  *			- SW_HIDE               隱藏視窗
  *			- SW_SHOWNORMAL         顯示視窗，如果視窗被最小化或最大化，系統將其恢復到原來的尺寸和大小 (初始建立時的大小)
@@ -360,8 +360,8 @@ inline Bool WsObject::Show() { return ::ShowWindow(m_hWnd, SW_SHOW); }
 /**************************************************//**
  * @brief	隱藏視窗或控制項
  * @return	@c Bool
- *			- 若視窗先前為顯示中傳回: TRUE
- *			- 若視窗先前為隱藏中傳回: FALSE
+ *			- 若視窗先前為顯示中傳回: True
+ *			- 若視窗先前為隱藏中傳回: False
  *****************************************************/
 inline Bool WsObject::Hide() { return ::ShowWindow(m_hWnd, SW_HIDE); }
 
@@ -369,8 +369,8 @@ inline Bool WsObject::Hide() { return ::ShowWindow(m_hWnd, SW_HIDE); }
  * @brief	顯示子視窗或控制項
  * @param	[in] idItem 子視窗或控制項 ID
  * @return	@c Bool
- *			- 若視窗先前為顯示中傳回: TRUE
- *			- 若視窗先前為隱藏中傳回: FALSE
+ *			- 若視窗先前為顯示中傳回: True
+ *			- 若視窗先前為隱藏中傳回: False
  *****************************************************/
 inline Bool WsObject::ShowChild(int idItem) { return ::ShowWindow(this->GetChild(idItem), SW_SHOW); }
 
@@ -378,8 +378,8 @@ inline Bool WsObject::ShowChild(int idItem) { return ::ShowWindow(this->GetChild
  * @brief	隱藏子視窗或控制項
  * @param	[in] idItem 子視窗或控制項 ID
  * @return	@c Bool
- *			- 若視窗先前為顯示中傳回: TRUE
- *			- 若視窗先前為隱藏中傳回: FALSE
+ *			- 若視窗先前為顯示中傳回: True
+ *			- 若視窗先前為隱藏中傳回: False
  *****************************************************/
 inline Bool WsObject::HideChild(int idItem) { return ::ShowWindow(this->GetChild(idItem), SW_HIDE); }
 
@@ -425,8 +425,8 @@ inline DWORD WsObject::SetExStyle(DWORD dwExStyle) { return ::SetWindowLong(m_hW
  * @brief	取得視窗、控制項矩形尺寸
  * @param	[out] prc	RECT 結構指標
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::GetFrameRect(LPRECT prc) { return::GetWindowRect(m_hWnd, prc); }
 
@@ -434,8 +434,8 @@ inline Bool WsObject::GetFrameRect(LPRECT prc) { return::GetWindowRect(m_hWnd, p
  * @brief	取得視窗、控制項工作區，矩形邊界尺寸
  * @param	[out] prc	RECT 結構指標
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::GetClientRect(LPRECT prc) { return ::GetClientRect(m_hWnd, prc); }
 
@@ -443,8 +443,8 @@ inline Bool WsObject::GetClientRect(LPRECT prc) { return ::GetClientRect(m_hWnd,
  * @brief	取得的父視窗(控制項)矩形尺寸
  * @param	[out] prc	RECT 結構指標
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::GetParentRect(LPRECT prc) { return ::GetWindowRect(m_hParent, prc); }
 
@@ -452,8 +452,8 @@ inline Bool WsObject::GetParentRect(LPRECT prc) { return ::GetWindowRect(m_hPare
  * @brief	取得父視窗(控制項)工作區，矩形尺寸
  * @param	[out] prc	RECT 結構指標
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::GetParentClientRect(LPRECT prc) { ::GetClientRect(m_hParent, prc); }
 
@@ -462,8 +462,8 @@ inline Bool WsObject::GetParentClientRect(LPRECT prc) { ::GetClientRect(m_hParen
  * @param	[in]  idItem	子控制項 id
  * @param	[out] prc		RECT 結構指標
  * @return	@c Bool
- *	- 操作成功傳回: TRUE
- *	- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *	- 操作成功傳回: True
+ *	- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::GetChildRect(int idItem, LPRECT prc) { return ::GetWindowRect(::GetDlgItem(m_hWnd, idItem), prc); }
 
@@ -472,8 +472,8 @@ inline Bool WsObject::GetChildRect(int idItem, LPRECT prc) { return ::GetWindowR
  * @param	[in]  idItem	子控制項 id
  * @param	[out] prc		RECT 結構指標
  * @return	Bool
- *	- 操作成功傳回: TRUE
- *	- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *	- 操作成功傳回: True
+ *	- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline Bool WsObject::GetChildClientRect(int idItem, LPRECT prc) { return ::GetClientRect(::GetDlgItem(m_hWnd, idItem), prc); }
 
@@ -482,14 +482,14 @@ inline Bool WsObject::GetChildClientRect(int idItem, LPRECT prc) { return ::GetC
  * @param	[in] x		視窗左上座標 X
  * @param	[in] y		視窗左上座標 Y
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  * @see		MSDN SetWindowPos
  *****************************************************/
 inline Bool WsObject::SetPosition(int x, int y)
 {
 	const UINT flag = SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE;
-	return ::SetWindowPos(m_hWnd, NULL, x, y, 0, 0, flag);
+	return ::SetWindowPos(m_hWnd, Null, x, y, 0, 0, flag);
 }
 
 /**************************************************//**
@@ -497,22 +497,22 @@ inline Bool WsObject::SetPosition(int x, int y)
  * @param	[in] wd		視窗寬度
  * @param	[in] ht		視窗高度
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  * @see		MSDN SetWindowPos
  *****************************************************/
 inline Bool WsObject::SetSize(int wd, int ht)
 {
 	const UINT flag = SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE;
-	return ::SetWindowPos(m_hWnd, NULL, 0, 0, wd, ht, flag);
+	return ::SetWindowPos(m_hWnd, Null, 0, 0, wd, ht, flag);
 }
 
 /**************************************************//**
  * @brief	取得目前位於最上層的子控制項 Handle
  * @return	@c HWND
  *			- 操作成功傳回: 子控制項 HWND
- *			- 操作失敗傳回: NULL，調用 GetLastError 取得錯誤訊息
- * @note	識別在子視窗連結清單的最上層子視窗，如果子視窗不存在，這個值是 NULL。\n
+ *			- 操作失敗傳回: Null，調用 GetLastError 取得錯誤訊息
+ * @note	識別在子視窗連結清單的最上層子視窗，如果子視窗不存在，這個值是 Null。\n
  *			傳回的指標可能是暫時的，而且不應儲存供之後使用。
  *****************************************************/
 inline HWND WsObject::GetTopWindow() { return ::GetTopWindow(m_hWnd); }
@@ -521,14 +521,14 @@ inline HWND WsObject::GetTopWindow() { return ::GetTopWindow(m_hWnd); }
  * @brief	取得當前輸入焦點視窗
  * @return	@c HWND
  *			- 傳回不為零，目前焦點的視窗 HANDLE
- *			- 傳回 NULL，如果沒有焦點的視窗。
+ *			- 傳回 Null，如果沒有焦點的視窗。
  *****************************************************/
 inline HWND WsObject::GetFocus() { return ::GetFocus(); }
 
 /**************************************************//**
  * @brief	設定視窗為輸入焦點
  * @return	@c HWND
- *			- 先前擁有輸入焦點的視窗物件的指標，如果沒有此視窗，則傳回 NULL 。
+ *			- 先前擁有輸入焦點的視窗物件的指標，如果沒有此視窗，則傳回 Null 。
  *			- 傳回的指標是暫時的，而且不應儲存與保存給其他函式使用。
  *****************************************************/
 inline HWND WsObject::SetFocus() { return ::SetFocus(m_hWnd); }
@@ -540,7 +540,7 @@ inline HWND WsObject::SetFocus() { return ::SetFocus(m_hWnd); }
 inline void WsObject::SetIcon(HICON hIcon)
 {
 	HWND hWnd = m_hWnd;
-	if (hWnd != NULL && hIcon != NULL) {
+	if (hWnd != Null && hIcon != Null) {
 		::SendMessage(hWnd, WM_SETICON, (WPARAM)ICON_BIG, (LPARAM)hIcon);
 	}
 }
@@ -548,26 +548,26 @@ inline void WsObject::SetIcon(HICON hIcon)
 /**************************************************//**
  * @brief	取得程序模組 Handle
  * @return	@c HINSTANCE	程序模組 HANDLE
- * @note	取得物件內程序模組 hanlde，若視窗尚未建立將傳回 NULL
+ * @note	取得物件內程序模組 hanlde，若視窗尚未建立將傳回 Null
  *****************************************************/
 inline HINSTANCE WsObject::GetModule() { return m_hModule; }
 
 /**************************************************//**
  * @brief	取得父視窗操作 Handle
  * @return	@c HWND	程序模組 hanlde
- * @note	取得物件父視窗操作 handle，若非子項目將傳回 NULL
+ * @note	取得物件父視窗操作 handle，若非子項目將傳回 Null
  *****************************************************/
 inline HWND WsObject::GetParent()
 {
 	HWND hWnd = ::GetParent(m_hWnd);
-	if (m_hParent == NULL || m_hParent != hWnd)
+	if (m_hParent == Null || m_hParent != hWnd)
 		m_hParent = hWnd;
 }
 
 /**************************************************//**
  * @brief	取得視窗或控制項操作 Handle
  * @return	@c HWND	程序模組 HANDLE
- * @note	取得窗操作 HANDLE，若視窗尚未建立將傳回 NULL
+ * @note	取得窗操作 HANDLE，若視窗尚未建立將傳回 Null
  *****************************************************/
 inline HWND WsObject::GetHandle() { return m_hWnd; }
 
@@ -576,24 +576,24 @@ inline HWND WsObject::GetHandle() { return m_hWnd; }
  * @param	[in] idItem	子項目 ID
  * @return	@c HWND
  *			- 操作成功傳回: 子控制項 HWND
- *			- 操作失敗傳回: NULL，調用 GetLastError 取得錯誤訊息
+ *			- 操作失敗傳回: Null，調用 GetLastError 取得錯誤訊息
  *****************************************************/
 inline HWND WsObject::GetChild(int idItem) { return ::GetDlgItem(m_hWnd, idItem); }
 
 /**************************************************//**
  * @brief	取得視窗或控制項操作 ID
  * @return	@c inc	視窗或控制項 ID
- * @note	取得窗操作 HANDLE，若視窗尚未建立將傳回 NULL
+ * @note	取得窗操作 HANDLE，若視窗尚未建立將傳回 Null
  *****************************************************/
 inline int  WsObject::GetID() { return m_idItem; }
 
 /**************************************************//**
  * @brief	視窗或控制項已建立
  * @return	@c Bool
- *			- 視窗或控制項已建立傳回: TRUE
- *			- 視窗或控制項未建立傳回: FALSE
- * @note	取得窗操作 HANDLE，若視窗尚未建立將傳回 NULL
+ *			- 視窗或控制項已建立傳回: True
+ *			- 視窗或控制項未建立傳回: False
+ * @note	取得窗操作 HANDLE，若視窗尚未建立將傳回 Null
  *****************************************************/
-inline Bool WsObject::IsExist() { return m_hWnd != NULL; }
+inline Bool WsObject::IsExist() { return m_hWnd != Null; }
 
 #endif // !__AXEEN_CWINS_CWINSOBJECT_HH__

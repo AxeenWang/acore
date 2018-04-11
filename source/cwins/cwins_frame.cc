@@ -19,19 +19,19 @@
  *****************************************************/
 LRESULT CALLBACK WsFrame::WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
-    WsFrame* fmObj = NULL;
+    WsFrame* fmObj = Null;
 
 	// is window create message?
 	if (uMessage == WM_CREATE) {
 		fmObj = (WsFrame*)((LPCREATESTRUCT)lParam)->lpCreateParams;
-		if (fmObj != NULL) {
+		if (fmObj != Null) {
 			::SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)fmObj);
 			fmObj->m_hWnd = hWnd;
 		}
 	}
     
 	// get user saved data form "GWLP_USERDATA" mode
-	if ((fmObj = (WsFrame*)::GetWindowLongPtr(hWnd, GWLP_USERDATA)) == NULL) {
+	if ((fmObj = (WsFrame*)::GetWindowLongPtr(hWnd, GWLP_USERDATA)) == Null) {
 		// transfer window message in system default callback function
 		return ::DefWindowProc(hWnd, uMessage, wParam, lParam);
 	}
@@ -75,7 +75,7 @@ LRESULT WsFrame::MessageDispose(UINT uMessage, WPARAM wParam, LPARAM lParam)
 int WsFrame::Run()
 {
     MSG message = { 0 };
-    while (::GetMessage(&message, NULL, 0, 0))
+    while (::GetMessage(&message, Null, 0, 0))
     {
         // If wanna WS_TABSTOP work, must join this check
         if (!::IsDialogMessage(m_hWnd, &message))
@@ -91,21 +91,21 @@ int WsFrame::Run()
  * @brief	建立一個範本視窗
  * @param	[in] hInstance	程序運行模組 Hanlde of Module
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 Bool WsFrame::CreateFromWindowEx(HINSTANCE hInstance)
 {
-	const Bool err = FALSE;
-	const Bool eok = TRUE;
+	const Bool err = False;
+	const Bool eok = True;
 	SaFRAME frm;
 
-	if (hInstance == NULL) 	return err;
+	if (hInstance == Null) 	return err;
 
 	::memset((void*)&frm, 0, sizeof(SaFRAME));
 	frm.hInstance = hInstance;
-	frm.hWndParent = NULL;
-	frm.fnWndProc = NULL;
+	frm.hWndParent = Null;
+	frm.fnWndProc = Null;
 	frm.pszClassName = TEXT(DEFAULT_WNDS_CLASS);
 	frm.pszTitleName = TEXT(DEFAULT_WNDS_TITLE);
 	frm.iPosx = 0;
@@ -114,9 +114,9 @@ Bool WsFrame::CreateFromWindowEx(HINSTANCE hInstance)
 	frm.iHeight = DEFAULT_WNDS_HEIGHT;
 	frm.uClassStyle = 0;
 	frm.hBackground = (HBRUSH)(COLOR_BTNFACE + 1);
-	frm.hIcon = NULL;
-	frm.hIconSm = NULL;
-	frm.hCursor = NULL;
+	frm.hIcon = Null;
+	frm.hIconSm = Null;
+	frm.hCursor = Null;
 	frm.dwStyle = DEFAULT_WNDS_STYLE;
 	frm.dwExStyle = 0;
 	frm.idItem = 0;
@@ -137,24 +137,24 @@ Bool WsFrame::CreateFromWindowEx(HINSTANCE hInstance)
  * @brief	向系統註冊一個視窗類別
  * @param	[in] fmsPtr	SaFRAME 結構指標
  * @return	@c Bool
- *			- 運作成功回傳: TRUE
- *			- 運作失敗回傳: FALSE
+ *			- 運作成功回傳: True
+ *			- 運作失敗回傳: False
  * @see SaFRAME struct
  * @see MSDN WNDCLASSEX struct
  *****************************************************/
 Bool WsFrame::InRegisterClass(LPSaFRAME fmsPtr)
 {
-	const Bool err = FALSE;
+	const Bool err = False;
 
 	UINT        uStyle = (CS_HREDRAW | CS_VREDRAW);    // | CS_DBLCLKS;
-	HINSTANCE   hInst = NULL;
-	HCURSOR     hCusr = NULL;
-	HICON       hIcon = NULL;
-	HBRUSH      hBrsh = NULL;
-	WNDPROC     fnWndProc = NULL;
+	HINSTANCE   hInst = Null;
+	HCURSOR     hCusr = Null;
+	HICON       hIcon = Null;
+	HBRUSH      hBrsh = Null;
+	WNDPROC     fnWndProc = Null;
 	WNDCLASSEX  wcex;
 
-	if (fmsPtr == NULL) return err;
+	if (fmsPtr == Null) return err;
 
 	// 填入註冊數據
 	uStyle |= fmsPtr->uClassStyle;
@@ -165,19 +165,19 @@ Bool WsFrame::InRegisterClass(LPSaFRAME fmsPtr)
 	fnWndProc = fmsPtr->fnWndProc;
 
 	// Check and set cursor
-	if (hCusr == NULL)
-		hCusr = ::LoadCursor(NULL, IDC_ARROW);
+	if (hCusr == Null)
+		hCusr = ::LoadCursor(Null, IDC_ARROW);
 
 	// Check and set icon (use default application icon)
-	if (hIcon == NULL)
-		hIcon = ::LoadIcon(NULL, IDI_APPLICATION);
+	if (hIcon == Null)
+		hIcon = ::LoadIcon(Null, IDI_APPLICATION);
 
 	// Check and set back ground color
-	if (hBrsh == NULL)
+	if (hBrsh == Null)
 		hBrsh = (HBRUSH)(COLOR_WINDOW + 1);
 
 	// Check and set the callback function
-	if (NULL == fnWndProc)
+	if (Null == fnWndProc)
 		fnWndProc = (WNDPROC)WsFrame::WndProc;
 
 	// regist the window class
@@ -191,7 +191,7 @@ Bool WsFrame::InRegisterClass(LPSaFRAME fmsPtr)
 	wcex.hIcon = hIcon;					// handle of icon
 	wcex.hCursor = hCusr;				// handle of cursor
 	wcex.hbrBackground = hBrsh;			// handle of background
-	wcex.lpszMenuName = NULL;			// pointer of menu name (string)
+	wcex.lpszMenuName = Null;			// pointer of menu name (string)
 	wcex.lpszClassName = fmsPtr->pszClassName;	// pointer of class name (string)
 	wcex.hIconSm = hIcon;				// pointer of icon for small icon using
 
@@ -203,20 +203,20 @@ Bool WsFrame::InRegisterClass(LPSaFRAME fmsPtr)
  * @brief	建立視窗
  * @param	[in] fmsPtr	SaFRAME 結構指標
  * @return	Bool 型別
- *	成功回傳 TRUE
- *	失敗回傳 FALSE
+ *	成功回傳 True
+ *	失敗回傳 False
  *****************************************************/
 Bool WsFrame::InCreateWindow(LPSaFRAME fmsPtr)
 {
 	const	Bool err = false;
-	HWND	hWnd = NULL;
-	HMENU	hMenu = NULL;
+	HWND	hWnd = Null;
+	HMENU	hMenu = Null;
 	DWORD	dwStyle = 0;    // WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX;
 	DWORD	dwExStyle = 0;
 	IntQu	idItem = 0;
 	int		x, y, wd, ht;
 
-	if (fmsPtr == NULL) return err;
+	if (fmsPtr == Null) return err;
 
 	// save window sample info
 	idItem = (IntQu)fmsPtr->idItem;
@@ -245,5 +245,5 @@ Bool WsFrame::InCreateWindow(LPSaFRAME fmsPtr)
 		hMenu,					// handle of menu or Item ID
 		m_hModule,				// handle of instance
 		(LPVOID)this);			// pointer of parameter
-	return hWnd != NULL;
+	return hWnd != Null;
 }

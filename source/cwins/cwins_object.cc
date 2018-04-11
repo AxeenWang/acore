@@ -15,12 +15,12 @@
  * @param	[in] bBlod		是否要粗體
  * @param	[in] charset	指定字符集
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False
  *****************************************************/
 Bool WsObject::CreateFont(LPCTSTR fontFace, int size, Bool bBlod, int charset)
 {
-	HDC hDC = NULL;
+	HDC hDC = Null;
 	int iHeight, iBold;
 	LOGFONT lf;
 
@@ -37,9 +37,9 @@ Bool WsObject::CreateFont(LPCTSTR fontFace, int size, Bool bBlod, int charset)
 	lf.lfEscapement = 0;                        // 字體斜度
 	lf.lfOrientation = 0;                       // 底線斜度
 	lf.lfWeight = iBold;                        // 字體粗細
-	lf.lfItalic = FALSE;                        // 設定字體為斜體
-	lf.lfUnderline = FALSE;                     // 設定字體底線
-	lf.lfStrikeOut = FALSE;                     // 設定刪線
+	lf.lfItalic = False;                        // 設定字體為斜體
+	lf.lfUnderline = False;                     // 設定字體底線
+	lf.lfStrikeOut = False;                     // 設定刪線
 	lf.lfCharSet = charset;                     // 設定字元集
 	lf.lfOutPrecision = OUT_DEFAULT_PRECIS;     // 字體輸出解析度
 	lf.lfClipPrecision = CLIP_DEFAULT_PRECIS;   // 字型擷取解析度
@@ -49,7 +49,7 @@ Bool WsObject::CreateFont(LPCTSTR fontFace, int size, Bool bBlod, int charset)
 	
 	// 建立字型
 	m_hFont = ::CreateFontIndirect(&lf);
-	return m_hFont != NULL;
+	return m_hFont != Null;
 }
 
 /**************************************************//**
@@ -61,7 +61,7 @@ int WsObject::GetBorderSize()
 	HWND hWnd = m_hWnd;
 	RECT rcw, rcc;
 
-	if (hWnd == NULL) return 0;
+	if (hWnd == Null) return 0;
 	::GetClientRect(hWnd, &rcc);
 	::GetWindowRect(hWnd, &rcw);
 	return ((rcw.right - rcw.left) - rcc.right) / 2;
@@ -72,8 +72,8 @@ int WsObject::GetBorderSize()
  * @param	[in] wd		視窗寬度
  * @param	[in] ht		視窗高度
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  * @see		MSDN SetWindowPos
  *****************************************************/
 Bool WsObject::SetClientSize(int wd, int ht)
@@ -83,10 +83,10 @@ Bool WsObject::SetClientSize(int wd, int ht)
 	RECT rc;
 
 	::SetRect(&rc, 0, 0, wd, ht);
-	::AdjustWindowRectEx(&rc, ::GetWindowLong(hWnd, GWL_STYLE), ::GetMenu(hWnd) != NULL, 0);
+	::AdjustWindowRectEx(&rc, ::GetWindowLong(hWnd, GWL_STYLE), ::GetMenu(hWnd) != Null, 0);
 	wd = (int)(rc.right - rc.left);
 	ht = (int)(rc.bottom - rc.top);
-	return ::SetWindowPos(hWnd, NULL, 0, 0, wd, ht, flag);
+	return ::SetWindowPos(hWnd, Null, 0, 0, wd, ht, flag);
 }
 
 /**************************************************//**
@@ -100,9 +100,9 @@ void WsObject::SetCenterPosition()
 	int  x, y, w, h;
 	RECT rc;
 
-	if (hWnd != NULL) {
-		if (hParent == NULL) {
-			if ((hParent = ::GetParent(hWnd)) == NULL) {
+	if (hWnd != Null) {
+		if (hParent == Null) {
+			if ((hParent = ::GetParent(hWnd)) == Null) {
 				// 取得作業環境畫面邊界
 				x = GetSystemMetrics(SM_CXSCREEN);
 				y = GetSystemMetrics(SM_CYSCREEN);
@@ -143,20 +143,20 @@ void WsObject::InDestroyWindow()
 	WNDPROC	fnProc = m_fnWndProc;
 
 	// 返回系統預設訊息處理函式位址
-	if (fnProc != NULL) {
+	if (fnProc != Null) {
 		::SetWindowLongPtr(hCtrl, GWLP_WNDPROC, (LONG_PTR)fnProc);
-		m_fnWndProc = NULL;
+		m_fnWndProc = Null;
 	}
 	m_emCtrlsType = emCtrlEmpty;
 
 	this->KillTimer();
 	this->DeleteFont();
 
-	m_hModule = NULL;
-	m_hParent = NULL;
-	m_hWnd = NULL;
-	m_idItem = NULL;
-	m_hFont = NULL;
+	m_hModule = Null;
+	m_hParent = Null;
+	m_hWnd = Null;
+	m_idItem = Null;
+	m_hFont = Null;
 	m_idTimer = 0;
 }
 
@@ -168,13 +168,13 @@ void WsObject::InDestroyWindow()
 void WsObject::InitCommCtrl()
 {
 	// 在此設定一個靜態識別旗標，令所有繼承者，不會重複指定通用控制項
-	static Bool bCommctrl = FALSE;
+	static Bool bCommctrl = False;
 	INITCOMMONCONTROLSEX icce;
 
 	if (!bCommctrl) {
 		// 指定啟用全部控制項
 		icce.dwSize = sizeof(INITCOMMONCONTROLSEX);
 		icce.dwICC = ICC_WIN95_CLASSES;
-		if (::InitCommonControlsEx(&icce)) bCommctrl = TRUE;
+		if (::InitCommonControlsEx(&icce)) bCommctrl = True;
 	}
 }

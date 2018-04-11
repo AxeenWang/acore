@@ -23,25 +23,25 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	const TCHAR* szExist = TEXT("DDS-III Trainer is running...");
 	const TCHAR* szFails = TEXT("DDS-III Initialize failed");
 
-	HANDLE		hMutex	= NULL;
-	DDSFrame*	pmain	= NULL;
+	HANDLE		hMutex	= Null;
+	DDSFrame*	pmain	= Null;
 
 	// 檢查互拆識別，用於防止程式重載
-	hMutex = ::CreateMutex(NULL, TRUE, szMutex);
+	hMutex = ::CreateMutex(Null, True, szMutex);
 	if (::GetLastError() == ERROR_ALREADY_EXISTS) {
 		SAFE_CLOSE_HANDLE(hMutex);
-		::MessageBox(NULL, szExist, szTitle, MB_OK | MB_ICONERROR);
+		::MessageBox(Null, szExist, szTitle, MB_OK | MB_ICONERROR);
 		return APPLICATION_RETURN_OVERSETUP;
 	}
 
 	// 建立主要框架 (採用 Dialog 模式) 
-	if ((pmain = new (std::nothrow) DDSFrame()) == NULL) {
+	if ((pmain = new (std::nothrow) DDSFrame()) == Null) {
 		SAFE_CLOSE_HANDLE(hMutex);
-		::MessageBox(NULL, szFails, szTitle, MB_OK | MB_ICONERROR);
+		::MessageBox(Null, szFails, szTitle, MB_OK | MB_ICONERROR);
 		return APPLICATION_RETURN_CREATE_FRAME;
 	}
 
-	pmain->CreateFromResource(NULL, IDD_MAINFRAME, NULL, TRUE);
+	pmain->CreateFromResource(Null, IDD_MAINFRAME, Null, True);
 	SAFE_DELETE(pmain);
 	SAFE_CLOSE_HANDLE(hMutex);
 

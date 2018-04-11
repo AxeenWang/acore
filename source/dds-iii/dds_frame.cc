@@ -13,21 +13,21 @@
  *****************************************************/
 DDSFrame::DDSFrame() 
 	: WsDialog()
-	, m_xCheat(NULL)
-	, m_xComboMoon(NULL)
-	, m_xComboMonsterCode(NULL)
-	, m_xComboMonsterLevel(NULL)
-	, m_xComboMonsterSkillAmount(NULL)
-	, m_xComboMonsterMemberNumber(NULL)
+	, m_xCheat(Null)
+	, m_xComboMoon(Null)
+	, m_xComboMonsterCode(Null)
+	, m_xComboMonsterLevel(Null)
+	, m_xComboMonsterSkillAmount(Null)
+	, m_xComboMonsterMemberNumber(Null)
 {
 	int size = sizeof(m_xComboMonsterSkill) / sizeof(WsCombo*);
 	for (int i = 0; i < size; i++) {
-		m_xComboMonsterSkill[i] = NULL;
+		m_xComboMonsterSkill[i] = Null;
 	}
 
 	size = sizeof(m_xComboMonsterPower) / sizeof(WsCombo*);
 	for (int i = 0; i < size; i++) {
-		m_xComboMonsterPower[i] = NULL;
+		m_xComboMonsterPower[i] = Null;
 	}
 }
 
@@ -66,9 +66,9 @@ LRESULT DDSFrame::MessageDispose(UINT uMessage, WPARAM wParam, LPARAM lParam)
 		this->DoWmTimer(wParam, lParam);
 		break;
 	default:
-		return FALSE;
+		return False;
 	}
-	return TRUE;
+	return True;
 }
 
 /**************************************************//**
@@ -86,7 +86,7 @@ void DDSFrame::DoWmInitDialog(WPARAM wParam, LPARAM lParam)
 
 	HWND hEdit = this->GetChild(msgid);
 
-	this->SetIcon(::LoadIcon(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON)));
+	this->SetIcon(::LoadIcon(::GetModuleHandle(Null), MAKEINTRESOURCE(IDI_ICON)));
 	this->SetText(sznm);
 	this->SetChildText(msgid, szff);
 	this->EnableChild(msgid);
@@ -94,7 +94,7 @@ void DDSFrame::DoWmInitDialog(WPARAM wParam, LPARAM lParam)
 	this->CreateCheatObject();
 	this->CreateMonsterGroup();
 	this->SetCenterPosition();
-	this->SetTimer(eventID, timer, NULL);
+	this->SetTimer(eventID, timer, Null);
 }
 
 /**************************************************//**
@@ -139,7 +139,7 @@ void DDSFrame::DoWmTimer(WPARAM wParam, LPARAM lParam)
 	const int msgid = IDC_EDIT_MESSAGE;
 	DDSCheat* pcheat = m_xCheat;
 
-	if (pcheat == NULL)
+	if (pcheat == Null)
 		return;
 	
 	// 尚未連接目標程序
@@ -208,9 +208,9 @@ void DDSFrame::DoWmActive(WPARAM wParam, LPARAM lParam)
 	//}
 
 	//if (uCode == WA_INACTIVE)
-	//	m_bBackGroundPlay = TRUE;
+	//	m_bBackGroundPlay = True;
 	//else {
-	//	m_bBackGroundPlay = FALSE;
+	//	m_bBackGroundPlay = False;
 	//	this->LoadMemberData();
 	//}
 }
@@ -228,7 +228,7 @@ void DDSFrame::DoCommandComboSelect(UINT id)
 	WsCombo* pcombo;
 	int len, val;
 
-	if (pcx == NULL) return;
+	if (pcx == Null) return;
 
 	// 仲魔編號
 	if (id == IDC_MONSTER_COMBO_MEMBERNUMBER)
@@ -289,7 +289,7 @@ void DDSFrame::LoadMoonStatus()
 	WsCombo* pcombo = m_xComboMoon;
 	int val;
 
-	if (pcx == NULL || pcombo == NULL) return;
+	if (pcx == Null || pcombo == Null) return;
 	val = pcx->GetMoon();
 	pcombo->SetCursel(val);
 }
@@ -304,7 +304,7 @@ void DDSFrame::LoadMemberData()
 	int member = 0;
 	int val, len;
 
-	if (pcx == NULL)
+	if (pcx == Null)
 		return;
 
 	member = pcombo->GetCursel();
@@ -373,7 +373,7 @@ void DDSFrame::SaveMemberData()
 	int val;
 	TCHAR szbuf[MAX_PATH];
 
-	if (pcx == NULL) return;
+	if (pcx == Null) return;
 
 	// 惡魔經驗
 	::GetWindowText(hEdit1, szbuf, sizeof(szbuf));
@@ -429,7 +429,7 @@ void DDSFrame::ComboMonsterCode()
 	TCHAR szbuf[MAX_PATH];
 
 	// Combo Box 物件建立失敗
-	if (pcombo == NULL) {
+	if (pcombo == Null) {
 		this->CreateMonsterGroupFailed();
 		return;
 	}
@@ -459,7 +459,7 @@ void DDSFrame::ComboMonsterMemberNumber()
 	TCHAR szbuf[MAX_PATH];
 
 	// Combo Box 物件建立失敗
-	if (pcombo == NULL) {
+	if (pcombo == Null) {
 		this->CreateMonsterGroupFailed();
 		return;
 	}
@@ -489,7 +489,7 @@ void DDSFrame::ComboMonsterLevel()
 	TCHAR szbuf[MAX_PATH];
 
 	// Combo Box 物件建立失敗
-	if (pcombo == NULL) {
+	if (pcombo == Null) {
 		this->CreateMonsterGroupFailed();
 		return;
 	}
@@ -528,7 +528,7 @@ void DDSFrame::ComboMonsterPower()
 	// 建立仲魔能力 Combo box
 	for (int i = 0; i < skills; i++) {
 		pcombo[i] = new (std::nothrow) WsCombo();
-		if (pcombo[i] == NULL) {
+		if (pcombo[i] == Null) {
 			this->CreateMonsterGroupFailed();
 			return;
 		}
@@ -560,7 +560,7 @@ void DDSFrame::ComboMonsterSkillAmount()
 	TCHAR szbuf[MAX_PATH];
 
 	// Combo Box 物件建立失敗
-	if (pcombo == NULL) {
+	if (pcombo == Null) {
 		this->CreateMonsterGroupFailed();
 		return;
 	}
@@ -1017,7 +1017,7 @@ void DDSFrame::ComboMonsterSkill()
 	// 建立技能 Combo box
 	for (int i = 0; i < skills; i++) {
 		pcombo[i] = new (std::nothrow) WsCombo();
-		if (pcombo[i] == NULL) {
+		if (pcombo[i] == Null) {
 			this->CreateMonsterGroupFailed();
 			return;
 		}
@@ -1054,7 +1054,7 @@ void DDSFrame::ComboMoon()
 	TCHAR szbuf[MAX_PATH];
 
 	// Combo Box 物件建立失敗
-	if (pcombo == NULL) {
+	if (pcombo == Null) {
 		this->CreateMonsterGroupFailed();
 		return;
 	}
@@ -1084,7 +1084,7 @@ void DDSFrame::CreateCheatObject()
 	DDSCheat* pcheat = new (std::nothrow) DDSCheat();
 	
 	SAFE_DELETE(m_xCheat);
-	if (pcheat == NULL) {
+	if (pcheat == Null) {
 		this->CreateMonsterGroupFailed();
 		return;
 	}

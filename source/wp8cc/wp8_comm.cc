@@ -8,7 +8,7 @@
  *****************************************************************************/
 #include "wp8cc\wp8_comm.hh"
 
-static WP8Cheat* static_cheat_object = NULL;
+static WP8Cheat* static_cheat_object = Null;
 
 /******************************************************//**
  * @brief	WP8cc 名稱定義
@@ -44,23 +44,23 @@ static SaCONSTTEXT static_error_message[] = {
  * @brief	啟動 WPCheat 物件
  * @return	@c WP8Cheat*
  *			- 運作成功傳回: 非零值 WP8Cheat 物件指標
- *			- 運作失敗傳回: NULL
+ *			- 運作失敗傳回: Null
  *****************************************************/
 WP8Cheat * StartCheat()
 {
 	WP8Cheat* wp = static_cheat_object;
 
-	if (wp != NULL) { SAFE_DELETE(wp); }
+	if (wp != Null) { SAFE_DELETE(wp); }
 
-	if (wp == NULL) {
+	if (wp == Null) {
 		wp = new (std::nothrow) WP8Cheat();
-		if (wp != NULL) {
+		if (wp != Null) {
 			static_cheat_object = wp;
 			wp->SetVersion(WP8VER_502);
 			return wp;
 		}
 	}
-	return NULL;
+	return Null;
 }
 
 /**************************************************//**
@@ -69,7 +69,7 @@ WP8Cheat * StartCheat()
 void EndCheat()
 {
 	WP8Cheat* wp = static_cheat_object;
-	if (wp != NULL) {
+	if (wp != Null) {
 		SAFE_DELETE(wp);
 		static_cheat_object = wp;
 	}
@@ -79,7 +79,7 @@ void EndCheat()
  * @brief	取得 WPCheat 物件
  * @return	@c WP8Cheat* 物件指標
  *			- 物件已建立傳回: 非零值 WP8Cheat 物件指標
- *			- 物件未建立傳回: NULL
+ *			- 物件未建立傳回: Null
  *****************************************************/
 WP8Cheat * GetCheat() { return static_cheat_object; }
 
@@ -93,7 +93,7 @@ void SysError(EmWP8ERROR err, HWND hWnd)
 	const int len = sizeof(static_error_message) / sizeof(SaCONSTTEXT);
 	TCHAR szTitle[MAX_PATH];
 
-	if (::GetNamePark(emNameError) != NULL)
+	if (::GetNamePark(emNameError) != Null)
 		::lstrcpy(szTitle, ::GetNamePark(emNameError));
 	else
 		::lstrcpy(szTitle, TEXT("WP8cc Error"));
@@ -113,14 +113,14 @@ void SysError(EmWP8ERROR err, HWND hWnd)
  * @param	[in] index	EmNAMEPARK 型別索引
  * @return	@c LPCTSTR
  *			- 字串取得成功傳回: 非零值字串指標
- *			- 字串取得失敗傳回: NULL
+ *			- 字串取得失敗傳回: Null
  *****************************************************/
 LPCTSTR GetNamePark(EmNAMEPARK index)
 {
 	const int iPark = sizeof(static_name_park) / sizeof(SaCONSTTEXT);
 
 	if (index >= emNamePassEnd || index < emNameDefault)
-		return NULL;
+		return Null;
 	return static_name_park[index].name;
 }
 
@@ -129,7 +129,7 @@ LPCTSTR GetNamePark(EmNAMEPARK index)
  * @param	[in] index	EmNAMEPARK 搜尋索引
  * @return	@c LPCTSTR
  *			- 字串取得成功傳回: 非零值字串指標
- *			- 字串取得失敗傳回: NULL
+ *			- 字串取得失敗傳回: Null
  *****************************************************/
 LPCTSTR SearchNamePark(EmNAMEPARK index)
 {
@@ -139,6 +139,6 @@ LPCTSTR SearchNamePark(EmNAMEPARK index)
 			return static_name_park[i].name;
 		}
 	}
-	return NULL;
+	return Null;
 }
 

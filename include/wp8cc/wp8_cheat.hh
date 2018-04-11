@@ -25,7 +25,7 @@ public:
 
 	// 時間
 	void	LoadGameDate();
-	Int32u	GetCurrentWeekNumber(Bool bOnly = TRUE);
+	Int32u	GetCurrentWeekNumber(Bool bOnly = True);
 	Int32u	GetCurrentWeek();
 	Int32u	GetCurrentMonth();
 
@@ -48,6 +48,7 @@ public:
 	Bool	LoadHorsePony();
 	Bool	LoadHorseMare();
 	Bool	LoadHorseStallion();
+	Bool	LoadHorseData();
 	
 protected:
 	Int32u	LoadGameCurrentWeekNumber();
@@ -75,8 +76,8 @@ protected:
 /**************************************************//**
  * @brief	取得遊戲目前週數
  * @param	[in] bOnly	是否僅僅取得週數識別
- *			- TRUE	= 僅取得週數，不做月週資料演算
- *			- FALSE	= 取得完整遊戲時間資訊。
+ *			- True	= 僅取得週數，不做月週資料演算
+ *			- False	= 取得完整遊戲時間資訊。
  * @return	@c Int32u	遊戲週數
  * @note	必須先調用 LoadGameDate 成員
  * @see		SaWP8DATE 結構說明
@@ -259,6 +260,29 @@ inline Bool WP8Cheat::LoadHorseStallion()
 		(void*)&m_HorseStallion.Data[0],
 		sizeof(m_HorseStallion.Data[0])
 	);
+}
+
+/**************************************************//**
+ * @brief	取得全部馬資訊
+ * @return	@c Bool	運作成功與否
+ * @see		LoadHorseData
+ *****************************************************/
+inline Bool WP8Cheat::LoadHorseData()
+{
+	for (;;) {
+		if (!this->LoadHorseAbility())
+			break;
+		if (!this->LoadHorseRace())
+			break;
+		if (!this->LoadHorsePony())
+			break;
+		if (!this->LoadHorseMare())
+			break;
+		if (!this->LoadHorseStallion())
+			break;
+		return True;
+	}
+	return False;
 }
 
 #endif // !__AXEEN_WP8_WP8CHEAT_HH__

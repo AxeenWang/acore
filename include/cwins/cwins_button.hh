@@ -98,8 +98,8 @@ inline LRESULT WsButton::GetState()
 /**************************************************//**
  * @brief	設定單選按鈕或複選框狀態
  * @param	[in] bState	設定按鈕 State 狀態值
- *			- TRUE	設定按鈕為觸發狀態(按下、被選中、發光)
- *			- FALSE	清除按鈕所有被設定狀態
+ *			- True	設定按鈕為觸發狀態(按下、被選中、發光)
+ *			- False	清除按鈕所有被設定狀態
  * @return	@c LRESULT	傳回值始終為零
  *****************************************************/
 inline LRESULT WsButton::SetState(Bool bState)
@@ -115,8 +115,8 @@ inline LRESULT WsButton::SetState(Bool bState)
  * @param	[in] hButton	子項目視窗
  * @param	[in] idItem		控制項 ID
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  ******************************************************/
 inline Bool WsButton::CreateFromResource(HWND hButton, int idItem) { return this->CombineResource(hButton, idItem); }
 

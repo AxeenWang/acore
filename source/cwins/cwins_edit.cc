@@ -18,19 +18,19 @@
  * @param	[in] hParent  父視窗 Handle
  * @param	[in] idItem   控制項 ID
  * @return	@c Bool
- *			- 函式運作成功傳回: TRUE
- *			- 函式運作失敗傳回: FALSE
+ *			- 函式運作成功傳回: True
+ *			- 函式運作失敗傳回: False
 ******************************************************/
 Bool WsEdit::CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, HWND hParent, int idItem)
 {
-	const Bool err = FALSE;
-	HMODULE hInst = ::GetModuleHandle(NULL);
+	const Bool err = False;
+	HMODULE hInst = ::GetModuleHandle(Null);
 	SaCTRLS ctrl;
 
-	if ((NULL == hInst) || (NULL == hParent) || (idItem <= 0))
+	if ((Null == hInst) || (Null == hParent) || (idItem <= 0))
 		return err;
 	
-	if (NULL == pszName) pszName = TEXT("");
+	if (Null == pszName) pszName = TEXT("");
 
 	::memset((void*)&ctrl, 0, sizeof(SaCTRLS));
 	ctrl.hParent = hParent;
@@ -43,6 +43,6 @@ Bool WsEdit::CreateFromWindowEx(LPCTSTR pszName, int x, int y, int wd, int ht, H
 	ctrl.iWidth = wd;
 	ctrl.iHeight = ht;
 	ctrl.idItem = idItem;
-	ctrl.fnWndProcess = NULL;
+	ctrl.fnWndProcess = Null;
 	return this->CreateUseHotCodes(&ctrl);
 }

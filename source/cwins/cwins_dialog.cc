@@ -20,8 +20,8 @@
  *****************************************************/
 INT_PTR WsDialog::DialogProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
-	SaDIALOGPARAM*	ddPtr = NULL;	// user parameter
-	WsDialog*		ddObj = NULL;	// dialog object
+	SaDIALOGPARAM*	ddPtr = Null;	// user parameter
+	WsDialog*		ddObj = Null;	// dialog object
 
 	// is dialog initialized message?
 	if (uMessage == WM_INITDIALOG) {
@@ -34,7 +34,7 @@ INT_PTR WsDialog::DialogProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lPa
 	}
 
 	// get user saved data form "GWLP_USERDATA" mode
-	if ((ddObj = (WsDialog*)::GetWindowLongPtr(hWnd, GWLP_USERDATA)) == NULL)
+	if ((ddObj = (WsDialog*)::GetWindowLongPtr(hWnd, GWLP_USERDATA)) == Null)
 		return 0;
 	// transfer window message
 	return ddObj->MessageDispose(uMessage, wParam, lParam);
@@ -61,9 +61,9 @@ INT_PTR WsDialog::MessageDispose(UINT uMessage, WPARAM wParam, LPARAM lParam)
 		::EndDialog(m_hWnd, 0);
 		break;
 	default:
-		return FALSE;
+		return False;
 	}
-	return TRUE;
+	return True;
 }
 
 /**************************************************//**
@@ -72,23 +72,23 @@ INT_PTR WsDialog::MessageDispose(UINT uMessage, WPARAM wParam, LPARAM lParam)
  * @param	[in] idItem		控制項 ID
  * @param	[in] pvUnknow	額外參數指標 (使用者可利用)
  * @param	[in] bModule	是否建立 Module Dialog
- *			- 預設為 FALSE 建立 Child Dialog
- *			- 設定為 TRUE 建立 Module Dialog
+ *			- 預設為 False 建立 Child Dialog
+ *			- 設定為 True 建立 Module Dialog
  * @return	@c Bool
- *			- 函式運作成功傳回: TRUE
- *			- 函式運作失敗傳回: FALSE
+ *			- 函式運作成功傳回: True
+ *			- 函式運作失敗傳回: False
  * @details 使用資源檔(Resource)定義的 Dialog 資源建立
  *****************************************************/
 Bool WsDialog::CreateFromResource(HWND hParent, int idItem, void * pvUnknow, Bool bModule)
 {
-	const Bool err = FALSE;
-	HINSTANCE hInst = ::GetModuleHandle(NULL);	// 取得程序模組 Handle
+	const Bool err = False;
+	HINSTANCE hInst = ::GetModuleHandle(Null);	// 取得程序模組 Handle
 	HWND hWnd = m_hWnd;
 	LPTSTR pszTemplate;
 	SaDIALOGPARAM ddPtr;
 
-	// 若 hWnd != NULL 表示物件內容已存在
-	if (hInst == NULL || hWnd != NULL)
+	// 若 hWnd != Null 表示物件內容已存在
+	if (hInst == Null || hWnd != Null)
 		return err;
 
 	// 控制項 ID 不能小於或等於 0
@@ -109,8 +109,8 @@ Bool WsDialog::CreateFromResource(HWND hParent, int idItem, void * pvUnknow, Boo
 		return ::DialogBoxParam(hInst, pszTemplate, hParent, (DLGPROC)WsDialog::DialogProc, (LPARAM)&ddPtr) != -1;
 	}
 	else {
-		// 若運作失敗將傳回 NULL，若運作成功傳回 Dialog Handle
-		return ::CreateDialogParam(hInst, pszTemplate, hParent, (DLGPROC)WsDialog::DialogProc, (LPARAM)&ddPtr) != NULL;
+		// 若運作失敗將傳回 Null，若運作成功傳回 Dialog Handle
+		return ::CreateDialogParam(hInst, pszTemplate, hParent, (DLGPROC)WsDialog::DialogProc, (LPARAM)&ddPtr) != Null;
 	}
 }
 
@@ -124,18 +124,18 @@ Bool WsDialog::CreateFromResource(HWND hParent, int idItem, void * pvUnknow, Boo
  * @param	[in] idItem		視窗或控制項 ID
  * @param	[in] pvUnknow	自定義資料
  * @param	[in] bModule	是否建立 Module Dialog
- *			- 預設為 FALSE 建立 Child Dialog
- *			- 設定為 TRUE 建立 Module Dialog
+ *			- 預設為 False 建立 Child Dialog
+ *			- 設定為 True 建立 Module Dialog
  * @return	@c Bool
- *			- 函式運作成功傳回: TRUE
- *			- 函式運作失敗傳回: FALSE
+ *			- 函式運作成功傳回: True
+ *			- 函式運作失敗傳回: False
  * @details 使用 CreateWindowEx() 建立 Dialog
  *****************************************************/
 Bool WsDialog::CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem, void* pvUnknow, Bool bModule)
 {
-	const int err = FALSE;
+	const int err = False;
 	const TCHAR* pszName = TEXT("DialogEx");
-	HINSTANCE hInst = ::GetModuleHandle(NULL);
+	HINSTANCE hInst = ::GetModuleHandle(Null);
 	SaCTRLS ctrl;
 	SaDIALOGPARAM ddPtr;
 

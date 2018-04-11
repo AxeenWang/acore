@@ -65,8 +65,8 @@ inline WsTabs::~WsTabs() { }
 /**************************************************//**
  * @brief	刪除所有標籤
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
 *****************************************************/
 inline Bool WsTabs::DeleteAllItem()
 {
@@ -80,8 +80,8 @@ inline Bool WsTabs::DeleteAllItem()
  * @brief	刪除一個標籤
  * @param	[in] index 項目索引值 (zero-base)
  * @return	@c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
 *****************************************************/
 inline Bool WsTabs::DeleteItem(int index)
 {
@@ -97,8 +97,8 @@ inline Bool WsTabs::DeleteItem(int index)
  *			- Resets items in a tab control.
  *			- Clearing any that were set to the TCIS_BUTTONPRESSED state
  * @param	[in] bDeSel	指定重置標籤範圍
- *			- FALSE, 所有的標籤將被清除狀態
- *			- TRUE,  當前被選定的標籤將被清除狀態
+ *			- False, 所有的標籤將被清除狀態
+ *			- True,  當前被選定的標籤將被清除狀態
 *****************************************************/
 inline void WsTabs::DeSelectAll(Bool bDeSel)
 {
@@ -168,8 +168,8 @@ inline int WsTabs::SetCursel(int index)
  * @param	[in] index	要插入標籤的索引 (zero-base)
  * @param	[in] pttci	TCITEM 結構指標
  * @return  @c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsTabs::InsertItem(int index, LPTCITEM pttci)
 {
@@ -184,8 +184,8 @@ inline Bool WsTabs::InsertItem(int index, LPTCITEM pttci)
  * @param	[in]  index	標籤索引 (zero-base)
  * @param	[out] pttci TCITEM 結構指標
  * @return  @c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsTabs::GetItem(int index, TCITEM* pttci)
 {
@@ -200,8 +200,8 @@ inline Bool WsTabs::GetItem(int index, TCITEM* pttci)
  * @param	[in]  index	標籤索引 (zero-base)
  * @param	[out] pttci TCITEM 結構指標
  * @return  @c Bool
- *			- 運作成功傳回: TRUE
- *			- 運作失敗傳回: FALSE
+ *			- 運作成功傳回: True
+ *			- 運作失敗傳回: False
  *****************************************************/
 inline Bool WsTabs::SetItem(int index, LPTCITEM pttci)
 {
@@ -229,16 +229,16 @@ inline int WsTabs::GetItemCount()
  * @brief	調整標籤頁面工作區塊尺寸
  * @param	[in]	 bMode	採用模式
  * @param	[in,out] prc	RECT 結構位址指標 
- * @note	bMode 會設定為 FALSE，採用使窗對應舉行區域。
- *			- TRUE : Specifies a display rectangle and receives the corresponding window rectangle
- *			- FALSE: specifies a window rectangle and receives the corresponding display area.
+ * @note	bMode 會設定為 False，採用使窗對應舉行區域。
+ *			- True : Specifies a display rectangle and receives the corresponding window rectangle
+ *			- False: specifies a window rectangle and receives the corresponding display area.
  *****************************************************/
 inline void WsTabs::AdjustRect(Bool bMode, RECT* prc)
 {
 	// 傳送 TCM_ADJUSTRECT 訊息
 	// wParam 使用模式
-	//	- TRUE => lParam specifies a display rectangle and receives the corresponding window rectangle
-	//	- FALSE=> lParam specifies a window rectangle and receives the corresponding display area.
+	//	- True => lParam specifies a display rectangle and receives the corresponding window rectangle
+	//	- False=> lParam specifies a window rectangle and receives the corresponding display area.
 	// lParam RECT 結構指標
 	this->SendMessage(TCM_ADJUSTRECT, (WPARAM)bMode, (LPARAM)prc);
 }
@@ -248,8 +248,8 @@ inline void WsTabs::AdjustRect(Bool bMode, RECT* prc)
  * @param	[in]  index	書籤索引 (zero-base)
  * @param	[out] prc	RECT 結構指標
  * @return	@c int
- *			- 執行成功傳回: TRUE
- *			- 執行失敗傳回: FALSE
+ *			- 執行成功傳回: True
+ *			- 執行失敗傳回: False
  *****************************************************/
 inline Bool WsTabs::GetItemRect(int index, RECT* prc)
 {
@@ -298,8 +298,8 @@ inline INT WsTabs::SetMinWidth(int wd)
  * @param	[in] hTab	子項目視窗 handle
  * @param	[in] idItem	控制項 ID
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  ******************************************************/
 inline Bool WsTabs::CreateFromResource(HWND hTab, int idItem) { return this->CombineResource(hTab, idItem); }
 

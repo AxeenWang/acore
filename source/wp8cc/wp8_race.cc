@@ -25,7 +25,7 @@ void WP8RaceFrame::OnEventSize(WPARAM wParam, LPARAM lParam)
 	int wd = (int)LOWORD(lParam);
 	int ht = (int)HIWORD(lParam);
 
-	if (cList != NULL) {
+	if (cList != Null) {
 		cList->SetSize(wd, ht);
 	}
 }
@@ -63,7 +63,7 @@ void WP8RaceFrame::LoadData()
  *****************************************************/
 WP8RaceFrame::WP8RaceFrame()
 	: WP8Page()
-	, m_cList(NULL) {
+	, m_cList(Null) {
 }
 
 /**************************************************//**
@@ -78,7 +78,7 @@ void WP8RaceFrame::InitList()
 {
 	WP8RaceList* cList = new (std::nothrow) WP8RaceList();
 
-	if (cList != NULL) {
+	if (cList != Null) {
 		RECT rc;
 		m_cList = cList;
 		if (cList->Create(m_hWnd, IDC_RACE_LIST)) {
@@ -121,13 +121,13 @@ WP8RaceList::~WP8RaceList() { }
  * @param	[in] hParent	父視窗操作 handle
  * @param	[in] idItem		列表控制項 ID
  * @return	@c Bool
- *			- 函式運作成功傳回: TRUE
- *			- 函式運作失敗傳回: FALSE
+ *			- 函式運作成功傳回: True
+ *			- 函式運作失敗傳回: False
  *****************************************************/
 Bool WP8RaceList::Create(HWND hParent, int idItem)
 {
-	const Bool err = FALSE;
-	const Bool eok = TRUE;
+	const Bool err = False;
+	const Bool eok = True;
 
 	// LVS_REPORT				: 設定成 Report 樣式
 	// LVS_SHOWSELALWAYS		: 非當前使用視窗時，被選定 Item 仍以高亮反白顯示
@@ -142,7 +142,7 @@ Bool WP8RaceList::Create(HWND hParent, int idItem)
 	// LVS_EX_MULTIWORKAREAS	: 多工作區 (可複選項目)
 	DWORD	dwExStyle = LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES | LVS_EX_HEADERDRAGDROP;
 
-	if (hParent == NULL && idItem <= 0)
+	if (hParent == Null && idItem <= 0)
 		return err;
 
 	// 建立 List View

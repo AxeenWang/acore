@@ -13,23 +13,11 @@
 /********************************************//**
  * 常數巨集
  ***********************************************/
-#ifndef TRUE
-#define TRUE  1		//!< 判斷別 = 真
-#endif
-
-#ifndef FALSE
-#define FALSE 0		//!< 判斷別 = 假
-#endif
-
-#ifndef ZERO
-#define ZERO  0		//!< 零
-#endif
-
-#ifndef NULL
+#ifndef Null
 #ifdef __cplusplus
-#define NULL  0				//!< 空值，無值 null
+#define Null  0				//!< 空值，無值 null
 #else
-#define NULL  ((void*)0)	//!< 空值，無值 null
+#define Null  ((void*)0)	//!< 空值，無值 null
 #endif
 #endif
 
@@ -73,10 +61,10 @@
 /********************************************//**
  * 常用動作巨集
  ***********************************************/
-#define SAFE_FREE(p)            { if (NULL!=(p))  { ::free((void*)(p); (p)=NULL; } }	//!< 釋放記憶體
-#define SAFE_DELETE(p)          { if (NULL!=(p))  { delete (p); (p)=NULL; } }			//!< 釋放記憶體配置 (物件型)
-#define SAFE_DELETE_ARRAY(p)    { if (NULL!=(p))  { delete [] (p); (p)=NULL; } }		//!< 釋放記憶體配置 (陣列型)
-#define SAFE_CLOSE_FILE(p)      { if (NULL!=(p))  { ::fclose(p); (p)=NULL; } }			//!< 關閉檔案
-#define SAFE_CLOSE_HANDLE(p)    { if (NULL!=(p) && INVALID_HANDLE_VALUE!=(p))  { ::CloseHandle(p); (p)=NULL; } }	//!< 關閉 Window Handle
+#define SAFE_FREE(p)            { if (Null!=(p))  { ::free((void*)(p); (p)=Null; } }	//!< 釋放記憶體
+#define SAFE_DELETE(p)          { if (Null!=(p))  { delete (p); (p)=Null; } }			//!< 釋放記憶體配置 (物件型)
+#define SAFE_DELETE_ARRAY(p)    { if (Null!=(p))  { delete [] (p); (p)=Null; } }		//!< 釋放記憶體配置 (陣列型)
+#define SAFE_CLOSE_FILE(p)      { if (Null!=(p))  { ::fclose(p); (p)=Null; } }			//!< 關閉檔案
+#define SAFE_CLOSE_HANDLE(p)    { if (Null!=(p) && INVALID_HANDLE_VALUE!=(p))  { ::CloseHandle(p); (p)=Null; } }	//!< 關閉 Window Handle
 
 #endif	__AXEEN_ACORE_ACOREMACRO_HH__

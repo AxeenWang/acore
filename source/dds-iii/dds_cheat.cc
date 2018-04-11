@@ -35,7 +35,7 @@ void DDSCheat::CheckLife()
 	const int maxmember = DDSIII_MEMBER_MAX_NUMS;
 	IntQu addr = abase + 2;
 
-	if (m_hProcess == NULL) return;
+	if (m_hProcess == Null) return;
 	
 	// 主人公 HP, MP 狀態處理
 	this->GodBlessYou(addr);
@@ -58,7 +58,7 @@ void DDSCheat::CheckItem()
 	IntQu abase = DDS3_ITEM_BASE;
 	UINT num;
 
-	if (hProc == NULL) return;
+	if (hProc == Null) return;
 	for (int i = 0; i < DDS3_ITEM_NUMS; i++) {
 		num = 0;
 		this->ReadMemory((LPCVOID)abase, (LPVOID)&num, 1);
@@ -89,7 +89,7 @@ void DDSCheat::CheckGem()
 	IntQu abase = DDS3_GEM_BASE;
 	UINT num;
 
-	if (hProc == NULL) return;
+	if (hProc == Null) return;
 	for (int i = 0; i < DDS3_GEM_NUMS; i++) {
 		num = 0;
 		this->ReadMemory((LPCVOID)abase, (LPVOID)&num, 1);
@@ -120,7 +120,7 @@ void DDSCheat::CheckGold()
 	IntQu abase = DDS3_GOLD_BASE;
 	UINT num;
 
-	if (hProc == NULL) return;
+	if (hProc == Null) return;
 	this->ReadMemory((LPCVOID)abase, (LPVOID)&num, 4);
 	if (num < DDS3_GOLD_THRESHOLD) {
 		num = DDS3_GOLD_THRESHOLD;
@@ -132,8 +132,8 @@ void DDSCheat::CheckGold()
  * @brief	讀取仲魔資料
  * @param	[in] val	招收仲魔存放欄位之編號
  * @return	Bool 型別
- *	- 讀取成功傳回: TRUE
- *	- 讀取失敗傳回: FALSE
+ *	- 讀取成功傳回: True
+ *	- 讀取失敗傳回: False
  *****************************************************/
 Bool DDSCheat::LoadMemberData(int val)
 {
@@ -142,7 +142,7 @@ Bool DDSCheat::LoadMemberData(int val)
 	const int abase = DDSIII_MEMBER_BASE;
 	const int aones = DDSIII_MEMBER_ONES;
 	const int anext = DDSIII_MEMBER_NEXT;
-	const Bool err = FALSE;
+	const Bool err = False;
 	IntQu	xAddress;
 
 	// 檢查編號是否正確
@@ -165,19 +165,19 @@ Bool DDSCheat::LoadMemberData(int val)
 	m_xBasePoint = xAddress;
 	m_iBaseID = val;
 	::memcpy(m_cBaseEdit, m_cBaseData, maxsize);
-	return TRUE;
+	return True;
 }
 
 /**************************************************//**
  * @brief	保存仲魔資料
  * @return	Bool 型別
- *	- 保存成功傳回: TRUE
- *	- 保存失敗傳回: FALSE
+ *	- 保存成功傳回: True
+ *	- 保存失敗傳回: False
  *****************************************************/
 Bool DDSCheat::SaveMemberData()
 {
 	const int maxsize = DDSIII_MEMBER_DATASIZE;
-	const Bool err = FALSE;
+	const Bool err = False;
 	IntQu	xAddress = m_xBasePoint;
 
 	if (xAddress == 0)
@@ -197,7 +197,7 @@ Bool DDSCheat::SaveMemberData()
 		// 資料保存成功，更新原讀取資料
 		::memcpy(m_cBaseData, m_cBaseEdit, maxsize);
 	}
-	return TRUE;
+	return True;
 }
 
 /**************************************************//**
@@ -238,18 +238,18 @@ void DDSCheat::GodBlessYou(IntQu addr)
  * @param	[in] inx	要擷取目標索引 (偏位址 in byte)
  * @param	[in] len	要擷取資料長度
  * @return Bool
- *	- 成功傳回: TRUE
- *	- 失敗傳回: FALSE
+ *	- 成功傳回: True
+ *	- 失敗傳回: False
  *****************************************************/
 Bool DDSCheat::GetDataEdit(void* dst, int inx, size_t len)
 {
 	const int maxsize = DDSIII_MEMBER_DATASIZE;
-	if (dst == NULL)
-		return FALSE;
+	if (dst == Null)
+		return False;
 	if ((len + inx) > maxsize)
-		return FALSE;
+		return False;
 	::memcpy(dst, &m_cBaseEdit[inx], len);
-	return TRUE;
+	return True;
 }
 
 /**************************************************//**
@@ -258,13 +258,13 @@ Bool DDSCheat::GetDataEdit(void* dst, int inx, size_t len)
  * @param	[in] inx	要存放目標位置 (偏位址 in byte)
  * @param	[in] len	要存放資料長度
  * @return	Bool
- *	- 成功傳回: TRUE
- *	- 失敗傳回: FALSE
+ *	- 成功傳回: True
+ *	- 失敗傳回: False
  *****************************************************/
 void DDSCheat::SetDataEdit(void * src, int inx, size_t len)
 {
 	const int maxsize = DDSIII_MEMBER_DATASIZE;
-	if (src == NULL)
+	if (src == Null)
 		return;
 	if ((len + inx) > maxsize)
 		return;

@@ -27,20 +27,20 @@ WP8Tabs::~WP8Tabs() { }
  *****************************************************/
 Bool WP8Tabs::Create(HWND hParent, int idItem)
 {
-	const Bool err = FALSE;
-	const Bool eok = TRUE;
+	const Bool err = False;
+	const Bool eok = True;
 	const DWORD dwStyle = WS_CLIPSIBLINGS | TCS_FIXEDWIDTH;	// | WS_BORDER;
 
 	SaCTRLS ctrls;
 
-	if (hParent == NULL || idItem <= 0)
+	if (hParent == Null || idItem <= 0)
 		return err;
 
 	// 建立 DMCWNDCTRLS 內容
 	::memset(&ctrls, 0, sizeof(SaCTRLS));
 	ctrls.hParent = hParent;
 	ctrls.emType = emCtrlSysTabControl32;
-	ctrls.pszName = NULL;
+	ctrls.pszName = Null;
 	ctrls.dwStyle = dwStyle;
 	ctrls.dwExStyle = 0;
 	ctrls.iPosx = 0;
@@ -48,7 +48,7 @@ Bool WP8Tabs::Create(HWND hParent, int idItem)
 	ctrls.iWidth = 0;
 	ctrls.iHeight = 0;
 	ctrls.idItem = idItem; // conctrller item id
-	ctrls.fnWndProcess = NULL;
+	ctrls.fnWndProcess = Null;
 	
 	if (this->CreateUseHotCodes(&ctrls)) {
 		this->InitTab();

@@ -25,8 +25,8 @@ protected:
 public:
 	WsDialog();
 	virtual ~WsDialog();
-	Bool CreateFromResource(HWND hParent, int idItem, void* pvUnknow, Bool bModule=FALSE);
-	Bool CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem, void* pvUnknow, Bool bModule=FALSE);
+	Bool CreateFromResource(HWND hParent, int idItem, void* pvUnknow, Bool bModule=False);
+	Bool CreateFromWindowEx(int x, int y, int wd, int ht, HWND hParent, int idItem, void* pvUnknow, Bool bModule=False);
 };
 
 /**************************************************//**

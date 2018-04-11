@@ -42,8 +42,8 @@ inline WsEdit::~WsEdit() { }
  * @param	[in] hEdit	子項目視窗 handle
  * @param	[in] idItem	控制項 ID
  * @return	@c Bool
- *			- 操作成功傳回: TRUE
- *			- 操作失敗傳回: FALSE，調用 GetLastError 取得錯誤訊息
+ *			- 操作成功傳回: True
+ *			- 操作失敗傳回: False，調用 GetLastError 取得錯誤訊息
  ******************************************************/
 inline Bool WsEdit::CreateFromResource(HWND hEdit, int idItem) { return this->CombineResource(hEdit, idItem); }
 

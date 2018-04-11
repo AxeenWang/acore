@@ -15,7 +15,7 @@ WP8Cheat*	StartCheat();
 void		EndCheat();
 WP8Cheat*	GetCheat();
 
-void		SysError(EmWP8ERROR err, HWND hWnd = NULL);
+void		SysError(EmWP8ERROR err, HWND hWnd = Null);
 LPCTSTR		GetNamePark(EmNAMEPARK index);
 LPCTSTR		SearchNamePark(EmNAMEPARK index);
 
